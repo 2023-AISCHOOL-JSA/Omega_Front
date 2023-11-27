@@ -15,7 +15,7 @@ const List = ({
   daysss,
 }) => {
   const plaNoList = bgList.map((item) => item.pla_no)
-  console.log(plaNoList, 'plaNoList plaNoList')
+  // console.log(plaNoList, 'plaNoList plaNoList')
   const myData2 = useContext(data)
   // 모달 state
   const [show, setShow] = useState(false)
@@ -30,11 +30,11 @@ const List = ({
   const setDataFun = () => {
     setData(key1)
     // key1: 요소의 순서
-    console.log(key1)
+    // console.log(key1)
     setShow(true)
   }
-  console.log(resData, 'resData resData resData')
-  console.log(bgList, '2222222222222222222222222222222222222222222')
+  // console.log(resData, 'resData resData resData')
+  // console.log(bgList, '2222222222222222222222222222222222222222222')
   return (
     <Card
       className={'mb-2 d-flex me-1'}
@@ -116,7 +116,7 @@ const List = ({
               <Modal.Title>추가할 요일을 선택하세요</Modal.Title>
             </Modal.Header>
             {daysss.map((item, index) => (
-              <Modal.Body className="se">
+              <Modal.Body key={index} className="se">
                 <button onClick={(e) => setData2(e, handleClose)} value={item}>
                   day{item}
                 </button>
