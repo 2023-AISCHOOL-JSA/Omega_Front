@@ -14,6 +14,7 @@ const MainBg = () => {
   var inputRef = useRef(null)
   const recommendations = {
     서울: '서울특별시',
+    인천: '인천광역시',
     부산: '경상남도 부산',
     제주: '제주특별시',
     대구: '대구광역시',

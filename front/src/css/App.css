@@ -310,7 +310,7 @@ button[type="button"]:hover {
   color: white;
   text-align: center !important;
 }
-.modal-content {
+.anothermodal {
   width: 80% !important;
 }
 .modal-header {
@@ -323,12 +323,12 @@ button[type="button"]:hover {
   text-align: center !important;
   margin-left: 21%;
 }
-.modal-body {
+.se {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.modal-body > button {
+.se > button {
   border: none;
   width: 70% !important;
   background-color: #ff9a00;

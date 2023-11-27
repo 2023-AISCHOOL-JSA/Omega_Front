@@ -105,12 +105,18 @@ const List = ({
           </button>
         </div>
         {show && (
-          <Modal show={show} onHide={handleClose} animation={false} centered>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            animation={false}
+            centered
+            className="anothermodal"
+          >
             <Modal.Header closeButton>
               <Modal.Title>추가할 요일을 선택하세요</Modal.Title>
             </Modal.Header>
             {daysss.map((item, index) => (
-              <Modal.Body>
+              <Modal.Body className="se">
                 <button onClick={(e) => setData2(e, handleClose)} value={item}>
                   day{item}
                 </button>

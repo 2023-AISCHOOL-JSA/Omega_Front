@@ -17,7 +17,7 @@ const Header = () => {
         <Link to="/" style={{ textDecoration: 'none' }}>
           <span className="logo">어디가</span>
         </Link>
-        <span className="tab" style={{ marginLeft: '60px' }}>
+        <span className="tab" style={{ marginLeft: '25px' }}>
           여행 일정
         </span>
         |
@@ -63,7 +63,7 @@ const Header = () => {
             <div className="google">
               <button className="social-btn-google">
                 <img src={Google} alt="" />
-                구글 로그인
+                <span className="google-txt">구글 로그인</span>
               </button>
             </div>
           </div>

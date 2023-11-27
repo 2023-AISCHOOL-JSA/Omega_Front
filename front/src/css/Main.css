@@ -26,9 +26,11 @@ body {
 }
 
 .main-int {
-  position: absolute;
+  /* position: absolute;
   top: 27%;
-  left: 28%;
+  left: 28%; */
+  text-align: center;
+  margin-top: 8%;
 }
 
 .main-intro {
@@ -41,7 +43,7 @@ body {
   animation: fadein 1s ease-in-out;
 }
 
-.main-intro-sub {
+/* .main-intro-sub {
   font-family: yeonaesidae, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -90,7 +92,7 @@ body {
   top: 170%;
   width: 350px;
   animation: fadein 4s ease-in-out;
-}
+} */
 
 @keyframes fadein {
   0% {
@@ -121,7 +123,7 @@ body {
   transform: translateX(-50%);
   border-radius: 10px;
   right: 20%;
-  top: 50%;
+  top: 5%;
   padding: 0 1rem;
   background-color: rgba(255, 255, 255);
   border: 1px solid #ff9b00;
@@ -147,12 +149,12 @@ body {
   cursor: pointer;
   position: absolute;
   right: 35.8%;
-  top: 51.1%;
+  top: 6.1%;
 }
 
 .recommend-container {
   position: relative;
-  top: 57.2%;
+  top: 12.3%;
   left: 35.05%;
   width: 29.9%;
   height: 300px;
