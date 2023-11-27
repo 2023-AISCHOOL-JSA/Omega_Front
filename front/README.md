@@ -8,3 +8,8 @@
 
 - 로그인 모달 수정
 - reset 주석 처리
+
+# 김유열 (11/27)
+
+- 일정생성페이지 일정생성하기 버튼html,css 추가 (schedule-creation, schedule-creation-col)
+- scrollable-div를 scrollable-div1,scrollable-div2로 변경

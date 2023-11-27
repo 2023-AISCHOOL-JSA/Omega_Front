@@ -1026,7 +1026,7 @@ const MakePlan = () => {
             </Nav>
             {/*///////////////////////////////// 리스트 시작 ////////////////////////////////////*/}
             {/*///////////////////////////////// 셀렉트키 전부 만들어야함 (11/26) ////////////////////////////////////*/}
-            <div className="scrollable-div">
+            <div className="scrollable-div1">
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
@@ -1067,7 +1067,7 @@ const MakePlan = () => {
           </Col>
 
           <Col className="p-0" sm={8} style={{ position: 'relative' }}>
-            <Col className={`temp-css ${isTempCssVisible ? '' : 'hidden'}`}>
+            <Col className={`temp-css${isTempCssVisible ? '' : 'hidden'}`}>
               {/* // <div className={`temp33 ${isTempCssVisible ? '' : 'hidden'}`} onClick={handleButtonClick}> */}
               <Container>
                 <Row className="mt-3 text-center" style={{ fontSize: '14px' }}>
@@ -1179,7 +1179,7 @@ const MakePlan = () => {
                         <Accordion
                           defaultActiveKey={days}
                           alwaysOpen
-                          className="scrollable-div"
+                          className="scrollable-div2"
                         >
                           {/* 나중에 day state로 일정 리스트 관리 1127 수정 */}
                           {days.map((item, index) => (
@@ -1194,16 +1194,21 @@ const MakePlan = () => {
                             />
                           ))}
                         </Accordion>
+                        <Container>
+                          <Row>
+                            <Col className="schedule-creation-col">
+                              <button className="schedule-creation">
+                                일정 생성하기
+                              </button>
+                            </Col>
+                          </Row>
+                        </Container>
                       </DragDropContext>
                     </data.Provider>
                   </checkNumber.Provider>
                 </Row>
-                <Row>
-                  <Col className="">
-                    <button>123</button>
-                  </Col>
-                </Row>
               </Container>
+
               {/* 이미지 변경하던지 해야함 */}
               <div
                 className="temp33"

@@ -102,10 +102,16 @@ input::placeholder {
 .nav-tabs:hover {
   cursor: pointer;
 }
-.scrollable-div {
+.scrollable-div1 {
+  overflow-y: scroll;
+  overflow-x: 'hidden';
+  height: 700px; /* 필요에 따라 최대 높이를 조절할 수 있음 */
+}
+.scrollable-div2 {
   overflow-y: scroll;
   overflow-x: 'hidden';
   height: 650px; /* 필요에 따라 최대 높이를 조절할 수 있음 */
+  margin-bottom: 100px;
 }
 .active {
   /* background-color: gray !important; */
@@ -172,7 +178,7 @@ button[type="button"]:hover {
   z-index: 10 !important;
   background-color: #ffffff;
   /* left: 37%; */
-  height: 800px;
+  height: 850px;
   /* transform: translateX(0); */
   transition: transform 0.3s;
   overflow-x: 'hidden';
@@ -444,4 +450,24 @@ button[type="button"]:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.schedule-creation-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.schedule-creation {
+  position: absolute;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #ff9b00;
+  height: 45px;
+  border-radius: 5px;
+  color: white;
+  bottom: 30px;
+  z-index: 100;
+  font-size: 20px;
 }
