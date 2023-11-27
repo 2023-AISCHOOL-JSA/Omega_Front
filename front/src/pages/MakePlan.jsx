@@ -49,8 +49,6 @@ const MakePlan = () => {
     { sequence: '7', title: '나의저장', path1: './img/hhhh.png' },
   ]
 
-  console.log(categories[0].path1)
-
   // 마커 센터 state
   const [markerCenterList, setMarkerCenterList] = useState([])
   // 이미지 돌리기 테스트
@@ -71,7 +69,7 @@ const MakePlan = () => {
   }
 
   useEffect(() => {
-    console.log(edited)
+    // console.log(edited)
     if (edited) {
       myScheduleTitleRef.current.focus()
     }
@@ -93,7 +91,7 @@ const MakePlan = () => {
   const handleColClick = (e) => {
     setShowCalendar(!showCalendar)
     if (e.target.innerText == '설정하기') {
-      console.log(e.target.innerText)
+      // console.log(e.target.innerText)
       const formattedDate1 = `${dateRange[0].getFullYear() - 2000}년 ${
         dateRange[0].getMonth() + 1
       }월 ${dateRange[0].getDate()}일`
@@ -103,8 +101,8 @@ const MakePlan = () => {
       const periodText = [formattedDate1, '  -  ', formattedDate2]
       setDateRange2(periodText)
 
-      console.log(dateRange[1].getDate() - dateRange[0].getDate(), '박')
-      console.log(dateRange[1].getDate() - dateRange[0].getDate() + 1, '일')
+      // console.log(dateRange[1].getDate() - dateRange[0].getDate(), '박')
+      // console.log(dateRange[1].getDate() - dateRange[0].getDate() + 1, '일')
 
       setDateRange3(
         `${dateRange[1].getDate() - dateRange[0].getDate()}박${
@@ -117,9 +115,9 @@ const MakePlan = () => {
       setDays(tempp)
     }
   }
-  useEffect(() => {
-    console.log(days)
-  }, [days])
+  // useEffect(() => {
+  //   console.log(days)
+  // }, [days])
 
   const handleCalendarChange = (newDate) => {
     // console.log(newDate,"newDate 어떻게 생겼는지?")
@@ -133,9 +131,9 @@ const MakePlan = () => {
 
   // 드래그앤드랍 함수
   const handleDragEnd = (result) => {
-    console.log(result, 'result')
-    console.log(result.draggableId, 'draggableId')
-    console.log(result.source, 'source')
+    // console.log(result, 'result')
+    // console.log(result.draggableId, 'draggableId')
+    // console.log(result.source, 'source')
     // console.log(mydata2);
 
     if (!result.destination) {
@@ -148,21 +146,21 @@ const MakePlan = () => {
     ) {
       return
     }
-    console.log(
-      ~~result.destination.droppableId[10] + ~~result.destination.index,
-      'zz'
-    )
-    console.log(~~result.source.index + ~~result.source.droppableId[10], 'xx')
+    // console.log(
+    //   ~~result.destination.droppableId[10] + ~~result.destination.index,
+    //   'zz'
+    // )
+    // console.log(~~result.source.index + ~~result.source.droppableId[10], 'xx')
     // Shallow copy of the array
 
-    console.log(items, 'myList복사한 items')
+    // console.log(items, 'myList복사한 items')
     const itemIndex = items.findIndex(
       (item) => item.pla_name === result.draggableId
     )
     // console.log(items.findIndex((item) => item.text === result.draggableId),"제발 흑흑")
     // Remove the item from the source index
     const [reorderedItem] = items.splice(itemIndex, 1)
-    console.log(reorderedItem, '리로드아이템')
+    // console.log(reorderedItem, '리로드아이템')
     if (result.destination.droppableId == 'droppable-1') {
       reorderedItem.myDay = '1'
       reorderedItem.bgColor = { backgroundColor: '#34EAAD' }
@@ -175,35 +173,35 @@ const MakePlan = () => {
     }
 
     // 리로드아이템에 드래그영역의 인덱스번호로 변경
-    if (result.destination.droppableId == result.source.droppableId) {
-      console.log('들어오는지')
-      console.log(
-        '인덱스올릴 아이템',
-        items.filter((item) => item.pla_name == result.draggableId)
-      )
-    }
+    // if (result.destination.droppableId == result.source.droppableId) {
+    //   console.log('들어오는지')
+    //   console.log(
+    //     '인덱스올릴 아이템',
+    //     items.filter((item) => item.pla_name == result.draggableId)
+    //   )
+    // }
 
-    console.log(result.destination.droppableId[10], '영역1인지 2인지 3인지')
-    console.log(
-      items.filter((item) => item.myDay == result.destination.droppableId[10]),
-      '드랍된영역들의 아이템'
-    )
-    console.log(
-      items.filter((item) => item.myDay == result.destination.droppableId[10])[
-        result.destination.index
-      ]?.pla_name,
-      '드랍된영역인덱스의 아이템'
-    )
-    console.log(
-      items.findIndex(
-        (item) =>
-          item.pla_name ==
-          items.filter(
-            (item) => item.myDay == result.destination.droppableId[10]
-          )[result.destination.index]?.pla_name
-      ),
-      '드랍된영역인덱스의 아이템의 전체 배열에서의 index'
-    )
+    // console.log(result.destination.droppableId[10], '영역1인지 2인지 3인지')
+    // console.log(
+    //   items.filter((item) => item.myDay == result.destination.droppableId[10]),
+    //   '드랍된영역들의 아이템'
+    // )
+    // console.log(
+    //   items.filter((item) => item.myDay == result.destination.droppableId[10])[
+    //     result.destination.index
+    //   ]?.pla_name,
+    //   '드랍된영역인덱스의 아이템'
+    // )
+    // console.log(
+    //   items.findIndex(
+    //     (item) =>
+    //       item.pla_name ==
+    //       items.filter(
+    //         (item) => item.myDay == result.destination.droppableId[10]
+    //       )[result.destination.index]?.pla_name
+    //   ),
+    //   '드랍된영역인덱스의 아이템의 전체 배열에서의 index'
+    // )
     let reorderedItemIndex = items.findIndex(
       (item) =>
         item ==
@@ -218,10 +216,10 @@ const MakePlan = () => {
         result.destination.index
       ]?.pla_name
     ) {
-      console.log(
-        items.filter((item) => item.myDay == result.destination.droppableId[10])
-          .length
-      )
+      // console.log(
+      //   items.filter((item) => item.myDay == result.destination.droppableId[10])
+      //     .length
+      // )
 
       items.splice(myList.length + 1, 0, reorderedItem)
     } else {
@@ -230,12 +228,12 @@ const MakePlan = () => {
 
     // 우선 임시 마커찍는 인덱스추가하는 함수 이거 쓰기
     for (let i = 1; i <= days.length; i++) {
-      console.log('들어오긴하지?')
-      console.log(
-        items
-          .filter((item) => item.myDay == i)
-          .map((item, index) => (item.markerIndex = index + 1))
-      )
+      // console.log('들어오긴하지?')
+      // console.log(
+      //   items
+      //     .filter((item) => item.myDay == i)
+      //     .map((item, index) => (item.markerIndex = index + 1))
+      // )
       setList(
         items
           .filter((item) => item.myDay == i)
@@ -248,8 +246,8 @@ const MakePlan = () => {
 
   useEffect(() => {
     if (!myList.length == 0) {
-      console.log(mydata2, '어캐생김?')
-      console.log(markerCenterList, 'markerCenterList어캐생김?')
+      // console.log(mydata2, '어캐생김?')
+      // console.log(markerCenterList, 'markerCenterList어캐생김?')
 
       setCenter(markerCenterList[0].latlng)
     }
@@ -895,15 +893,15 @@ const MakePlan = () => {
       selectList = [...positions2]
     } else if (selectedKey === '6') selectList = [...firstData2]
 
-    console.log(e.target.value, '몇일에 들어갈건지')
-    console.log(chData, '선택된 리스트가 무엇인지')
+    // console.log(e.target.value, '몇일에 들어갈건지')
+    // console.log(chData, '선택된 리스트가 무엇인지')
     let checkData = selectList[chData] // 선택된리스트를 checkData에 저장
     // 안에 있다면 안넣기
 
-    console.log(
-      myList.findIndex((item) => item.pla_name == checkData.pla_name),
-      'myList에 추가한 요소가 있는지'
-    )
+    // console.log(
+    //   myList.findIndex((item) => item.pla_name == checkData.pla_name),
+    //   'myList에 추가한 요소가 있는지'
+    // )
     // 만약 이미 myList에 checkData 가 있다면 아무일도 X
 
     if (
@@ -961,10 +959,10 @@ const MakePlan = () => {
       // 센터마커에 넣어서 관리하기
       setMarkerCenterList([data])
 
-      console.log(
-        [...myList].filter((item) => item.myDay == e.target.value).length,
-        '마이리스트에 몇일차의 데이터들 길이'
-      )
+      // console.log(
+      //   [...myList].filter((item) => item.myDay == e.target.value).length,
+      //   '마이리스트에 몇일차의 데이터들 길이'
+      // )
     }
     handleClose()
   }
@@ -1019,7 +1017,7 @@ const MakePlan = () => {
                   key={index}
                   className={selectedKey === item.sequence ? 'active' : ''}
                   onClick={(e) => cateClick(e, item.sequence)}
-                  eventKey="link0"
+                  // eventKey={`link${index}`}
                 >
                   <img className="cate-img" src={item.path1}></img>
                   <div className="item-text mt-1 mb-3">{item.title}</div>
@@ -1032,6 +1030,7 @@ const MakePlan = () => {
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
+                    key={index}
                     daysss={days}
                     resData={item}
                     key1={index}
@@ -1043,6 +1042,7 @@ const MakePlan = () => {
               {selectedKey === '2' &&
                 positions2.map((item, index) => (
                   <List
+                    key={index}
                     daysss={days}
                     resData={item}
                     key1={index}
@@ -1054,6 +1054,7 @@ const MakePlan = () => {
               {selectedKey === '6' &&
                 firstData2.map((item, index) => (
                   <List
+                    key={index}
                     daysss={days}
                     resData={item}
                     key1={index}
@@ -1196,6 +1197,11 @@ const MakePlan = () => {
                       </DragDropContext>
                     </data.Provider>
                   </checkNumber.Provider>
+                </Row>
+                <Row>
+                  <Col className="">
+                    <button>123</button>
+                  </Col>
                 </Row>
               </Container>
               {/* 이미지 변경하던지 해야함 */}
