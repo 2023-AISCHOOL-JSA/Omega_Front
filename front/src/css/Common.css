@@ -1,0 +1,262 @@
+/* Header */
+
+@font-face {
+  font-family: 'Yeongdo-Rg';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/Yeongdo-Rg.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header {
+  height: 56px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.logo {
+  position: relative;
+  right: 21.6%;
+  font-size: 40px;
+  color: #ff9b00;
+  font-family: 'Yeongdo-Rg';
+  font-style: normal;
+  font-weight: 700;
+  top: 26%;
+}
+
+.tab {
+  width: 39px;
+  margin: 30px;
+  font-size: 18px;
+  color: #000;
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.login-btn {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1rem;
+  position: relative;
+  left: 21%;
+  background-color: white;
+  color: black;
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  border: 2px solid black;
+}
+
+/* 로그인 모달 */
+.login-modal {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  font-family: 'Yeongdo-Rg';
+  color: #ff9b00;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.loginbox {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  padding-left: 1rem;
+  margin-top: 10px;
+}
+
+.find {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.login {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.social-btn-kakao {
+  width: 100%;
+  height: 50px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.social-btn-kakao img {
+  width: 100%;
+  height: 100%;
+}
+
+.social-btn-google {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 10px;
+  border: 1px solid rgb(105, 104, 104);
+  font-weight: 550;
+}
+
+.social-btn-google img {
+  width: 27px;
+  height: 30px;
+  margin-left: 8px;
+  margin-right: 108px;
+}
+
+/* footer */
+
+/* Modal */
+
+.modal-con {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  border: none;
+  display: flex; /* Flexbox 적용 */
+  flex-direction: column; /* 아이템들을 세로로 배열 */
+  align-items: flex-start; /* 아이템들을 왼쪽 정렬 */
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.modal-con > div {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+}
+
+.place-name-mod {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.category {
+  width: 60px;
+  height: 25px;
+  border-radius: 20px;
+  background-color: lightblue;
+  text-align: center;
+  color: white;
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.domain {
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-left: 15px;
+  color: #000;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.modal-img {
+  margin-left: 50px;
+  width: 25px;
+  height: 25px;
+}
+
+.heart {
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+.mk-plan {
+  width: 110px;
+  border: none;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(255, 166, 0, 0.778);
+  text-align: center;
+  color: white;
+  margin-left: 260px;
+}
+
+.address {
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  color: gray;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  color: gray;
+}
+
+.modal-info {
+  display: flex;
+  margin-top: 10px;
+}
+
+.coll {
+  width: 100%;
+  color: #ff9b00;
+}
+
+.coll-con {
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+.title {
+  font-size: 18px;
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 550;
+  margin-top: 30px;
+}
+.modal-txt {
+  padding: 23px;
+  background-color: #f6f6f6;
+  font-size: 16px;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  font-family: omnigothic, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+}

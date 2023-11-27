@@ -1,0 +1,44 @@
+.made-map {
+  width: 100%;
+  height: 50%;
+}
+
+.made-date {
+  width: 100%;
+  height: 50%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+  background-color: #f6f6f6;
+  margin: 5%;
+}
+
+.made-date-plan {
+  width: 100%;
+  height: 100%;
+  padding-right: 20%;
+  padding-left: 20%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+}
+
+.youtube {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.youtube img {
+  width: 100px;
+  height: 25px;
+}
+
+.youtube p {
+  margin-top: 1%;
+  font-size: 18px;
+  margin-left: 2%;
+}
