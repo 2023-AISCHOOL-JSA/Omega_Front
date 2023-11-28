@@ -24,3 +24,11 @@
 
 - 일정생성페이지 일정생성하기 버튼html,css 추가 (schedule-creation, schedule-creation-col)
 - scrollable-div를 scrollable-div1,scrollable-div2로 변경
+
+# 김유열 (11/28)
+
+- 메인 전체 width 조정
+- 일정생성버튼추가
+- 리스트 클릭시 지도 센터조정및 오버레이 추가
+- 일정생성하기 버튼클릭시 최종 리스트 생성
+- css 추가
