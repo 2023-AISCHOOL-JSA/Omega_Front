@@ -30,7 +30,7 @@ body {
   top: 27%;
   left: 28%; */
   text-align: center;
-  margin-top: 8%;
+  margin-top: 9%;
 }
 
 .main-intro {
@@ -56,7 +56,7 @@ body {
 
 .bg {
   width: 100%;
-  height: 680px;
+  height: 700px;
   background-image: url('../img/ocean.jpg');
   background-size: 100% 100%;
   overflow: hidden;
@@ -103,7 +103,7 @@ body {
 
 .recommend-container {
   position: relative;
-  top: 12.3%;
+  top: 12.1%;
   left: 35.05%;
   width: 29.9%;
   height: 300px;
