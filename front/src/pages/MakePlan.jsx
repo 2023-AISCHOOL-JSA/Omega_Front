@@ -37,8 +37,10 @@ const MakePlan = () => {
   const [makePageModal, setMakePageModal] = useState(false)
   const [modalDataTemp, setModalDataTemp] = useState({})
 
-  // 마커 이미지 관리 state
+  // 마커 이미지 관리,토글 state
+  const [listCheckList,setListCheckList]= useState([])
   const [markerImg, setMarkerImage] = useState('')
+  const [markerImgToggle, setMarkerImageToggle] = useState(false)
   // 최종 리스트 (이거 쓰시면 됩니다)
   const [lastMakePlan, setLastMakePlan] = useState()
 
@@ -1080,7 +1082,11 @@ const MakePlan = () => {
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
+                  listCheckList={listCheckList}
+                  setListCheckList={setListCheckList}
+                  setMarkerImgToggle={setMarkerImageToggle}
                     setMarkerImage={setMarkerImage}
+                    markerImg={markerImg}
                     setCenter={setCenter}
                     key={index}
                     daysss={days}
@@ -1094,7 +1100,11 @@ const MakePlan = () => {
               {selectedKey === '2' &&
                 positions2.map((item, index) => (
                   <List
+                  listCheckList={listCheckList}
+                  setListCheckList={setListCheckList}
+                  setMarkerImgToggle={setMarkerImageToggle}
                     setMarkerImage={setMarkerImage}
+                    markerImg={markerImg}
                     setCenter={setCenter}
                     key={index}
                     daysss={days}
@@ -1108,6 +1118,11 @@ const MakePlan = () => {
               {selectedKey === '6' &&
                 firstData2.map((item, index) => (
                   <List
+                  listCheckList={listCheckList}
+                  setListCheckList={setListCheckList}
+                  markerImgToggle={markerImgToggle}
+                  setMarkerImgToggle={setMarkerImageToggle}
+                  markerImg={markerImg}
                     setMarkerImage={setMarkerImage}
                     setCenter={setCenter}
                     key={index}
@@ -1302,12 +1317,12 @@ const MakePlan = () => {
               level={7}
             >
               {/* 리스트 클릭 마커 */}
-              {markerImg ? (
+              {markerImgToggle ? (
                 <React.Fragment key={uuidv4()}>
                   <MapMarker
                     clickable={true} // 임시(지도클릭막기)
                     position={markerImg.latlng}
-                    title={markerImg?.pla_name}
+                    title={markerImg.pla_name}
                     image={{
                       // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함(변경완료))
                       src: './img/map-marker-2-24.png',
