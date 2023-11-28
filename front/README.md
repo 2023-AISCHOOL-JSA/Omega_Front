@@ -9,6 +9,17 @@
 - 로그인 모달 수정
 - reset 주석 처리
 
+11/28
+
+- 메인 페이지 프로필 아이콘 삭제
+- 마이페이지 하트 수정
+- 페이지 이동 이름 수정
+  (일정 생성페이지 make-plan -> make
+  만들어진 일정 페이지 made-plan -> made
+  지역 소개 페이지 region-guide -> info
+  )
+- 헤더 여행 일정 링크 (일정생성페이지로 이동)
+
 # 김유열 (11/27)
 
 - 일정생성페이지 일정생성하기 버튼html,css 추가 (schedule-creation, schedule-creation-col)

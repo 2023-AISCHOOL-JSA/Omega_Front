@@ -171,6 +171,7 @@ body {
 .card7 {
   width: 30.6%;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .card-bg {
@@ -237,7 +238,7 @@ body {
 
   .searchbtn {
     left: 70%;
-    top: 12%;
+    top: 11%;
   }
 
   .recommend-container {
@@ -245,6 +246,10 @@ body {
     left: 20.2%;
     width: 59.8%;
     height: 200px;
+  }
+
+  .region-icon {
+    margin-right: 10px;
   }
 
   .recommend1 {

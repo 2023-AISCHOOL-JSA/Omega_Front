@@ -6,7 +6,7 @@ const RegionTop = () => {
     <>
       <div className="reg-top">
         <p className="reg-title">제주특별자치도</p>
-        <Link to="/make-plan">
+        <Link to="/make">
           <button className="reg-plan">일정만들기</button>
         </Link>
       </div>

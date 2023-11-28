@@ -72,8 +72,19 @@ const ReservationInfo = ({ price, setprice }) => {
           <p>
             <span className="room-txt">방 갯수</span>
             <span className="room-txt-detail">
-              <MinusImg src={Minus} style={{ marginLeft: '15px' }} /> 1{' '}
-              <PlusImg src={Plus} />{' '}
+              <button className="miu-btn">
+                <MinusImg
+                  src={Minus}
+                  style={{ marginLeft: '15px', marginRight: '5px' }}
+                />
+              </button>
+              <span>1</span>
+              <button className="plu-btn">
+                <PlusImg
+                  src={Plus}
+                  style={{ marginLeft: '5px', marginRight: '5px' }}
+                />
+              </button>
               <span className="room-txt">(방 1개당 최대 2명)</span>
             </span>
           </p>

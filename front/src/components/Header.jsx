@@ -17,15 +17,17 @@ const Header = () => {
         <Link to="/" style={{ textDecoration: 'none' }}>
           <span className="logo">어디가</span>
         </Link>
-        <span className="tab" style={{ marginLeft: '25px' }}>
-          여행 일정
-        </span>
+        <Link to="/make" style={{ textDecoration: 'none' }}>
+          <span className="tab" style={{ marginLeft: '15px' }}>
+            여행 일정
+          </span>
+        </Link>
         <span className="bar">|</span>
         <Link to="/reservation" style={{ textDecoration: 'none' }}>
           <span className="tab">숙소 예약</span>
         </Link>
         <button className="login-btn" onClick={handleShow}>
-          로그아웃
+          로그인
         </button>
       </div>
 

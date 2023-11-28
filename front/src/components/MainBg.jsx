@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import SearchIcon from '../img/search.png'
 import styled from 'styled-components'
 import { EnvironmentOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 
 const IconImg = styled.img`
   width: 32px;
@@ -12,13 +13,15 @@ const MainBg = () => {
   const [active, setActive] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   var inputRef = useRef(null)
+  const navigate = useNavigate()
+
   const recommendations = {
     서울: '서울특별시',
     인천: '인천광역시',
     부산: '경상남도 부산',
     제주: '제주특별시',
     대구: '대구광역시',
-  } // 추천 지역
+  }
 
   const handleBlur = () => {
     setTimeout(() => setActive(false), 100)
@@ -99,7 +102,11 @@ const MainBg = () => {
               </div>
             )}
             <div>
-              <button type="submit" className="searchbtn">
+              <button
+                type="submit"
+                className="searchbtn"
+                onClick={() => navigate('/info')}
+              >
                 <IconImg src={SearchIcon} alt="" />
               </button>
             </div>

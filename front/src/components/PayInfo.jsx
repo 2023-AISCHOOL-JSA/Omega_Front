@@ -81,7 +81,7 @@ const PayInfo = ({ RoomPrice }) => {
             <p>hong@naver.com</p>
             <p>
               대한민국+82 010-1234-5678
-              <button className="certify">인증</button>
+              {/* <button className="certify">인증</button> */}
             </p>
             <p>14:00~15:00</p>
           </div>

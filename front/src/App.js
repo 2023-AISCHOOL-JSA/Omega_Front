@@ -16,9 +16,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/region-guide" element={<RegionInfo />} />
-        <Route path="/make-plan" element={<MakePlan />} />
-        <Route path="/made-plan" element={<MadePlan />} />
+        <Route path="/info" element={<RegionInfo />} />
+        <Route path="/make" element={<MakePlan />} />
+        <Route path="/made" element={<MadePlan />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/checkout" element={<CheckoutPage />} />

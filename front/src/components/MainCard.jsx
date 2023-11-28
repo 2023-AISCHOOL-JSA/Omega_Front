@@ -1,37 +1,30 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-import Profile from '../img/profile.png'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
-const IconImg = styled.img`
-  width: 40px;
-  height: 40px;
-  background: none;
-`
+import { useNavigate } from 'react-router-dom'
 
 const MainCard = () => {
+  const navigate = useNavigate()
+
   return (
     <>
-      <Card className="card7">
-        <Link to="/made-plan">
-          <Card.Img
-            variant="top"
-            src="https://i.ytimg.com/vi/27li701pBiI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDyKuJtEp3NxUm9ySZ3ZLi9UaNYfw"
-            className="card-bg"
-          />
-        </Link>
+      <Card className="card7" onClick={() => navigate('/made')}>
+        <Card.Img
+          variant="top"
+          src="https://i.ytimg.com/vi/jMjH43DPgUQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDdZmi9BIjRCJorPQX3rp-3XRBkmg"
+          className="card-bg"
+        />
         <Card.Body>
           <Card.Text>
-            <div className="profile">
+            {/* <div className="profile">
               <IconImg src={Profile} alt="" />
-            </div>
+            </div> */}
             <div className="card-content-wrapper">
-              <p className="card-title">풍자님의 부산 여행</p>
+              <p className="card-title">김민경님의 강원도 여행</p>
               <span>
                 <p className="card-content">
-                  2023.06.22
-                  <span className="card-content">당일치기</span>
+                  2023.11.17 ~ 2023.11.18
+                  <span className="card-content">1박2일</span>
                 </p>
               </span>
             </div>
@@ -47,9 +40,6 @@ const MainCard = () => {
         />
         <Card.Body>
           <Card.Text>
-            <div className="profile">
-              <IconImg src={Profile} alt="" />
-            </div>
             <div className="card-content-wrapper">
               <p className="card-title">곽튜브님의 제주도 여행</p>
               <span>
@@ -66,44 +56,17 @@ const MainCard = () => {
       <Card className="card7">
         <Card.Img
           variant="top"
-          src="https://i.ytimg.com/vi/RbcrJYIY89I/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCEGJvbQsUWy5ryrc2JXZI4ieF7sA"
+          src="https://i.ytimg.com/vi/27li701pBiI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDyKuJtEp3NxUm9ySZ3ZLi9UaNYfw"
           className="card-bg"
         />
         <Card.Body>
           <Card.Text>
-            <div className="profile">
-              <IconImg src={Profile} alt="" />
-            </div>
             <div className="card-content-wrapper">
-              <p className="card-title">기안84님의 여수 여행</p>
+              <p className="card-title">풍자님의 부산 여행</p>
               <span>
                 <p className="card-content">
-                  2022.03.04
+                  2023.06.22
                   <span className="card-content">당일치기</span>
-                </p>
-              </span>
-            </div>
-          </Card.Text>
-        </Card.Body>
-      </Card>
-
-      <Card className="card7">
-        <Card.Img
-          variant="top"
-          src="https://i.ytimg.com/vi/fiTOFLhNcn0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAESz9auZo4jsWlLYWITcLOiu4FBQ"
-          className="card-bg"
-        />
-        <Card.Body>
-          <Card.Text>
-            <div className="profile">
-              <IconImg src={Profile} alt="" />
-            </div>
-            <div className="card-content-wrapper">
-              <p className="card-title">휘인님의 전주 여행</p>
-              <span>
-                <p className="card-content">
-                  2022.02.09 ~ 20223.02.10
-                  <span className="card-content">1박2일</span>
                 </p>
               </span>
             </div>
@@ -119,9 +82,6 @@ const MainCard = () => {
         />
         <Card.Body>
           <Card.Text>
-            <div className="profile">
-              <IconImg src={Profile} alt="" />
-            </div>
             <div className="card-content-wrapper">
               <p className="card-title">입짧은햇님님의 강릉 여행</p>
               <span>
@@ -143,14 +103,32 @@ const MainCard = () => {
         />
         <Card.Body>
           <Card.Text>
-            <div className="profile">
-              <IconImg src={Profile} alt="" />
-            </div>
             <div className="card-content-wrapper">
               <p className="card-title">박미선님의 제주도 여행</p>
               <span>
                 <p className="card-content">
                   2022.12.30
+                  <span className="card-content">당일치기</span>
+                </p>
+              </span>
+            </div>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+
+      <Card className="card7">
+        <Card.Img
+          variant="top"
+          src="https://i.ytimg.com/vi/RbcrJYIY89I/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCEGJvbQsUWy5ryrc2JXZI4ieF7sA"
+          className="card-bg"
+        />
+        <Card.Body>
+          <Card.Text>
+            <div className="card-content-wrapper">
+              <p className="card-title">기안84님의 여수 여행</p>
+              <span>
+                <p className="card-content">
+                  2022.03.04
                   <span className="card-content">당일치기</span>
                 </p>
               </span>
