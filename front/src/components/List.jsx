@@ -118,8 +118,9 @@ const List = ({
             animation={false}
             centered
             className="anothermodal"
+            closeButton
           >
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title>추가할 요일을 선택하세요</Modal.Title>
             </Modal.Header>
             {daysss.map((item, index) => (
@@ -129,6 +130,7 @@ const List = ({
                 </button>
               </Modal.Body>
             ))}
+            <div style={{ height: '20px' }}></div>
           </Modal>
         )}
       </Card.Body>
