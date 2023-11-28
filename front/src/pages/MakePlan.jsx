@@ -38,6 +38,7 @@ const MakePlan = () => {
   const [modalDataTemp, setModalDataTemp] = useState({})
 
   // 마커 이미지 관리,토글 state
+  const [listCheckCount,setListCheckCount]= useState(0)
   const [listCheckList,setListCheckList]= useState([])
   const [markerImg, setMarkerImage] = useState('')
   const [markerImgToggle, setMarkerImageToggle] = useState(false)
@@ -1082,6 +1083,8 @@ const MakePlan = () => {
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
+                  listCheckCount={listCheckCount}
+                  setListCheckCount={setListCheckCount}
                   listCheckList={listCheckList}
                   setListCheckList={setListCheckList}
                   setMarkerImgToggle={setMarkerImageToggle}
@@ -1100,6 +1103,8 @@ const MakePlan = () => {
               {selectedKey === '2' &&
                 positions2.map((item, index) => (
                   <List
+                  listCheckCount={listCheckCount}
+                  setListCheckCount={setListCheckCount}
                   listCheckList={listCheckList}
                   setListCheckList={setListCheckList}
                   setMarkerImgToggle={setMarkerImageToggle}
@@ -1118,6 +1123,8 @@ const MakePlan = () => {
               {selectedKey === '6' &&
                 firstData2.map((item, index) => (
                   <List
+                  listCheckCount={listCheckCount}
+                  setListCheckCount={setListCheckCount}
                   listCheckList={listCheckList}
                   setListCheckList={setListCheckList}
                   markerImgToggle={markerImgToggle}

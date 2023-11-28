@@ -19,15 +19,19 @@ const List = ({
   markerImgToggle,
   markerImg,
   listCheckList,
-  setListCheckList
-
+  setListCheckList,
+  listCheckCount,
+  setListCheckCount
 }) => {
 
 
   const listClickCheck = (e) => {
     console.log(markerImg, "     console.log(markerImg)");
     console.log(resData, "     resData");
-  
+    if(!listCheckCount) {
+      setListCheckCount(1)
+      setMarkerImgToggle(!markerImgToggle);
+    }
    // 우선 listCheckList 에 클릭한 리스트 데이터 추가
     setListCheckList([...listCheckList, resData]);
   
