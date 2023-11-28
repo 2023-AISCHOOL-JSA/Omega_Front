@@ -97,7 +97,7 @@ body {
   border: none;
   cursor: pointer;
   position: absolute;
-  right: 35.8%;
+  right: 35.4%;
   top: 6.1%;
 }
 
@@ -107,11 +107,16 @@ body {
   left: 35.05%;
   width: 29.9%;
   height: 300px;
+  overflow-y: auto;
+}
+
+.recommend-container::-webkit-scrollbar {
+  width: 0;
 }
 
 .recommend {
   width: 100%;
-  height: 50px;
+  height: 20%;
   background-color: #fff;
   padding-left: 10px;
   padding-top: 3px;

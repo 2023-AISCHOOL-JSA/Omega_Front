@@ -12,6 +12,7 @@ const IconImg = styled.img`
 const MainBg = () => {
   const [active, setActive] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+
   var inputRef = useRef(null)
   const navigate = useNavigate()
 
@@ -21,6 +22,9 @@ const MainBg = () => {
     부산: '경상남도 부산',
     제주: '제주특별시',
     대구: '대구광역시',
+    대전: '대전광역시',
+    울산: '울산광역시',
+    세종: '세종특별자치시',
   }
 
   const handleBlur = () => {
@@ -49,12 +53,6 @@ const MainBg = () => {
         <div className="bg">
           <div className="main-int">
             <p className="main-intro">여행 어디가?</p>
-            {/* <p className="main-intro-sub">Your Moment</p> */}
-            {/* <p className="main-intro-txt">찾고 있는 장소가 있으신가요?</p>
-            <p className="main-intro-txt-1">
-              이미지 검색을 통해 원하는 장소를 찾고
-            </p>
-            <p className="main-intro-txt-2">여행을 계획해보세요</p> */}
           </div>
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
             <div>
@@ -85,7 +83,20 @@ const MainBg = () => {
                         <EnvironmentOutlined style={{ fontSize: '15px' }} />
                       </div>
 
-                      <div className="recommend1">{key}</div>
+                      <div className="recommend1">
+                        {key.split('').map((char, idx) => {
+                          let color =
+                            key.substring(0, searchTerm.length) ===
+                              searchTerm && idx < searchTerm.length
+                              ? 'orange'
+                              : 'black'
+                          return (
+                            <span style={{ color: color }} key={idx}>
+                              {char}
+                            </span>
+                          )
+                        })}
+                      </div>
                       <div className="recommend2">{recommendations[key]}</div>
                     </div>
                   ))}
