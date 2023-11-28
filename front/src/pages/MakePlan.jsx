@@ -65,11 +65,11 @@ const MakePlan = () => {
   // 마지막일정
   useEffect(() => {
     console.log(lastMakePlan, '마지막 일정 배열 확인')
-    // console.log(JSON.stringify(lastMakePlan), '마지막 일정 배열 확인22222222')
-    // console.log(
-    //   JSON.parse(JSON.stringify(lastMakePlan ?? '')),
-    //   '마지막 일정 배열 확인333333333333333'
-    // )
+    console.log(JSON.stringify(lastMakePlan), '마지막 일정 배열 확인22222222')
+    console.log(
+      JSON.parse(JSON.stringify(lastMakePlan ?? '')),
+      '마지막 일정 배열 확인333333333333333'
+    )
   }, [lastMakePlan])
 
   // 마커클릭함수
