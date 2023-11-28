@@ -13,6 +13,8 @@ const List = ({
   selectedKey,
   bgList,
   daysss,
+  setCenter,
+  setMarkerImage,
 }) => {
   const plaNoList = bgList.map((item) => item.pla_no)
   // console.log(plaNoList, 'plaNoList plaNoList')
@@ -43,6 +45,11 @@ const List = ({
           ? '0px solid orange'
           : '0px solid #ffffff',
         backgroundColor: plaNoList.includes(resData.pla_no) ? '#ECEFF7' : '',
+      }}
+      onClick={() => {
+        setCenter(resData.latlng)
+        setMarkerImage(resData)
+        console.log(resData)
       }}
     >
       {/* style={{ backgroundColor: bgList.myDay == 1 ? "gray" : "" }} */}

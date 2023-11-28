@@ -32,6 +32,43 @@ export const data = createContext()
 export const checkNumber = createContext()
 
 const MakePlan = () => {
+  // 임시 커스텀 오버레이
+  const MovieChart = () => <div>{markerImg.pla_name}</div>
+  // 마커 이미지 관리 state
+  const [markerImg, setMarkerImage] = useState('')
+  // 최종 리스트 (이거 쓰시면 됩니다)
+  const [lastMakePlan, setLastMakePlan] = useState()
+
+  const makePlanStrat = () => {
+    console.log('일정 생성 대기')
+    console.log(myList)
+
+    let myListObj = {}
+
+    for (let [i, j] of myList.entries()) {
+      myList
+        .filter((item) => item.myDay == i + 1)
+        .forEach((item) => {
+          if (!myListObj[`day${i + 1}`]) {
+            myListObj[`day${i + 1}`] = []
+          }
+          myListObj[`day${i + 1}`].push(item.pla_no)
+        })
+    }
+
+    setLastMakePlan(myListObj)
+  }
+
+  // 마지막일정
+  useEffect(() => {
+    console.log(lastMakePlan, '마지막 일정 배열 확인')
+    // console.log(JSON.stringify(lastMakePlan), '마지막 일정 배열 확인22222222')
+    // console.log(
+    //   JSON.parse(JSON.stringify(lastMakePlan ?? '')),
+    //   '마지막 일정 배열 확인333333333333333'
+    // )
+  }, [lastMakePlan])
+
   // 마커클릭함수
   const markerClick = (e) => {
     console.log(e.target)
@@ -989,13 +1026,13 @@ const MakePlan = () => {
           </Nav>
         </Container>
       </Navbar> */}
-      <Container>
+      <div style={{ padding: '0px 130px' }}>
         {/* //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////// SIDE BAR START ////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////// */}
         <Row style={{ overflow: 'hidden' }}>
           {/*///////////////////////////////// 검색 INPUT  ////////////////////////////////////*/}
-          <Col sm={4} style={{ backgroundColor: '#f6f6f6', zIndex: '20' }}>
+          <Col sm={3} style={{ backgroundColor: '#f6f6f6', zIndex: '20' }}>
             <div className="search-container">
               <input
                 type="search"
@@ -1030,6 +1067,8 @@ const MakePlan = () => {
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
+                    setMarkerImage={setMarkerImage}
+                    setCenter={setCenter}
                     key={index}
                     daysss={days}
                     resData={item}
@@ -1042,6 +1081,8 @@ const MakePlan = () => {
               {selectedKey === '2' &&
                 positions2.map((item, index) => (
                   <List
+                    setMarkerImage={setMarkerImage}
+                    setCenter={setCenter}
                     key={index}
                     daysss={days}
                     resData={item}
@@ -1054,6 +1095,8 @@ const MakePlan = () => {
               {selectedKey === '6' &&
                 firstData2.map((item, index) => (
                   <List
+                    setMarkerImage={setMarkerImage}
+                    setCenter={setCenter}
                     key={index}
                     daysss={days}
                     resData={item}
@@ -1066,7 +1109,7 @@ const MakePlan = () => {
             </div>
           </Col>
 
-          <Col className="p-0" sm={8} style={{ position: 'relative' }}>
+          <Col className="p-0" sm={9} style={{ position: 'relative' }}>
             <Col className={`temp-css${isTempCssVisible ? '' : 'hidden'}`}>
               {/* // <div className={`temp33 ${isTempCssVisible ? '' : 'hidden'}`} onClick={handleButtonClick}> */}
               <Container>
@@ -1195,13 +1238,20 @@ const MakePlan = () => {
                           ))}
                         </Accordion>
                         <Container>
-                          <Row>
-                            <Col className="schedule-creation-col">
-                              <button className="schedule-creation">
-                                일정 생성하기
-                              </button>
-                            </Col>
-                          </Row>
+                          {myList.length > 0 ? (
+                            <Row>
+                              <Col
+                                onClick={makePlanStrat}
+                                className="schedule-creation-col"
+                              >
+                                <button className="schedule-creation">
+                                  일정 생성하기
+                                </button>
+                              </Col>
+                            </Row>
+                          ) : (
+                            ''
+                          )}
                         </Container>
                       </DragDropContext>
                     </data.Provider>
@@ -1221,7 +1271,6 @@ const MakePlan = () => {
                     transform: `rotate(${rotation}deg)`,
                     transition: 'transform 0.3s ease',
                   }}
-                  src="https://cdn-icons-png.flaticon.com/512/271/271228.png"
                 />
               </div>
             </Col>
@@ -1229,15 +1278,70 @@ const MakePlan = () => {
             <Col />
 
             {/* 지도 생성하기 */}
+
             <Map
               center={center}
               style={{
                 width: '100%',
                 height: '100%',
-                marginLeft: isTempCssVisible ? '140px' : '',
+                marginLeft: isTempCssVisible ? '220px' : '',
               }}
               level={7}
             >
+              {/* 리스트 클릭 마커 */}
+              {markerImg ? (
+                <React.Fragment key={uuidv4()}>
+                  <MapMarker
+                    clickable={true} // 임시(지도클릭막기)
+                    position={markerImg.latlng}
+                    // title={markerImg?.pla_name}
+                    image={{
+                      // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함)
+                      src: './img/map-marker-2-24.png',
+                      size: {
+                        width: 24,
+                        height: 24,
+                      }, // 마커이미지의 크기입니다
+                      options: {
+                        // offset: {
+                        //   x: 27,
+                        //   y: 69,
+                        // }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                      },
+                    }}
+                    onClick={(e) => markerClick(e)}
+                  />
+                  {/* 커스텀오버레이도 같이 찍기 */}
+                  <CustomOverlayMap
+                    position={markerImg.latlng}
+                    // xAnchor={0.4}
+                    yAnchor={1.9}
+                    // 커스텀 오버레이 위치 설정
+                  >
+                    <div className="custom-overlay-div">
+                      <div
+                        className="center"
+                        style={{
+                          fontWeight: 400,
+                          fontSize: '16px',
+                          color: 'white',
+                          padding: '3px 10px 3px 10px',
+                          borderRadius: '50px',
+                          // width: '21px',
+                          // marginTop: '5px',
+                          // marginLeft: '3px',
+                          textAlign: 'center',
+                        }}
+                      >
+                        {markerImg.pla_name}
+                      </div>
+                    </div>
+                  </CustomOverlayMap>
+                </React.Fragment>
+              ) : (
+                ''
+              )}
+
               {/* positions로 마커찍기 */}
               {myList.map((position, index) => (
                 // React.Fragment: map안에서 여러개의 컴포넌트를 사용할때
@@ -1249,7 +1353,8 @@ const MakePlan = () => {
                     title={position?.pla_name}
                     image={{
                       // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함)
-                      src: 'https://velog.velcdn.com/images/for_i_in_range/post/7370a3e9-36fb-426a-a424-d7f89db02d00/image.png',
+                      src: './img/invimage.png',
+
                       size: {
                         width: 20,
                         height: 20,
@@ -1295,7 +1400,7 @@ const MakePlan = () => {
             </Map>
           </Col>
         </Row>
-      </Container>
+      </div>
     </div>
     ////////////////////
     ////////////////////

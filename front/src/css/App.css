@@ -174,7 +174,7 @@ button[type="button"]:hover {
 }
 .temp-css {
   position: absolute;
-  width: 350px !important;
+  width: 400px !important;
   z-index: 10 !important;
   background-color: #ffffff;
   /* left: 37%; */
@@ -196,6 +196,7 @@ button[type="button"]:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .temp33 > img {
   width: 25px;
@@ -457,6 +458,9 @@ button[type="button"]:hover {
   justify-content: center;
   align-items: center;
 }
+.schedule-creation:hover {
+  background-color: #ff8400;
+}
 .schedule-creation {
   position: absolute;
   width: 90%;
@@ -470,4 +474,12 @@ button[type="button"]:hover {
   bottom: 30px;
   z-index: 100;
   font-size: 20px;
+}
+.custom-overlay-div {
+  background-color: orange;
+  border-radius: 5px;
+  /* border: 1px solid black; */
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 }
