@@ -55,14 +55,7 @@ const RegionCom = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          gap: '100px',
-          marginBottom: '100px',
-          marginTop: '40px',
-        }}
-      >
+      <div className="reg-div">
         <DivCard className="reg-info">
           <img src={M1} alt="" onClick={handleShowModal} />
           <p>orrn</p>

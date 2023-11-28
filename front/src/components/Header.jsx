@@ -20,7 +20,7 @@ const Header = () => {
         <span className="tab" style={{ marginLeft: '25px' }}>
           여행 일정
         </span>
-        |
+        <span className="bar">|</span>
         <Link to="/reservation" style={{ textDecoration: 'none' }}>
           <span className="tab">숙소 예약</span>
         </Link>

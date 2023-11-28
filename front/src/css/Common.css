@@ -133,6 +133,140 @@
   margin-left: 5px;
 }
 
+/* 모바일용 */
+@media screen and (max-width: 932px) {
+  .header {
+    height: 56px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    position: relative;
+    right: 33px;
+    font-size: 40px;
+    color: #ff9b00;
+    font-family: 'Yeongdo-Rg';
+    font-style: normal;
+    font-weight: 700;
+    top: 26%;
+  }
+
+  .tab {
+    /* width: 39px;
+    margin: 30px;
+    font-size: 18px;
+    font-family: omnigothic, sans-serif;
+    font-style: normal;
+    font-weight: 600; */
+    color: white;
+    font-size: 0;
+  }
+
+  .bar {
+    color: white;
+    font-size: 0;
+  }
+
+  .login-btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 1rem;
+    position: relative;
+    left: 30px;
+    background-color: white;
+    color: black;
+    font-family: omnigothic, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    border: 2px solid black;
+  }
+
+  /* 로그인 모달 */
+  .login-modal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+  }
+
+  .login-logo {
+    font-family: 'Yeongdo-Rg';
+    color: #ff9b00;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .loginbox {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    padding-left: 1rem;
+    margin-top: 10px;
+  }
+
+  .find {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .login {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .social-btn-kakao {
+    width: 100%;
+    height: 50px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .social-btn-kakao img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .social-btn-google {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 10px;
+    border: 1px solid rgb(105, 104, 104);
+    font-weight: 550;
+  }
+
+  .social-btn-google img {
+    width: 27px;
+    height: 30px;
+    margin-left: 8px;
+    margin-right: 108px;
+  }
+
+  .google-txt {
+    margin-left: 5px;
+  }
+}
+
 /* footer */
 
 /* Modal */

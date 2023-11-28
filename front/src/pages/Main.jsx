@@ -19,6 +19,18 @@ const MainCon = styled.div`
     text-align: center;
     color: gray;
   }
+
+  @media screen and (max-width: 932px) {
+    p {
+      font-family: omnigothic, sans-serif;
+      font-style: normal;
+      font-weight: 300;
+      text-align: center;
+      color: gray;
+      font-size: 14px;
+      widht: 100%;
+    }
+  }
 `
 const Main = () => {
   return (

@@ -114,3 +114,49 @@
 .reg-mini-title span {
   color: orange;
 }
+
+.reg-div {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 100px;
+  margin-top: 40px;
+}
+
+/* 모바일용 */
+@media screen and (max-width: 930px) {
+  .content-body {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+  }
+
+  .reg-middle {
+    width: 100%;
+    height: auto;
+    display: inherit;
+  }
+
+  .reg-rep {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .reg-rep-img {
+    width: 330px;
+    height: 200px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .reg-rep-content {
+    flex-direction: column;
+    margin-left: 15px;
+  }
+  .reg-rep-content-l {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  .reg-rep-content-r {
+    width: 100%;
+  }
+}
