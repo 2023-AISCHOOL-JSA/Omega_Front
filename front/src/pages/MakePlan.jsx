@@ -27,13 +27,16 @@ import { createContext } from 'react'
 import Calendar from 'react-calendar'
 import '../css//CalendarCustom.css'
 import moment from 'moment'
+import MakeModal from '../components/MakeModal'
 
 export const data = createContext()
 export const checkNumber = createContext()
 
 const MakePlan = () => {
-  // 임시 커스텀 오버레이
-  const MovieChart = () => <div>{markerImg.pla_name}</div>
+  // 메이크페이지 모달 state
+  const [makePageModal, setMakePageModal] = useState(false)
+  const [modalDataTemp, setModalDataTemp] = useState({})
+
   // 마커 이미지 관리 state
   const [markerImg, setMarkerImage] = useState('')
   // 최종 리스트 (이거 쓰시면 됩니다)
@@ -70,9 +73,17 @@ const MakePlan = () => {
   }, [lastMakePlan])
 
   // 마커클릭함수
+
   const markerClick = (e) => {
-    console.log(e.target)
+    const [markerClickEventData] = firstData2.filter(
+      (item) => item.pla_name == e.Gb
+    )
+
+    console.log(markerClickEventData, 'markerClickEventData')
+    console.log([markerClickEventData], '[markerClickEventData]')
     console.log(e.Gb)
+    setModalDataTemp(markerClickEventData)
+    setMakePageModal(!makePageModal)
   }
 
   // 카테고리 리스트 변수(state안써도될듯)
@@ -1014,6 +1025,7 @@ const MakePlan = () => {
 
   return (
     <div>
+      {makePageModal ? <MakeModal data={modalDataTemp} /> : ''}
       {/* <Navbar bg="white" className="mb-3">
         <Container style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Navbar style={{ flex: 1 }}>
@@ -1026,7 +1038,7 @@ const MakePlan = () => {
           </Nav>
         </Container>
       </Navbar> */}
-      <div style={{ padding: '0px 130px' }}>
+      <div style={{ padding: '0px 100px' }}>
         {/* //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////// SIDE BAR START ////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////// */}
@@ -1294,10 +1306,11 @@ const MakePlan = () => {
                   <MapMarker
                     clickable={true} // 임시(지도클릭막기)
                     position={markerImg.latlng}
-                    // title={markerImg?.pla_name}
+                    title={markerImg?.pla_name}
                     image={{
-                      // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함)
+                      // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함(변경완료))
                       src: './img/map-marker-2-24.png',
+                      // src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DBqiID-0MCt6N6ATmxuHms-3v4HwMnyhw-pwx-MFIYxJyPdd7HwDhpCCZkMo3uhVR18&usqp=CAU',
                       size: {
                         width: 24,
                         height: 24,
@@ -1305,7 +1318,8 @@ const MakePlan = () => {
                       options: {
                         // offset: {
                         //   x: 27,
-                        //   y: 69,
+                        // y: 69,
+                        // y: 0,
                         // }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                       },
                     }}
@@ -1354,25 +1368,25 @@ const MakePlan = () => {
                     image={{
                       // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함)
                       src: './img/invimage.png',
-
                       size: {
-                        width: 20,
-                        height: 20,
+                        width: 24,
+                        height: 24,
                       }, // 마커이미지의 크기입니다
-                      // options: {
-                      //   offset: {
-                      //     x: 27,
-                      //     y: 69,
-                      //   }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-                      // },
+                      options: {
+                        offset: {
+                          x: 11,
+                          y: 10,
+                        }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                      },
                     }}
                     onClick={(e) => markerClick(e)}
                   />
                   {/* 커스텀오버레이도 같이 찍기 */}
                   <CustomOverlayMap
+                    zIndex={-99}
                     position={position.latlng}
-                    xAnchor={0.4}
-                    yAnchor={1}
+                    // xAnchor={0.4}
+                    // yAnchor={1}
                     // 커스텀 오버레이 위치 설정
                   >
                     <div>
