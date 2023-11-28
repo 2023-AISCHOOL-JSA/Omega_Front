@@ -307,15 +307,34 @@ button[type="button"]:hover {
   text-align: center;
 }
 .list-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
-  background-color: #ff9a00;
-  border: none;
+  /* background-color: #ff9a00; */
+  background-color: white;
+  border: 1px solid #ff9a00;
   width: 30px;
-  font-size: 20px;
+  font-size: 24px;
   height: 30px;
   align-items: center;
-  color: white;
+  color: #ff9a00;
+  /* font-weight: 1000; */
   text-align: center !important;
+}
+.list-btn:active {
+  background-color: #ff9a00;
+  color: white;
+  border: none;
+}
+/* 대기 */
+.list-check-btn {
+  border: none;
+  font-size: 30px;
+  background-color: #e4e7ef;
+}
+.list-check-btn:active {
+  background-color: #e4e7ef;
 }
 .anothermodal {
   /* display: flex;

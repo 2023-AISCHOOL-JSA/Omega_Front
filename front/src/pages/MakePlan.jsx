@@ -161,11 +161,16 @@ const MakePlan = () => {
         .fill(null)
         .map((_, i) => (i + 1).toString())
       setDays(tempp)
+      console.log(tempp, 'tempptempptempptempp')
     }
   }
-  // useEffect(() => {
-  //   console.log(days)
-  // }, [days])
+  useEffect(() => {
+    // console.log(tempp, 'tempptempptempptempp')
+    console.log(
+      days.map((item) => (parseInt(item) - 1).toString()),
+      '777777777777777777777777'
+    )
+  }, [days])
 
   const handleCalendarChange = (newDate) => {
     // console.log(newDate,"newDate 어떻게 생겼는지?")
@@ -1232,7 +1237,9 @@ const MakePlan = () => {
                       <DragDropContext onDragEnd={handleDragEnd}>
                         {/* defaultActiveKey 일차수별로 리스트로만들어서 할당해야함 (11/26 미완) */}
                         <Accordion
-                          defaultActiveKey={days}
+                          defaultActiveKey={days.map((item) =>
+                            (parseInt(item) - 1).toString()
+                          )}
                           alwaysOpen
                           className="scrollable-div2"
                         >
