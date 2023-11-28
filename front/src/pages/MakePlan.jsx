@@ -1022,7 +1022,11 @@ const MakePlan = () => {
 
   return (
     <div>
-      {makePageModal ? <MakeModal data={modalDataTemp} /> : ''}
+      {makePageModal ? (
+        <MakeModal makePageModal={setMakePageModal} data={modalDataTemp} />
+      ) : (
+        ''
+      )}
       {/* <Navbar bg="white" className="mb-3">
         <Container style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Navbar style={{ flex: 1 }}>
