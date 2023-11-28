@@ -227,7 +227,7 @@ button[type="button"]:hover {
   border: 2px;
   border-style: dashed;
   border-color: #efefef;
-  margin: 0px !important;
+  /* margin: 0px !important; */
   padding-left: 8px !important;
   padding-right: 8px !important;
   position: relative;
