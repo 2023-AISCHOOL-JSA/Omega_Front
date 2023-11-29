@@ -1048,14 +1048,18 @@ const MakePlan = () => {
                 className="main-input mt-3 mb-3"
                 placeholder="텍스트 혹은 이미지로 검색해보세요."
               />
-              <img
-                className="input-img search-img"
-                src="https://cdn.icon-icons.com/icons2/2406/PNG/512/search_magnifier_icon_145939.png"
-              />
-              <img
-                className="input-img img-search-img"
-                src="https://cdn.icon-icons.com/icons2/2440/PNG/512/gallery_icon_148533.png"
-              />
+              <button className="search-btn">
+                <img
+                  className="input-img search-img"
+                  src="https://cdn.icon-icons.com/icons2/2406/PNG/512/search_magnifier_icon_145939.png"
+                />
+              </button>
+              <button className="search-btn">
+                <img
+                  className="input-img img-search-img"
+                  src="https://cdn.icon-icons.com/icons2/2440/PNG/512/gallery_icon_148533.png"
+                />
+              </button>
             </div>
             <Nav variant="tabs">
               {categories.map((item, index) => (

@@ -58,10 +58,11 @@ input[type='search'] {
   width: 100%;
   border: 1px solid #e0e0e0;
   padding: 15px; /* 내용물 작성했을 때 여백감 */
-  border-radius: 5px; /* 굴곡 주면 padding 값도 그에 상응하게 적용하는 것이 좋음 */
+  border-radius: 10px; /* 굴곡 주면 padding 값도 그에 상응하게 적용하는 것이 좋음 */
+  font-size: 13px;
 }
 input::placeholder {
-  font-size: 0.8em;
+  font-size: 13px;
   color: #a8a8a8;
   font-weight: 600;
 }
@@ -85,6 +86,7 @@ input::placeholder {
 }
 .main-input {
   width: 100%;
+  margin-bottom: 0 !important;
 }
 .nav-item {
   display: flex;
@@ -161,6 +163,12 @@ button[type="button"]:hover {
 .img-search-img {
   right: 12px;
 }
+
+.search-btn {
+  border: none;
+  background: none;
+}
+
 .active-class > div {
   color: #131313;
   /* background-color: red; */

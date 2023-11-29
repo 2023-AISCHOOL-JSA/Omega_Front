@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-import Dormitory from '../img/dormitory.jpg'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import RegionModal from './RegionModal'
-import M1 from '../img/m1.jpg'
-import M3 from '../img/pup.jpg'
-import M4 from '../img/m4.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons'
+import { WishContext } from '../context/WishContext'
 
 const DivCard = styled.div`
   width: 300px;
@@ -39,10 +36,28 @@ const DivCard = styled.div`
 
 const RegionCom = () => {
   const [showModal, setShowModal] = useState(false)
-  const [heart, setHeart] = useState(false)
+  const [hearts, setHearts] = useState({})
+  const { addWish, removeWish } = useContext(WishContext)
+  const [data, setData] = useState([])
 
-  const handleHeart = () => {
-    setHeart(!heart)
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('url')
+      const data = await response.json()
+      setData(data)
+    }
+    fetchData()
+  }, [])
+
+  const handleHeart = (id) => {
+    const newHearts = { ...hearts, [id]: !hearts[id] }
+    setHearts(newHearts)
+
+    if (newHearts[id]) {
+      addWish(id)
+    } else {
+      removeWish(id)
+    }
   }
 
   const handleShowModal = () => {
@@ -56,68 +71,28 @@ const RegionCom = () => {
   return (
     <>
       <div className="reg-div">
-        <DivCard className="reg-info">
-          <img src={M1} alt="" onClick={handleShowModal} />
-          <p>orrn</p>
-          <span>제주특별자치도 서귀포시 성산읍 해맞이해안로</span>
-          <p onClick={handleHeart} className="heart-card">
-            {heart ? (
-              <FontAwesomeIcon
-                icon={faSolidHeart}
-                size="xl"
-                style={{ color: '#ff000d' }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faRegularHeart}
-                size="xl"
-                style={{ color: '#ff000d' }}
-              />
-            )}
-          </p>
-        </DivCard>
-
-        <DivCard className="reg-info">
-          <img src={M3} alt="" onClick={handleShowModal} />
-          <p>제주 약수터</p>
-          <span>제주특별자치도 서귀포시 중앙로 35</span>
-          <p onClick={handleHeart} className="heart-card">
-            {heart ? (
-              <FontAwesomeIcon
-                icon={faSolidHeart}
-                size="xl"
-                style={{ color: '#ff000d' }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faRegularHeart}
-                size="xl"
-                style={{ color: '#ff000d' }}
-              />
-            )}
-          </p>
-        </DivCard>
-
-        <DivCard className="reg-info">
-          <img src={M4} alt="" onClick={handleShowModal} heart={setHeart} />
-          <p>고흐의 정원</p>
-          <span>제주 서귀포시 성산읍 삼달신풍로 126-5</span>
-          <p onClick={handleHeart} className="heart-card">
-            {heart ? (
-              <FontAwesomeIcon
-                icon={faSolidHeart}
-                size="xl"
-                style={{ color: '#ff000d' }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faRegularHeart}
-                size="xl"
-                style={{ color: '#ff000d' }}
-              />
-            )}
-          </p>
-        </DivCard>
+        {data.map((item) => (
+          <DivCard className="reg-info" key={item.id} onClick={handleShowModal}>
+            <img src={item.image} alt="" />
+            <p>{item.name}</p>
+            <span>{item.address}</span>
+            <p onClick={() => handleHeart(item.id)} className="heart-card">
+              {hearts[item.id] ? (
+                <FontAwesomeIcon
+                  icon={faSolidHeart}
+                  size="xl"
+                  style={{ color: '#ff000d' }}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faRegularHeart}
+                  size="xl"
+                  style={{ color: '#ff000d' }}
+                />
+              )}
+            </p>
+          </DivCard>
+        ))}
       </div>
       {showModal && <RegionModal onClose={handleCloseModal} />}
     </>
