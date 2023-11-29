@@ -1,24 +1,14 @@
 import '../css//App.css'
 import '../css/reset.css'
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk'
-import ListGroup from 'react-bootstrap/ListGroup'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 // import 'bootstrap/dist/css/bootstrap.min.css'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-import { Tab } from 'bootstrap'
-import Tabs from 'react-bootstrap/Tabs'
 import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import Card from 'react-bootstrap/Card'
-import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
 import List from '../components/List'
-import Offcanvas from 'react-bootstrap/Offcanvas'
 import Accordion from 'react-bootstrap/Accordion'
 import AccordionList from '../components/AccordionList'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
@@ -38,8 +28,8 @@ const MakePlan = () => {
   const [modalDataTemp, setModalDataTemp] = useState({})
 
   // 마커 이미지 관리,토글 state
-  const [listCheckCount,setListCheckCount]= useState(0)
-  const [listCheckList,setListCheckList]= useState([])
+  const [listCheckCount, setListCheckCount] = useState(0)
+  const [listCheckList, setListCheckList] = useState([])
   const [markerImg, setMarkerImage] = useState('')
   const [markerImgToggle, setMarkerImageToggle] = useState(false)
   // 최종 리스트 (이거 쓰시면 됩니다)
@@ -1025,11 +1015,6 @@ const MakePlan = () => {
 
   return (
     <div>
-      {makePageModal ? (
-        <MakeModal makePageModal={setMakePageModal} data={modalDataTemp} />
-      ) : (
-        ''
-      )}
       {/* <Navbar bg="white" className="mb-3">
         <Container style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Navbar style={{ flex: 1 }}>
@@ -1043,6 +1028,23 @@ const MakePlan = () => {
         </Container>
       </Navbar> */}
       <div style={{ padding: '0px 100px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            // alignItems: 'center',
+          }}
+        >
+          {makePageModal ? (
+            <MakeModal
+              setMakePageModal={setMakePageModal}
+              makePageModal={makePageModal}
+              modalDataTemp={modalDataTemp}
+            />
+          ) : (
+            ''
+          )}
+        </div>
         {/* //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////// SIDE BAR START ////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////// */}
@@ -1083,11 +1085,11 @@ const MakePlan = () => {
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
-                  listCheckCount={listCheckCount}
-                  setListCheckCount={setListCheckCount}
-                  listCheckList={listCheckList}
-                  setListCheckList={setListCheckList}
-                  setMarkerImgToggle={setMarkerImageToggle}
+                    listCheckCount={listCheckCount}
+                    setListCheckCount={setListCheckCount}
+                    listCheckList={listCheckList}
+                    setListCheckList={setListCheckList}
+                    setMarkerImgToggle={setMarkerImageToggle}
                     setMarkerImage={setMarkerImage}
                     markerImg={markerImg}
                     setCenter={setCenter}
@@ -1103,11 +1105,11 @@ const MakePlan = () => {
               {selectedKey === '2' &&
                 positions2.map((item, index) => (
                   <List
-                  listCheckCount={listCheckCount}
-                  setListCheckCount={setListCheckCount}
-                  listCheckList={listCheckList}
-                  setListCheckList={setListCheckList}
-                  setMarkerImgToggle={setMarkerImageToggle}
+                    listCheckCount={listCheckCount}
+                    setListCheckCount={setListCheckCount}
+                    listCheckList={listCheckList}
+                    setListCheckList={setListCheckList}
+                    setMarkerImgToggle={setMarkerImageToggle}
                     setMarkerImage={setMarkerImage}
                     markerImg={markerImg}
                     setCenter={setCenter}
@@ -1123,13 +1125,13 @@ const MakePlan = () => {
               {selectedKey === '6' &&
                 firstData2.map((item, index) => (
                   <List
-                  listCheckCount={listCheckCount}
-                  setListCheckCount={setListCheckCount}
-                  listCheckList={listCheckList}
-                  setListCheckList={setListCheckList}
-                  markerImgToggle={markerImgToggle}
-                  setMarkerImgToggle={setMarkerImageToggle}
-                  markerImg={markerImg}
+                    listCheckCount={listCheckCount}
+                    setListCheckCount={setListCheckCount}
+                    listCheckList={listCheckList}
+                    setListCheckList={setListCheckList}
+                    markerImgToggle={markerImgToggle}
+                    setMarkerImgToggle={setMarkerImageToggle}
+                    markerImg={markerImg}
                     setMarkerImage={setMarkerImage}
                     setCenter={setCenter}
                     key={index}
@@ -1443,47 +1445,5 @@ const MakePlan = () => {
     ////////////////////
   )
 }
-
-////////////////////////// 모달내용 수정할 body
-// function MydModalWithGrid(props) {
-//   console.log(props);
-//   console.log(props.temp);
-//   return (
-//     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
-//       <Modal.Header closeButton>
-//         <Modal.Title id="contained-modal-title-vcenter">
-//           {props.temp}
-//         </Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body className="grid-example">
-//         <Container>
-//           <Row>
-//             <Col xs={12} md={8}>
-//               .col-xs-12 .col-md-8
-//             </Col>
-//             <Col xs={6} md={4}>
-//               .col-xs-6 .col-md-4
-//             </Col>
-//           </Row>
-
-//           <Row>
-//             <Col xs={6} md={4}>
-//               .col-xs-6 .col-md-4
-//             </Col>
-//             <Col xs={6} md={4}>
-//               .col-xs-6 .col-md-4
-//             </Col>
-//             <Col xs={6} md={4}>
-//               .col-xs-6 .col-md-4
-//             </Col>
-//   </Row>
-//         </Container>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button onClick={props.onHide}>Close</Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// }
 
 export default MakePlan
