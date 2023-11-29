@@ -531,7 +531,7 @@ button[type="button"]:hover {
 .make-page-modal {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 76px);
 
   position: absolute;
   /* background-color: red; */
@@ -560,6 +560,7 @@ button[type="button"]:hover {
   /* height: 70%; */
   background-color: white;
   border-radius: 5px;
+  height:calc(100vh - 76px);
 }
 .make-modal-close-btn {
   position: absolute;
@@ -616,7 +617,13 @@ button[type="button"]:hover {
 }
 .root-wrap {
   overflow-y: hidden;
-  height: calc(100vh-76px);
+  height: calc(100vh - 76px);
   /* transform: rotate(110deg);
   transform-origin: center; 회전 중심점을 조절할 수 있습니다. */
+}
+.make-modal-img{
+ width: 100%;
+ border-radius: 5px;
+ height:330px;
+
 }

@@ -43,9 +43,8 @@ const MakeModal = ({ makePageModal, modalDataTemp, setMakePageModal }) => {
     }
   }
   return (
-    <Container className="make-page-modal-1" ref={modalRef}>
-      <div className="make-page-modal">
-        <div />
+    <div className="make-page-modal">
+      <Container className="make-page-modal-1" ref={modalRef}>
         <Row>
           <Col className="p-0">
             <div
@@ -54,8 +53,8 @@ const MakeModal = ({ makePageModal, modalDataTemp, setMakePageModal }) => {
             >
               X
             </div>
-            <img
-              style={{ width: '100%', borderRadius: '5px', height: '330px' }}
+            <img className='make-modal-img'
+              // style={{ width: '100%', borderRadius: '0px', height: '100%' }}
               src={modalDataTemp.img}
             ></img>
           </Col>
@@ -144,10 +143,9 @@ const MakeModal = ({ makePageModal, modalDataTemp, setMakePageModal }) => {
               <div>{modalDataTemp.pla_info}</div>
             </Col>
           </Row>
-          <div style={{ height: '40px' }}></div>
         </Container>
-      </div>
-    </Container>
+      </Container>
+    </div>
   )
 }
 
