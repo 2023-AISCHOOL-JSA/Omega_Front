@@ -15,7 +15,55 @@ const List = ({
   daysss,
   setCenter,
   setMarkerImage,
+  setMarkerImgToggle,
+  markerImgToggle,
+  markerImg,
+  listCheckList,
+  setListCheckList,
+  listCheckCount,
+  setListCheckCount
 }) => {
+
+
+  const listClickCheck = (e) => {
+    console.log(markerImg, "     console.log(markerImg)");
+    console.log(resData, "     resData");
+    if(!listCheckCount) {
+      setListCheckCount(1)
+      setMarkerImgToggle(!markerImgToggle);
+    }
+   // 우선 listCheckList 에 클릭한 리스트 데이터 추가
+    setListCheckList([...listCheckList, resData]);
+  
+ 
+    if(listCheckList.length>0){
+      // 눌린 리스트 데이터와 기존에 있던 리스트 데이터가 같다면
+      if (resData.pla_no === listCheckList[0]?.pla_no) {
+        // 마커 새로 보여주기
+        setMarkerImgToggle(!markerImgToggle);
+    
+      }
+      // 리스트마커가 안찍힌상태(false인상태)에서 다른 리스트 누르면 true로 바꿀수없기때문에 조건 추가
+      if(markerImgToggle==false){
+        setMarkerImgToggle(!markerImgToggle);
+      }
+      // 무조건 배열의 0번째(기존에 존재했던 비교할 리스트데이터)는 없애기
+      setListCheckList(list => {
+        const temp = [...list];
+        temp.shift(); // Remove the first element
+        return temp;
+      });
+    };
+    }
+  
+  // 지워두됩니다 (확인용)
+  useEffect(()=>{
+    console.log(listCheckList[0],"    console.log(listCheckList[0])")
+    console.log(listCheckList,"    console.log(listCheckList)")
+    // console.log(resData.pla_no,"    console.log(listCheckList)")
+  },[listCheckList])
+
+
   const plaNoList = bgList.map((item) => item.pla_no)
   // console.log(plaNoList, 'plaNoList plaNoList')
   const myData2 = useContext(data)
@@ -51,10 +99,12 @@ const List = ({
           : '0px solid #ffffff',
         backgroundColor: plaNoList.includes(resData.pla_no) ? '#ECEFF7' : '',
       }}
-      onClick={() => {
-        setCenter(resData.latlng)
+      onClick={(e) => {
         setMarkerImage(resData)
-        console.log(resData)
+        listClickCheck((e))
+        setCenter(resData.latlng)
+  
+        // console.log(resData)
       }}
     >
       {/* style={{ backgroundColor: bgList.myDay == 1 ? "gray" : "" }} */}
