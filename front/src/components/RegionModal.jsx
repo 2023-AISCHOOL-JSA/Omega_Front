@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons'
-
 import '../css/Common.css'
 
 const ImgSet = styled.img`
@@ -113,7 +112,6 @@ const RegionModal = ({ onClose }) => {
               >
                 주소복사
               </button>
-
               <Overlay target={target.current} show={show} placement="bottom">
                 {(props) => (
                   <Tooltip id="overlay-example" {...props}>
