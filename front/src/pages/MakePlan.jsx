@@ -1014,7 +1014,16 @@ const MakePlan = () => {
   }, [myList])
 
   return (
-    <div>
+    // <div>
+    // <Container style={{ padding: '0px' }}>
+    <div
+      className="root-wrap"
+      style={{
+        height: '100%',
+        width: '100%',
+        padding: '0px 100px',
+      }}
+    >
       {/* <Navbar bg="white" className="mb-3">
         <Container style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Navbar style={{ flex: 1 }}>
@@ -1027,424 +1036,428 @@ const MakePlan = () => {
           </Nav>
         </Container>
       </Navbar> */}
-      <div style={{ padding: '0px 100px' }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            // alignItems: 'center',
-          }}
-        >
-          {makePageModal ? (
-            <MakeModal
-              setMakePageModal={setMakePageModal}
-              makePageModal={makePageModal}
-              modalDataTemp={modalDataTemp}
-            />
-          ) : (
-            ''
-          )}
-        </div>
-        {/* //////////////////////////////////////////////////////////////////////////////////////////////
+      {/* <Container style={{ padding: '0px 100px' }}> */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          // alignItems: 'center',
+        }}
+      >
+        {makePageModal ? (
+          <MakeModal
+            setMakePageModal={setMakePageModal}
+            makePageModal={makePageModal}
+            modalDataTemp={modalDataTemp}
+          />
+        ) : (
+          ''
+        )}
+      </div>
+      {/* //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////// SIDE BAR START ////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////// */}
-        <Row style={{ overflow: 'hidden' }}>
-          {/*///////////////////////////////// 검색 INPUT  ////////////////////////////////////*/}
-          <Col sm={3} style={{ backgroundColor: '#f6f6f6', zIndex: '20' }}>
-            <div className="search-container">
-              <input
-                type="search"
-                className="main-input mt-3 mb-3"
-                placeholder="텍스트 혹은 이미지로 검색해보세요."
+      <Row style={{ overflow: 'hidden' }}>
+        {/*///////////////////////////////// 검색 INPUT  ////////////////////////////////////*/}
+        <Col
+          sm={3}
+          style={{
+            backgroundColor: '#f6f6f6',
+            zIndex: '20',
+            height: 'calc(100vh-76px)',
+          }}
+        >
+          <div className="search-container">
+            <input
+              type="search"
+              className="main-input mt-3 mb-3"
+              placeholder="텍스트 혹은 이미지로 검색해보세요."
+            />
+            <button className="search-btn">
+              <img
+                className="input-img search-img"
+                src="https://cdn.icon-icons.com/icons2/2406/PNG/512/search_magnifier_icon_145939.png"
               />
-              <button className="search-btn">
-                <img
-                  className="input-img search-img"
-                  src="https://cdn.icon-icons.com/icons2/2406/PNG/512/search_magnifier_icon_145939.png"
-                />
-              </button>
-              <button className="search-btn">
-                <img
-                  className="input-img img-search-img"
-                  src="https://cdn.icon-icons.com/icons2/2440/PNG/512/gallery_icon_148533.png"
-                />
-              </button>
-            </div>
-            <Nav variant="tabs">
-              {categories.map((item, index) => (
-                <Nav.Item
-                  key={index}
-                  className={selectedKey === item.sequence ? 'active' : ''}
-                  onClick={(e) => cateClick(e, item.sequence)}
-                  // eventKey={`link${index}`}
-                >
-                  <img className="cate-img" src={item.path1}></img>
-                  <div className="item-text mt-1 mb-3">{item.title}</div>
-                </Nav.Item>
-              ))}
-            </Nav>
-            {/*///////////////////////////////// 리스트 시작 ////////////////////////////////////*/}
-            {/*///////////////////////////////// 셀렉트키 전부 만들어야함 (11/26) ////////////////////////////////////*/}
-            <div className="scrollable-div1">
-              {selectedKey === '1' &&
-                positions1.map((item, index) => (
-                  <List
-                    listCheckCount={listCheckCount}
-                    setListCheckCount={setListCheckCount}
-                    listCheckList={listCheckList}
-                    setListCheckList={setListCheckList}
-                    setMarkerImgToggle={setMarkerImageToggle}
-                    setMarkerImage={setMarkerImage}
-                    markerImg={markerImg}
-                    setCenter={setCenter}
-                    key={index}
-                    daysss={days}
-                    resData={item}
-                    key1={index}
-                    setData={setData}
-                    setData2={setData2}
-                    bgList={myList} /* 다른 속성들 추가 */
-                  />
-                ))}
-              {selectedKey === '2' &&
-                positions2.map((item, index) => (
-                  <List
-                    listCheckCount={listCheckCount}
-                    setListCheckCount={setListCheckCount}
-                    listCheckList={listCheckList}
-                    setListCheckList={setListCheckList}
-                    setMarkerImgToggle={setMarkerImageToggle}
-                    setMarkerImage={setMarkerImage}
-                    markerImg={markerImg}
-                    setCenter={setCenter}
-                    key={index}
-                    daysss={days}
-                    resData={item}
-                    key1={index}
-                    setData={setData}
-                    setData2={setData2}
-                    bgList={myList} /* 다른 속성들 추가 */
-                  />
-                ))}
-              {selectedKey === '6' &&
-                firstData2.map((item, index) => (
-                  <List
-                    listCheckCount={listCheckCount}
-                    setListCheckCount={setListCheckCount}
-                    listCheckList={listCheckList}
-                    setListCheckList={setListCheckList}
-                    markerImgToggle={markerImgToggle}
-                    setMarkerImgToggle={setMarkerImageToggle}
-                    markerImg={markerImg}
-                    setMarkerImage={setMarkerImage}
-                    setCenter={setCenter}
-                    key={index}
-                    daysss={days}
-                    resData={item}
-                    key1={index}
-                    setData={setData}
-                    setData2={setData2}
-                    bgList={myList} /* 다른 속성들 추가 */
-                  />
-                ))}
-            </div>
-          </Col>
-
-          <Col className="p-0" sm={9} style={{ position: 'relative' }}>
-            <Col className={`temp-css${isTempCssVisible ? '' : 'hidden'}`}>
-              {/* // <div className={`temp33 ${isTempCssVisible ? '' : 'hidden'}`} onClick={handleButtonClick}> */}
-              <Container>
-                <Row className="mt-3 text-center" style={{ fontSize: '14px' }}>
-                  <Col sm={3} className="travel-region-text pe-0">
-                    <span>전국</span> 여행
-                  </Col>
-                  {/* 캘린더 테스트 */}
-                  <Col sm={6} className="pe-0" onClick={handleColClick}>
-                    {/* <div travelPeriodRef={}>2023.10.11~2023.10.14</div> */}
-                    <div className="travel-period-text">{dateRange2}</div>
-                    {/* <div className="travel-period-text">23.10.11(일) - 10.14(목)</div> */}
-                  </Col>
-
-                  <Col className="travel-days-text" sm={3}>
-                    {dateRange3}
-                  </Col>
-                  {!showCalendar && (
-                    <>
-                      <Row className="text-center  mt-4">
-                        <Col className="me-3 start-end-text" sm={5}>
-                          시작 일자
-                        </Col>
-                        <Col className="ms-3 start-end-text" sm={5}>
-                          종료 일자
-                        </Col>
-                      </Row>
-                      <Row className="text-center mt-1 mb-2">
-                        <Col className="start-end me-3" sm={5}>
-                          <div>
-                            {moment(dateRange[0]).format('YY년 MM월 DD일')}
-                          </div>
-                        </Col>
-                        <Col className="start-end ms-3" sm={5}>
-                          <div>
-                            {moment(dateRange[1]).format('YY년 MM월 DD일')}
-                          </div>
-                        </Col>
-                      </Row>
-                      {/* 캘린더@@ */}
-                      <Calendar
-                        minDetail="month"
-                        // maxDetail="month"
-                        onChange={handleCalendarChange}
-                        value={dateRange}
-                        selectRange={true}
-                        formatDay={(locale, date) =>
-                          date.toLocaleString('en', { day: 'numeric' })
-                        }
-                        // nextLabel={<NextIcon />}
-                        // prevLabel={<PrevIcon />}
-                        next2Label={null}
-                        prev2Label={null}
-                        showNeighboringMonth={false}
-                      />
-                      <Row>
-                        <Col className="mt-3">
-                          <button
-                            className="list-btn2"
-                            style={{ width: '100%' }}
-                            onClick={(e) => handleColClick(e)}
-                          >
-                            설정하기
-                          </button>
-                        </Col>
-                      </Row>
-                    </>
-                  )}
-                </Row>
-                <Row className="mt-4">
-                  <Col sm={9}>
-                    {/* 나의 일정 */}
-                    {!edited ? (
-                      <>
-                        <span
-                          style={{ fontWeight: '600', fontSize: '15px' }}
-                          onClick={handleEditChange}
-                        >
-                          {newText}
-                        </span>
-                        <span onClick={handleEditChange}>✏️</span>
-                      </>
-                    ) : (
-                      <input
-                        className="my-schedule-title"
-                        type="text"
-                        ref={myScheduleTitleRef}
-                        value={newText}
-                        onChange={(e) => setNewText(e.target.value)}
-                        onBlur={handleInputBlur}
-                        onKeyDown={(e) => {
-                          // 엔터 키를 눌렀을 때 edited 상태 변경
-                          if (e.key === 'Enter') {
-                            setEdited(false)
-                          }
-                        }}
-                      />
-                    )}
-                  </Col>
-                  <Col className="save-btn">
-                    <button>저장</button>
-                  </Col>
-                </Row>
-                <Row className="mt-4">
-                  {/* //////////////////////////////아코디언 시작////////////////////////////////// */}
-                  <checkNumber.Provider value={num1}>
-                    <data.Provider value={myList}>
-                      <DragDropContext onDragEnd={handleDragEnd}>
-                        {/* defaultActiveKey 일차수별로 리스트로만들어서 할당해야함 (11/26 미완) */}
-                        <Accordion
-                          alwaysOpen
-                          className="scrollable-div2"
-                          defaultActiveKey={['0', '1', '2', '3', '4', '5']}
-                        >
-                          {/* 나중에 day state로 일정 리스트 관리 1127 수정 */}
-                          {days.map((item, index) => (
-                            <AccordionList
-                              days={days}
-                              key={index}
-                              myList={myList}
-                              setList={setList}
-                              selectedKey={selectedKey}
-                              item={item}
-                              index={index}
-                            />
-                          ))}
-                        </Accordion>
-                        <Container>
-                          {myList.length > 0 ? (
-                            <Row>
-                              <Col
-                                onClick={makePlanStrat}
-                                className="schedule-creation-col"
-                              >
-                                <button className="schedule-creation">
-                                  일정 생성하기
-                                </button>
-                              </Col>
-                            </Row>
-                          ) : (
-                            ''
-                          )}
-                        </Container>
-                      </DragDropContext>
-                    </data.Provider>
-                  </checkNumber.Provider>
-                </Row>
-              </Container>
-
-              {/* 이미지 변경하던지 해야함 */}
-              <div
-                className="temp33"
-                onClick={() => {
-                  scheduleToggle()
-                }}
+            </button>
+            <button className="search-btn">
+              <img
+                className="input-img img-search-img"
+                src="https://cdn.icon-icons.com/icons2/2440/PNG/512/gallery_icon_148533.png"
+              />
+            </button>
+          </div>
+          <Nav variant="tabs">
+            {categories.map((item, index) => (
+              <Nav.Item
+                key={index}
+                className={selectedKey === item.sequence ? 'active' : ''}
+                onClick={(e) => cateClick(e, item.sequence)}
+                // eventKey={`link${index}`}
               >
-                <img
-                  style={{
-                    transform: `rotate(${rotation}deg)`,
-                    transition: 'transform 0.3s ease',
-                  }}
+                <img className="cate-img" src={item.path1}></img>
+                <div className="item-text mt-1 mb-3">{item.title}</div>
+              </Nav.Item>
+            ))}
+          </Nav>
+          {/*///////////////////////////////// 리스트 시작 ////////////////////////////////////*/}
+          {/*///////////////////////////////// 셀렉트키 전부 만들어야함 (11/26) ////////////////////////////////////*/}
+          <div className="scrollable-div1">
+            {selectedKey === '1' &&
+              positions1.map((item, index) => (
+                <List
+                  listCheckCount={listCheckCount}
+                  setListCheckCount={setListCheckCount}
+                  listCheckList={listCheckList}
+                  setListCheckList={setListCheckList}
+                  setMarkerImgToggle={setMarkerImageToggle}
+                  setMarkerImage={setMarkerImage}
+                  markerImg={markerImg}
+                  setCenter={setCenter}
+                  key={index}
+                  daysss={days}
+                  resData={item}
+                  key1={index}
+                  setData={setData}
+                  setData2={setData2}
+                  bgList={myList} /* 다른 속성들 추가 */
                 />
-              </div>
-            </Col>
-
-            <Col />
-
-            {/* 지도 생성하기 */}
-
-            <Map
-              center={center}
-              style={{
-                width: '100%',
-                height: '100%',
-                marginLeft: isTempCssVisible ? '220px' : '',
-              }}
-              level={7}
-            >
-              {/* 리스트 클릭 마커 */}
-              {markerImgToggle ? (
-                <React.Fragment key={uuidv4()}>
-                  <MapMarker
-                    clickable={true} // 임시(지도클릭막기)
-                    position={markerImg.latlng}
-                    title={markerImg.pla_name}
-                    image={{
-                      // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함(변경완료))
-                      src: './img/map-marker-2-24.png',
-                      // src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DBqiID-0MCt6N6ATmxuHms-3v4HwMnyhw-pwx-MFIYxJyPdd7HwDhpCCZkMo3uhVR18&usqp=CAU',
-                      size: {
-                        width: 24,
-                        height: 24,
-                      }, // 마커이미지의 크기입니다
-                      options: {
-                        // offset: {
-                        //   x: 27,
-                        // y: 69,
-                        // y: 0,
-                        // }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-                      },
-                    }}
-                    onClick={(e) => markerClick(e)}
-                  />
-                  {/* 커스텀오버레이도 같이 찍기 */}
-                  <CustomOverlayMap
-                    position={markerImg.latlng}
-                    // xAnchor={0.4}
-                    yAnchor={1.9}
-                    // 커스텀 오버레이 위치 설정
-                  >
-                    <div className="custom-overlay-div">
-                      <div
-                        className="center"
-                        style={{
-                          fontWeight: 400,
-                          fontSize: '16px',
-                          color: 'white',
-                          padding: '3px 10px 3px 10px',
-                          borderRadius: '50px',
-                          // width: '21px',
-                          // marginTop: '5px',
-                          // marginLeft: '3px',
-                          textAlign: 'center',
-                        }}
-                      >
-                        {markerImg.pla_name}
-                      </div>
-                    </div>
-                  </CustomOverlayMap>
-                </React.Fragment>
-              ) : (
-                ''
-              )}
-
-              {/* positions로 마커찍기 */}
-              {myList.map((position, index) => (
-                // React.Fragment: map안에서 여러개의 컴포넌트를 사용할때
-                // <React.Fragment key={`${position.title}-${position.latlng}`}>
-                <React.Fragment key={uuidv4()}>
-                  <MapMarker
-                    clickable={true} // 임시(지도클릭막기)
-                    position={position.latlng}
-                    title={position?.pla_name}
-                    image={{
-                      // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함)
-                      src: './img/invimage.png',
-                      size: {
-                        width: 24,
-                        height: 24,
-                      }, // 마커이미지의 크기입니다
-                      options: {
-                        offset: {
-                          x: 11,
-                          y: 10,
-                        }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-                      },
-                    }}
-                    onClick={(e) => markerClick(e)}
-                  />
-                  {/* 커스텀오버레이도 같이 찍기 */}
-                  <CustomOverlayMap
-                    zIndex={-99}
-                    position={position.latlng}
-                    // xAnchor={0.4}
-                    // yAnchor={1}
-                    // 커스텀 오버레이 위치 설정
-                  >
-                    <div>
-                      <div
-                        className="center"
-                        style={{
-                          fontWeight: 'bold',
-                          fontSize: '10px',
-                          color: 'white',
-                          backgroundColor: `${position.bgColor.backgroundColor}`,
-                          padding: '3px',
-                          borderRadius: '50px',
-                          width: '21px',
-                          marginTop: '5px',
-                          marginLeft: '3px',
-                          textAlign: 'center',
-                        }}
-                      >
-                        {`${position.markerIndex}`}
-                      </div>
-                    </div>
-                  </CustomOverlayMap>
-                </React.Fragment>
               ))}
-            </Map>
+            {selectedKey === '2' &&
+              positions2.map((item, index) => (
+                <List
+                  listCheckCount={listCheckCount}
+                  setListCheckCount={setListCheckCount}
+                  listCheckList={listCheckList}
+                  setListCheckList={setListCheckList}
+                  setMarkerImgToggle={setMarkerImageToggle}
+                  setMarkerImage={setMarkerImage}
+                  markerImg={markerImg}
+                  setCenter={setCenter}
+                  key={index}
+                  daysss={days}
+                  resData={item}
+                  key1={index}
+                  setData={setData}
+                  setData2={setData2}
+                  bgList={myList} /* 다른 속성들 추가 */
+                />
+              ))}
+            {selectedKey === '6' &&
+              firstData2.map((item, index) => (
+                <List
+                  listCheckCount={listCheckCount}
+                  setListCheckCount={setListCheckCount}
+                  listCheckList={listCheckList}
+                  setListCheckList={setListCheckList}
+                  markerImgToggle={markerImgToggle}
+                  setMarkerImgToggle={setMarkerImageToggle}
+                  markerImg={markerImg}
+                  setMarkerImage={setMarkerImage}
+                  setCenter={setCenter}
+                  key={index}
+                  daysss={days}
+                  resData={item}
+                  key1={index}
+                  setData={setData}
+                  setData2={setData2}
+                  bgList={myList} /* 다른 속성들 추가 */
+                />
+              ))}
+          </div>
+        </Col>
+
+        <Col className="p-0" sm={9} style={{ position: 'relative' }}>
+          <Col className={`temp-css${isTempCssVisible ? '' : 'hidden'}`}>
+            {/* // <div className={`temp33 ${isTempCssVisible ? '' : 'hidden'}`} onClick={handleButtonClick}> */}
+            <Container>
+              <Row className="mt-3 text-center" style={{ fontSize: '14px' }}>
+                <Col sm={3} className="travel-region-text pe-0">
+                  <span>전국</span> 여행
+                </Col>
+                {/* 캘린더 테스트 */}
+                <Col sm={6} className="pe-0" onClick={handleColClick}>
+                  {/* <div travelPeriodRef={}>2023.10.11~2023.10.14</div> */}
+                  <div className="travel-period-text">{dateRange2}</div>
+                  {/* <div className="travel-period-text">23.10.11(일) - 10.14(목)</div> */}
+                </Col>
+
+                <Col className="travel-days-text" sm={3}>
+                  {dateRange3}
+                </Col>
+                {!showCalendar && (
+                  <>
+                    <Row className="text-center  mt-4">
+                      <Col className="me-3 start-end-text" sm={5}>
+                        시작 일자
+                      </Col>
+                      <Col className="ms-3 start-end-text" sm={5}>
+                        종료 일자
+                      </Col>
+                    </Row>
+                    <Row className="text-center mt-1 mb-2">
+                      <Col className="start-end me-3" sm={5}>
+                        <div>
+                          {moment(dateRange[0]).format('YY년 MM월 DD일')}
+                        </div>
+                      </Col>
+                      <Col className="start-end ms-3" sm={5}>
+                        <div>
+                          {moment(dateRange[1]).format('YY년 MM월 DD일')}
+                        </div>
+                      </Col>
+                    </Row>
+                    {/* 캘린더@@ */}
+                    <Calendar
+                      minDetail="month"
+                      // maxDetail="month"
+                      onChange={handleCalendarChange}
+                      value={dateRange}
+                      selectRange={true}
+                      formatDay={(locale, date) =>
+                        date.toLocaleString('en', { day: 'numeric' })
+                      }
+                      // nextLabel={<NextIcon />}
+                      // prevLabel={<PrevIcon />}
+                      next2Label={null}
+                      prev2Label={null}
+                      showNeighboringMonth={false}
+                    />
+                    <Row>
+                      <Col className="mt-3">
+                        <button
+                          className="list-btn2"
+                          style={{ width: '100%' }}
+                          onClick={(e) => handleColClick(e)}
+                        >
+                          설정하기
+                        </button>
+                      </Col>
+                    </Row>
+                  </>
+                )}
+              </Row>
+              <Row className="mt-4">
+                <Col sm={9}>
+                  {/* 나의 일정 */}
+                  {!edited ? (
+                    <>
+                      <span
+                        style={{ fontWeight: '600', fontSize: '15px' }}
+                        onClick={handleEditChange}
+                      >
+                        {newText}
+                      </span>
+                      <span onClick={handleEditChange}>✏️</span>
+                    </>
+                  ) : (
+                    <input
+                      className="my-schedule-title"
+                      type="text"
+                      ref={myScheduleTitleRef}
+                      value={newText}
+                      onChange={(e) => setNewText(e.target.value)}
+                      onBlur={handleInputBlur}
+                      onKeyDown={(e) => {
+                        // 엔터 키를 눌렀을 때 edited 상태 변경
+                        if (e.key === 'Enter') {
+                          setEdited(false)
+                        }
+                      }}
+                    />
+                  )}
+                </Col>
+                <Col className="save-btn">
+                  <button>저장</button>
+                </Col>
+              </Row>
+              <Row className="mt-4">
+                {/* //////////////////////////////아코디언 시작////////////////////////////////// */}
+                <checkNumber.Provider value={num1}>
+                  <data.Provider value={myList}>
+                    <DragDropContext onDragEnd={handleDragEnd}>
+                      {/* defaultActiveKey 일차수별로 리스트로만들어서 할당해야함 (11/26 미완) */}
+                      <Accordion
+                        alwaysOpen
+                        className="scrollable-div2"
+                        defaultActiveKey={['0', '1', '2', '3', '4', '5']}
+                      >
+                        {/* 나중에 day state로 일정 리스트 관리 1127 수정 */}
+                        {days.map((item, index) => (
+                          <AccordionList
+                            days={days}
+                            key={index}
+                            myList={myList}
+                            setList={setList}
+                            selectedKey={selectedKey}
+                            item={item}
+                            index={index}
+                          />
+                        ))}
+                      </Accordion>
+
+                      {myList.length > 0 ? (
+                        <div
+                          onClick={makePlanStrat}
+                          className="schedule-creation-col"
+                        >
+                          <button className="schedule-creation">
+                            일정 생성하기
+                          </button>
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                    </DragDropContext>
+                  </data.Provider>
+                </checkNumber.Provider>
+              </Row>
+            </Container>
+
+            {/* 이미지 변경하던지 해야함 */}
+            <div
+              className="temp33"
+              onClick={() => {
+                scheduleToggle()
+              }}
+            >
+              <img
+                style={{
+                  transform: `rotate(${rotation}deg)`,
+                  transition: 'transform 0.3s ease',
+                }}
+              />
+            </div>
           </Col>
-        </Row>
-      </div>
+
+          <Col />
+
+          {/* 지도 생성하기 */}
+
+          <Map
+            center={center}
+            style={{
+              width: '100%',
+              height: '100%',
+              marginLeft: isTempCssVisible ? '220px' : '',
+            }}
+            level={10}
+          >
+            {/* 리스트 클릭 마커 */}
+            {markerImgToggle ? (
+              <React.Fragment key={uuidv4()}>
+                <MapMarker
+                  clickable={true} // 임시(지도클릭막기)
+                  position={markerImg.latlng}
+                  title={markerImg.pla_name}
+                  image={{
+                    // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함(변경완료))
+                    src: './img/map-marker-2-24.png',
+                    // src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DBqiID-0MCt6N6ATmxuHms-3v4HwMnyhw-pwx-MFIYxJyPdd7HwDhpCCZkMo3uhVR18&usqp=CAU',
+                    size: {
+                      width: 24,
+                      height: 24,
+                    }, // 마커이미지의 크기입니다
+                    options: {
+                      // offset: {
+                      //   x: 27,
+                      // y: 69,
+                      // y: 0,
+                      // }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                    },
+                  }}
+                  onClick={(e) => markerClick(e)}
+                />
+                {/* 커스텀오버레이도 같이 찍기 */}
+                <CustomOverlayMap
+                  position={markerImg.latlng}
+                  // xAnchor={0.4}
+                  yAnchor={1.9}
+                  // 커스텀 오버레이 위치 설정
+                >
+                  <div className="custom-overlay-div">
+                    <div
+                      className="center"
+                      style={{
+                        fontWeight: 400,
+                        fontSize: '16px',
+                        color: 'white',
+                        padding: '3px 10px 3px 10px',
+                        borderRadius: '50px',
+                        // width: '21px',
+                        // marginTop: '5px',
+                        // marginLeft: '3px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {markerImg.pla_name}
+                    </div>
+                  </div>
+                </CustomOverlayMap>
+              </React.Fragment>
+            ) : (
+              ''
+            )}
+
+            {/* positions로 마커찍기 */}
+            {myList.map((position, index) => (
+              // React.Fragment: map안에서 여러개의 컴포넌트를 사용할때
+              // <React.Fragment key={`${position.title}-${position.latlng}`}>
+              <React.Fragment key={uuidv4()}>
+                <MapMarker
+                  clickable={true} // 임시(지도클릭막기)
+                  position={position.latlng}
+                  title={position?.pla_name}
+                  image={{
+                    // 임시로 블로그에 투명이미지 올려서 사용 (투명이미지만들어서 변경해야함)
+                    src: './img/invimage.png',
+                    size: {
+                      width: 24,
+                      height: 24,
+                    }, // 마커이미지의 크기입니다
+                    options: {
+                      offset: {
+                        x: 11,
+                        y: 10,
+                      }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                    },
+                  }}
+                  onClick={(e) => markerClick(e)}
+                />
+                {/* 커스텀오버레이도 같이 찍기 */}
+                <CustomOverlayMap
+                  zIndex={-99}
+                  position={position.latlng}
+                  // xAnchor={0.4}
+                  // yAnchor={1}
+                  // 커스텀 오버레이 위치 설정
+                >
+                  <div>
+                    <div
+                      className="center"
+                      style={{
+                        fontWeight: 'bold',
+                        fontSize: '10px',
+                        color: 'white',
+                        backgroundColor: `${position.bgColor.backgroundColor}`,
+                        padding: '3px',
+                        borderRadius: '50px',
+                        width: '21px',
+                        marginTop: '5px',
+                        marginLeft: '3px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {`${position.markerIndex}`}
+                    </div>
+                  </div>
+                </CustomOverlayMap>
+              </React.Fragment>
+            ))}
+          </Map>
+        </Col>
+      </Row>
     </div>
+    // </div>
     ////////////////////
     ////////////////////
   )

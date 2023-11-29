@@ -43,8 +43,9 @@ const MakeModal = ({ makePageModal, modalDataTemp, setMakePageModal }) => {
     }
   }
   return (
-    <div className="make-page-modal">
-      <Container className="make-page-modal-1" ref={modalRef}>
+    <Container className="make-page-modal-1" ref={modalRef}>
+      <div className="make-page-modal">
+        <div />
         <Row>
           <Col className="p-0">
             <div
@@ -145,8 +146,8 @@ const MakeModal = ({ makePageModal, modalDataTemp, setMakePageModal }) => {
           </Row>
           <div style={{ height: '40px' }}></div>
         </Container>
-      </Container>
-    </div>
+      </div>
+    </Container>
   )
 }
 
