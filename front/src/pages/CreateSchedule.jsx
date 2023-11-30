@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Map, CustomOverlayMap, MapMarker } from 'react-kakao-maps-sdk'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { Map, CustomOverlayMap, MapMarker, Polyline } from 'react-kakao-maps-sdk'
 import { useLocation } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import Draggable from 'react-draggable'
 import { Col, Container, Row } from 'react-bootstrap'
 const CreateSchedule = () => {
+
+  const { kakao } = window;
   // 데이터 꺼내기
   const location = useLocation()
   const myList2 = location.state && location.state.myList1
@@ -17,68 +19,79 @@ const CreateSchedule = () => {
   console.log(myList2, 'myList1 myList1')
 
   const [center, setCenter] = useState({ lat: 0, lng: 0 })
-  const [level, setLevel] = useState(8) // 초기 레벨 설정
+  const [level, setLevel] = useState(8) // 초기 레벨 설정 (크게 의미X)
+  const [markerList, setMarkerList] = useState([]) // 초기 레벨 설정
+  const [myList3, setMyList3] = useState([]) // 초기 레벨 설정
 
-  // 드래그 영역관련
-  const [deltaPosition, setDeltaPosition] = useState({ x: 0, y: 0 })
 
-  const handleDrag = (e, ui) => {
-    const { y } = deltaPosition
-    setDeltaPosition({
-      //   x: x + ui.deltaX,
-      y: y + ui.deltaY,
-    })
-  }
+  // 지도 마커 위치센터 조정
+  const mapRef = useRef();
   useEffect(() => {
-    if (myList2 && myList2.length > 0) {
-      // 모든 마커의 좌표를 포함하는 경계 사각형 계산
-      let minLat = myList2[0].latlng.lat
-      let maxLat = myList2[0].latlng.lat
-      let minLng = myList2[0].latlng.lng
-      let maxLng = myList2[0].latlng.lng
+    // myList2를 사용하여 markerList 업데이트
+    setMarkerList([...myList2].map((item) => item.latlng));
+  }, [myList2]);
+  
+  // markerList 변경 후에 로그 찍기
+  // 마커의 중심으로 지도의 센터를 조정합니다.
 
-      myList2.forEach((marker) => {
-        const { lat, lng } = marker.latlng
-        minLat = Math.min(minLat, lat)
-        maxLat = Math.max(maxLat, lat)
-        minLng = Math.min(minLng, lng)
-        maxLng = Math.max(maxLng, lng)
+  const bounds = useMemo(() => {
+    const bounds = new kakao.maps.LatLngBounds();
+
+    markerList.forEach(markerList=> {
+      bounds.extend(new kakao.maps.LatLng(markerList.lat, markerList.lng))
+    });
+    return bounds;
+  }, [markerList])
+
+  useEffect(()=>{ const map = mapRef.current
+    if (map) map.setBounds(bounds)},[markerList])
+
+
+    // 드래그 영역관련
+    const [deltaPosition, setDeltaPosition] = useState({ x: 0, y: 0 })
+
+    const handleDrag = (e, ui) => {
+      const { y } = deltaPosition
+      setDeltaPosition({
+        //   x: x + ui.deltaX,
+        y: y + ui.deltaY,
       })
-
-      // 경계 사각형의 중심을 계산하여 지도의 중심으로 설정
-      const newCenter = {
-        lat: (minLat + maxLat) / 2,
-        lng: (minLng + maxLng) / 2,
-      }
-
-      setCenter(newCenter)
-
-      // 경계 사각형의 너비와 높이를 계산하여 줌 레벨 조정
-      const latDelta = maxLat - minLat
-      const lngDelta = maxLng - minLng
-
-      // 모든 마커가 화면에 표시되도록 패딩 추가
-      const padding = 0.1
-
-      const zoomLevel = calculateZoomLevel(
-        latDelta + padding,
-        lngDelta + padding
-      )
-
-      setLevel(zoomLevel)
     }
-  }, [myList2])
 
-  const calculateZoomLevel = (latDelta, lngDelta) => {
-    const MAX_ZOOM = 14
-    const zoomLevel = Math.min(
-      Math.floor(Math.log2(360 / lngDelta)) - 1,
-      Math.floor(Math.log2(180 / latDelta)) - 1,
-      MAX_ZOOM
-    )
-    return zoomLevel
-  }
-
+    const renderLines = () => {
+      const lines = [];
+  
+      // 같은 일(myDay)을 가진 마커끼리 그룹화
+      const markerGroups = myList2.reduce((groups, marker) => {
+        const key = marker.myDay;
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(marker);
+        return groups;
+      }, {});
+  
+      // 그룹 내의 마커에 대해 선 추가
+      Object.values(markerGroups).forEach((group) => {
+        for (let i = 0; i < group.length - 1; i++) {
+          const startPoint = group[i].latlng;
+          const endPoint = group[i + 1].latlng;
+  
+          lines.push(
+            <Polyline
+              key={`${startPoint.lat}-${startPoint.lng}-${endPoint.lat}-${endPoint.lng}`}
+              path={[startPoint, endPoint]}
+              options={{
+                strokeColor: '#ff0000', // 선 색상
+                strokeWeight: 3, // 선 두께
+                strokeOpacity: 0.7, // 선 투명도
+              }}
+            />
+          );
+        }
+      });
+  
+      return lines;
+    };
+  
   return (
     <div className="create-map-wrap" style={{ padding: '0px 10%' }}>
       <Draggable
@@ -174,10 +187,25 @@ const CreateSchedule = () => {
           borderRadius: '10px',
         }}
         level={level}
+        ref={mapRef}
       >
+         {markerList.map(markerList => <MapMarker key={`${markerList.lat}-${markerList.lng}`} position={markerList}   image={{
+                src: './img/invimage.png',
+                size: {
+                  width: 24,
+                  height: 24,
+                },
+                options: {
+                  offset: {
+                    x: 11,
+                    y: 10,
+                  },
+                },
+              }}/>)}
         {myList2?.map((position, index) => (
           <React.Fragment key={uuidv4()}>
             <MapMarker
+            
               clickable={true}
               position={position.latlng}
               title={position?.pla_name}
@@ -218,6 +246,8 @@ const CreateSchedule = () => {
             </CustomOverlayMap>
           </React.Fragment>
         ))}
+        {renderLines()} {/* 마커 간의 선을 그리는 함수 호출 */}
+      
       </Map>
     </div>
   )
