@@ -25,67 +25,69 @@ const CreateSchedule = () => {
     }
   }, [myList2])
 
+  useEffect(() => {}, [center])
+
   return (
     <div className="create-map-wrap">
-      <Map
-        id="map"
-        center={{
-          // 지도의 중심좌표
-          lat: 33.450701,
-          lng: 126.570667,
-        }}
-        style={{
-          width: '100%',
-          height: '70vh',
-        }}
-        level={13}
-      >
-        {/* positions로 마커찍기 */}
-        {myList2?.map((position, index) => (
-          <React.Fragment key={uuidv4()}>
-            <MapMarker
-              clickable={true}
-              position={position.latlng}
-              title={position?.pla_name}
-              image={{
-                src: './img/invimage.png',
-                size: {
-                  width: 24,
-                  height: 24,
-                },
-                options: {
-                  offset: {
-                    x: 11,
-                    y: 10,
+      {center ? (
+        <Map
+          id="map"
+          center={center}
+          style={{
+            width: '100%',
+            height: '70vh',
+          }}
+          level={13}
+        >
+          {/* positions로 마커찍기 */}
+          {myList2?.map((position, index) => (
+            <React.Fragment key={uuidv4()}>
+              <MapMarker
+                clickable={true}
+                position={position.latlng}
+                title={position?.pla_name}
+                image={{
+                  src: './img/invimage.png',
+                  size: {
+                    width: 24,
+                    height: 24,
                   },
-                },
-              }}
-            />
-            {/* 커스텀오버레이도 같이 찍기 */}
-            <CustomOverlayMap zIndex={-99} position={position.latlng}>
-              <div>
-                <div
-                  className="center"
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: '10px',
-                    color: 'white',
-                    backgroundColor: `${position.bgColor.backgroundColor}`,
-                    padding: '3px',
-                    borderRadius: '50px',
-                    width: '21px',
-                    marginTop: '5px',
-                    marginLeft: '3px',
-                    textAlign: 'center',
-                  }}
-                >
-                  {`${position.markerIndex}`}
+                  options: {
+                    offset: {
+                      x: 11,
+                      y: 10,
+                    },
+                  },
+                }}
+              />
+              {/* 커스텀오버레이도 같이 찍기 */}
+              <CustomOverlayMap zIndex={-99} position={position.latlng}>
+                <div>
+                  <div
+                    className="center"
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: '10px',
+                      color: 'white',
+                      backgroundColor: `${position.bgColor.backgroundColor}`,
+                      padding: '3px',
+                      borderRadius: '50px',
+                      width: '21px',
+                      marginTop: '5px',
+                      marginLeft: '3px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {`${position.markerIndex}`}
+                  </div>
                 </div>
-              </div>
-            </CustomOverlayMap>
-          </React.Fragment>
-        ))}
-      </Map>
+              </CustomOverlayMap>
+            </React.Fragment>
+          ))}
+        </Map>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

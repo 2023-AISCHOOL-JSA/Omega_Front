@@ -29,7 +29,7 @@ const MakePlan = () => {
   const [modalDataTemp, setModalDataTemp] = useState({})
   const navigate = useNavigate()
   const location = useLocation()
-  const reg_name = location.state.value
+  const reg_name = location?.state?.value
   // 마커 이미지 관리,토글 state
   const [listCheckCount, setListCheckCount] = useState(0)
   const [listCheckList, setListCheckList] = useState([])
