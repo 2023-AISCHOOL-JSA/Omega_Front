@@ -22,6 +22,7 @@ const MinusImg = styled.img`
 
 const ReservationInfo = ({ price, setprice }) => {
   const [datePick, setDatePick] = useState(false)
+  const [count, setCount] = useState(1)
 
   const handleDate = () => {
     setDatePick(!datePick)
@@ -72,14 +73,14 @@ const ReservationInfo = ({ price, setprice }) => {
           <p>
             <span className="room-txt">방 갯수</span>
             <span className="room-txt-detail">
-              <button className="miu-btn">
+              <button className="miu-btn" onClick={() => setCount(count - 1)}>
                 <MinusImg
                   src={Minus}
                   style={{ marginLeft: '15px', marginRight: '5px' }}
                 />
               </button>
-              <span>1</span>
-              <button className="plu-btn">
+              <span>{count}</span>
+              <button className="plu-btn" onClick={() => setCount(count + 1)}>
                 <PlusImg
                   src={Plus}
                   style={{ marginLeft: '5px', marginRight: '5px' }}

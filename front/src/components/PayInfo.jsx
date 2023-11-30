@@ -83,9 +83,11 @@ const PayInfo = ({ RoomPrice }) => {
             />
             <span className="man">남</span>
             <span className="woman">여</span>
+            <br />
             <input className="pay-input" placeholder="이메일을 입력하세요" />
+            <br />
             <input className="pay-input" placeholder="연락처를 입력하세요" />
-            <p>14:00~15:00</p>
+            <p style={{ marginTop: '8px' }}>14:00~15:00</p>
           </div>
         </div>
         {/* 두번째 div */}

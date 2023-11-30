@@ -425,6 +425,7 @@ button[type="button"]:hover {
 .travel-period-text {
   font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
 }
 .travel-days-text {
   font-size: 16px;
@@ -607,4 +608,8 @@ button[type="button"]:hover {
 } */
 .create-map-wrap {
   height: 100vh;
+}
+
+.card-body {
+  cursor: pointer;
 }
