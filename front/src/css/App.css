@@ -425,6 +425,7 @@ button[type="button"]:hover {
 .travel-period-text {
   font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
 }
 .travel-days-text {
   font-size: 16px;
@@ -711,4 +712,8 @@ button[type="button"]:hover {
 }
 .create-page-btn:hover {
   background-color: #8a8a8a;
+}
+
+.card-body {
+  cursor: pointer;
 }
