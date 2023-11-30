@@ -107,13 +107,19 @@ input::placeholder {
 .scrollable-div1 {
   overflow-y: scroll;
   overflow-x: 'hidden';
-  height: 700px; /* 필요에 따라 최대 높이를 조절할 수 있음 */
+  /* 필요에 따라 최대 높이를 조절할 수 있음 */
+  height: calc(100vh - 228px);
+  /* height: 100%; */
+  /* 원하는 최대 높이로 설정 */
+  /* max-height: 1000px; */
 }
 .scrollable-div2 {
   overflow-y: scroll;
   overflow-x: 'hidden';
-  height: 650px; /* 필요에 따라 최대 높이를 조절할 수 있음 */
-  margin-bottom: 100px;
+  /* height: calc(100vh-76px); */
+  height: calc(100vh - 179px);
+  padding-bottom: 90px;
+  /* 필요에 따라 최대 높이를 조절할 수 있음 */
 }
 .active {
   /* background-color: gray !important; */
@@ -186,7 +192,8 @@ button[type="button"]:hover {
   z-index: 10 !important;
   background-color: #ffffff;
   /* left: 37%; */
-  height: 850px;
+  /* height: 850px; */
+  /* height: 100%; */
   /* transform: translateX(0); */
   transition: transform 0.3s;
   overflow-x: 'hidden';
@@ -519,4 +526,85 @@ button[type="button"]:hover {
   /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+/* 메이크페이지 모달CSS 영역 */
+
+.make-modal-close-btn {
+  position: absolute;
+  /* top: 16%; */
+  /* left: 65%; */
+  right: 0%;
+  /* top: 1%; */
+  font-weight: 1000;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.make-modal-close-btn:hover {
+  /* background-color: #f1f1f1; */
+  color: white;
+  border-radius: 50%;
+}
+.make-modal-title {
+  font-weight: 600;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+.make-modal-title span {
+  border-radius: 10px;
+  background-color: #47c9d8;
+  display: inline-block;
+  width: 40px;
+  height: 27px;
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 25px;
+  color: white;
+  font-weight: 400;
+  /* align-items: center; */
+}
+.make-modal-addr {
+  font-size: 0.8rem;
+  color: #a7a7a7;
+}
+.make-modal-detail div {
+  color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.make-modal-detail div p {
+  font-weight: 500;
+  color: black;
+}
+.make-modal-info {
+  color: #6d6d6d;
+}
+.root-wrap {
+  overflow-y: hidden;
+  height: calc(100vh - 76px);
+  /* transform: rotate(110deg);
+  transform-origin: center; 회전 중심점을 조절할 수 있습니다. */
+}
+.make-modal-img {
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 330px;
+}
+.make-modal-search-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  cursor: pointer;
+}
+/* .make-modal-info-area {
+} */
+.create-map-wrap {
+  height: 100vh;
 }

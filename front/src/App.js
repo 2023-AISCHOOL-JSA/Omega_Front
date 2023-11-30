@@ -11,6 +11,7 @@ import SuccessPage from './pages/Success'
 import MadePlan from './pages/MadePlan'
 import LoginModal from './components/LoginModal'
 import { WishProvider } from './context/WishContext'
+import CreateSchedule from './pages/CreateSchedule'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/login" element={<LoginModal />} />
+          <Route path="/create" element={<CreateSchedule />} />
         </Routes>
       </WishProvider>
     </>
