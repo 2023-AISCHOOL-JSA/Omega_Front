@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SearchIcon from '../img/search.png'
 import styled from 'styled-components'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 
 const IconImg = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: none;
 `
 const MainBg = () => {
@@ -105,7 +105,12 @@ const MainBg = () => {
                 ).length === 0 && (
                   <div
                     className="recommend"
-                    style={{ fontSize: '14px', fontWeight: '300' }}
+                    style={{
+                      fontSize: '14px',
+                      fontWeight: '550',
+                      paddingTop: '20px',
+                      paddingLeft: '10px',
+                    }}
                   >
                     해당하는 값이 존재하지 않습니다.
                   </div>
@@ -113,6 +118,7 @@ const MainBg = () => {
               </div>
             )}
             <div>
+              {/* 지역소개 페이지로 넘길 값 sd_nm */}
               <button
                 type="submit"
                 className="searchbtn"

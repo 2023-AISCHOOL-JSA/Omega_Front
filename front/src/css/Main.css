@@ -56,7 +56,7 @@ body {
 
 .bg {
   width: 100%;
-  height: 700px;
+  height: 750px;
   background-image: url('../img/ocean.jpg');
   background-size: 100% 100%;
   overflow: hidden;
@@ -75,7 +75,7 @@ body {
   top: 5%;
   padding: 0 1rem;
   background-color: rgba(255, 255, 255);
-  border: 1px solid #ff9b00;
+  border: none;
 }
 
 .bg-input:focus {
@@ -99,11 +99,12 @@ body {
   position: absolute;
   right: 35.4%;
   top: 6.1%;
+  color: orange;
 }
 
 .recommend-container {
   position: relative;
-  top: 12.1%;
+  top: 11.6%;
   left: 35.05%;
   width: 29.9%;
   height: 300px;
@@ -126,9 +127,9 @@ body {
 }
 
 .region-icon {
-  width: 6%;
+  width: 5%;
   float: left;
-  margin-top: 0;
+  margin-top: 0.7%;
 }
 
 .recommend:hover {
@@ -145,7 +146,7 @@ body {
 .recommend2 {
   font-size: 13px;
   color: gray;
-  margin-left: 6%;
+  margin-left: 5%;
   margin-top: 0;
   font-weight: 300;
   padding-bottom: 5px;

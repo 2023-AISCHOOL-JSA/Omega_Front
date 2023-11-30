@@ -38,7 +38,7 @@ const ReservationInfo = ({ price, setprice }) => {
             <span className="room-txt">예약 숙소</span>
             <span className="room-txt-detail">제주대학교 기숙사</span>
           </p>
-          <span className="room-date" onClick={handleDate}>
+          {/* <span className="room-date" onClick={handleDate}>
             Day 1{' '}
             {datePick ? (
               <FontAwesomeIcon
@@ -53,7 +53,7 @@ const ReservationInfo = ({ price, setprice }) => {
                 style={{ color: '#ffb900' }}
               />
             )}
-          </span>
+          </span> */}
 
           <p>
             <span className="room-txt">예약 기간</span>

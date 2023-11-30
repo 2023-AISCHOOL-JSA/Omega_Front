@@ -1,14 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const RegionTop = () => {
+  const navigate = useNavigate()
+
+  const handelClick = () => {
+    navigate('/plan', { state: { value: '제주' } })
+  }
+
   return (
     <>
       <div className="reg-top">
-        <p className="reg-title">제주특별자치도</p>
-        <Link to="/make">
-          <button className="reg-plan">일정만들기</button>
-        </Link>
+        <p className="reg-title">sd_nm</p>
+        <button className="reg-plan" onClick={handelClick}>
+          일정만들기
+        </button>
       </div>
     </>
   )

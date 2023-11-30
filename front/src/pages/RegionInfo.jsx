@@ -15,16 +15,16 @@ const RegionInfo = () => {
         {/* 자세한 지역 정보 */}
         <div className="reg-bot">
           <p className="reg-mini-title">
-            구석구석 둘러보는 <span>제주</span>
+            구석구석 둘러보는 <span>sd_nm</span>
           </p>
           <RegionCom />
           <p className="reg-mini-title">
-            머무르기 좋은 <span>제주</span> 숙소
+            머무르기 좋은 <span>sd_nm</span> 숙소
           </p>
           <RegionCom />
 
           <p className="reg-mini-title">
-            <span>제주</span>에서 우리 뭐할까?
+            <span>sd_nm</span>에서 우리 뭐할까?
           </p>
           <RegionCom />
         </div>

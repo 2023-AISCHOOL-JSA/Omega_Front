@@ -4,6 +4,7 @@ import { Avatar } from 'antd'
 const MyProfile = () => {
   const [Image, setImage] = useState(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+    // mb_profile
   )
   const [file, setFile] = useState('')
   const fileInput = useRef(null)
@@ -54,19 +55,23 @@ const MyProfile = () => {
 
         <div className="myinfo-txt">
           <div className="txt-group">
-            <p className="name">인지사님의 프로필</p>
+            <p className="name">mb_name님의 프로필</p>
             <span className="name2">정보저장</span>
-            <span className="name3">서비스 탈퇴</span>
+
+            <span className="name3">
+              {' '}
+              <button className="ser-delete-btn">서비스 탈퇴 </button>
+            </span>
           </div>
 
           <div className="info-txt">
             <span className="dlfma">이름</span>
-            <span className="myname">인지사</span>
+            <span className="myname">mb_name</span>
           </div>
 
           <div className="info-txt">
             <span className="dlfma">이메일</span>
-            <span>gjaischool@google.com</span>
+            <span className="email">mb_email</span>
           </div>
         </div>
       </div>

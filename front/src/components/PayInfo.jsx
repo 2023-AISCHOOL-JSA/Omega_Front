@@ -7,7 +7,8 @@ import {
 import axios from 'axios'
 
 const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm'
-const customerKey = '0000000000000000000009'
+const customerKey = Math.random().toString(36).substring(2, 23)
+console.log('커스텀키', customerKey)
 
 const PayInfo = ({ RoomPrice }) => {
   const paymentWidgetRef = useRef(null)
@@ -49,7 +50,7 @@ const PayInfo = ({ RoomPrice }) => {
 
     try {
       const paymentResponse = await paymentWidget?.requestPayment({
-        orderId: '0000000000000000000009',
+        orderId: customerKey,
         orderName: '토스 티셔츠 외 2건',
         customerName: '김토스',
         customerEmail: 'customer123@gmail.com',
@@ -75,14 +76,15 @@ const PayInfo = ({ RoomPrice }) => {
           </div>
 
           <div className="pay-txt">
-            <p style={{ marginBottom: '12px' }}>홍길동</p>
+            <input
+              style={{ marginBottom: '12px' }}
+              className="pay-input"
+              placeholder="이름을 입력하세요"
+            />
             <span className="man">남</span>
             <span className="woman">여</span>
-            <p>hong@naver.com</p>
-            <p>
-              대한민국+82 010-1234-5678
-              {/* <button className="certify">인증</button> */}
-            </p>
+            <input className="pay-input" placeholder="이메일을 입력하세요" />
+            <input className="pay-input" placeholder="연락처를 입력하세요" />
             <p>14:00~15:00</p>
           </div>
         </div>

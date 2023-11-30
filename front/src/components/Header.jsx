@@ -15,7 +15,7 @@ const Header = () => {
         <Link to="/" style={{ textDecoration: 'none' }}>
           <span className="logo">어디가</span>
         </Link>
-        <Link to="/make" style={{ textDecoration: 'none' }}>
+        <Link to="/plan" style={{ textDecoration: 'none' }}>
           <span className="tab" style={{ marginLeft: '15px' }}>
             여행 일정
           </span>

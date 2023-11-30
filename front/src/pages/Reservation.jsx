@@ -11,9 +11,9 @@ const Reservation = () => {
       <p className="res-title">Reservation</p>
       <div className="res-bg">
         <div className="top">
-          <span className="user-travel">인지사님의 여행 일정</span>
+          <span className="user-travel">mb_name님의 여행 일정</span>
           <div className="travel-info">
-            <span>제주특별자치도</span>
+            <span>sd_nm</span>
             <span className="travel-dat">2023.10.11~2023.10.12</span>
             <span>1박2일</span>
           </div>

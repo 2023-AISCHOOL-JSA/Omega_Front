@@ -10,7 +10,7 @@ const RegionBest = () => {
           <div className="reg-rep-content">
             <div className="reg-rep-content-l">
               <p className="txt">여긴 꼭 둘러보세요!</p>
-              <p className="place">#제주도올레길7코스</p>
+              <p className="place"># 올레길7코스</p>
             </div>
             <div className="reg-rep-content-r">
               <p className="explain">

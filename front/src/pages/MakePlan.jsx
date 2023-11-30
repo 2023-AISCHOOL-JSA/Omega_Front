@@ -28,6 +28,7 @@ import Calendar from 'react-calendar'
 import '../css//CalendarCustom.css'
 import moment from 'moment'
 import MakeModal from '../components/MakeModal'
+import { useLocation } from 'react-router-dom'
 
 export const data = createContext()
 export const checkNumber = createContext()
@@ -36,10 +37,13 @@ const MakePlan = () => {
   // 메이크페이지 모달 state
   const [makePageModal, setMakePageModal] = useState(false)
   const [modalDataTemp, setModalDataTemp] = useState({})
+  const location = useLocation()
+
+  const region_name = location.state.value
 
   // 마커 이미지 관리,토글 state
-  const [listCheckCount,setListCheckCount]= useState(0)
-  const [listCheckList,setListCheckList]= useState([])
+  const [listCheckCount, setListCheckCount] = useState(0)
+  const [listCheckList, setListCheckList] = useState([])
   const [markerImg, setMarkerImage] = useState('')
   const [markerImgToggle, setMarkerImageToggle] = useState(false)
   // 최종 리스트 (이거 쓰시면 됩니다)
@@ -1087,11 +1091,11 @@ const MakePlan = () => {
               {selectedKey === '1' &&
                 positions1.map((item, index) => (
                   <List
-                  listCheckCount={listCheckCount}
-                  setListCheckCount={setListCheckCount}
-                  listCheckList={listCheckList}
-                  setListCheckList={setListCheckList}
-                  setMarkerImgToggle={setMarkerImageToggle}
+                    listCheckCount={listCheckCount}
+                    setListCheckCount={setListCheckCount}
+                    listCheckList={listCheckList}
+                    setListCheckList={setListCheckList}
+                    setMarkerImgToggle={setMarkerImageToggle}
                     setMarkerImage={setMarkerImage}
                     markerImg={markerImg}
                     setCenter={setCenter}
@@ -1107,11 +1111,11 @@ const MakePlan = () => {
               {selectedKey === '2' &&
                 positions2.map((item, index) => (
                   <List
-                  listCheckCount={listCheckCount}
-                  setListCheckCount={setListCheckCount}
-                  listCheckList={listCheckList}
-                  setListCheckList={setListCheckList}
-                  setMarkerImgToggle={setMarkerImageToggle}
+                    listCheckCount={listCheckCount}
+                    setListCheckCount={setListCheckCount}
+                    listCheckList={listCheckList}
+                    setListCheckList={setListCheckList}
+                    setMarkerImgToggle={setMarkerImageToggle}
                     setMarkerImage={setMarkerImage}
                     markerImg={markerImg}
                     setCenter={setCenter}
@@ -1127,13 +1131,13 @@ const MakePlan = () => {
               {selectedKey === '6' &&
                 firstData2.map((item, index) => (
                   <List
-                  listCheckCount={listCheckCount}
-                  setListCheckCount={setListCheckCount}
-                  listCheckList={listCheckList}
-                  setListCheckList={setListCheckList}
-                  markerImgToggle={markerImgToggle}
-                  setMarkerImgToggle={setMarkerImageToggle}
-                  markerImg={markerImg}
+                    listCheckCount={listCheckCount}
+                    setListCheckCount={setListCheckCount}
+                    listCheckList={listCheckList}
+                    setListCheckList={setListCheckList}
+                    markerImgToggle={markerImgToggle}
+                    setMarkerImgToggle={setMarkerImageToggle}
+                    markerImg={markerImg}
                     setMarkerImage={setMarkerImage}
                     setCenter={setCenter}
                     key={index}
@@ -1154,7 +1158,7 @@ const MakePlan = () => {
               <Container>
                 <Row className="mt-3 text-center" style={{ fontSize: '14px' }}>
                   <Col sm={3} className="travel-region-text pe-0">
-                    <span>전국</span> 여행
+                    <span>{region_name}</span> 여행
                   </Col>
                   {/* 캘린더 테스트 */}
                   <Col sm={6} className="pe-0" onClick={handleColClick}>
