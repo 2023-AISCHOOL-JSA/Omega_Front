@@ -72,25 +72,27 @@ const MakeModal = ({
         </Row>
 
         <Container className="ps-4 pe-4 mb-4">
-          <Row className="mt-3">
+          <Row className="mt-4">
             <Col sm={8} className="make-modal-title" ref={PlaceName}>
               {modalDataTemp.pla_name}
               <span className="ms-2">{modalDataTemp.pla_code_main}</span>
             </Col>
             {/* <Col></Col> */}
-            <Col sm={2}>
-              <img
-                className="make-modal-search-img"
-                src="https://clova-phinf.pstatic.net/MjAxODAzMjlfOTIg/MDAxNTIyMjg3MzM3OTAy.WkiZikYhauL1hnpLWmCUBJvKjr6xnkmzP99rZPFXVwgg.mNH66A47eL0Mf8G34mPlwBFKP0nZBf2ZJn5D4Rvs8Vwg.PNG/image.png"
-                onClick={handleNaverClick}
-              />
-            </Col>
-            <Col sm={2}>
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
-                className="make-modal-search-img"
-                onClick={handleGoogleClick}
-              />
+            <Col className="d-flex justify-content-end" sm={4}>
+              <div style={{ display: 'inline-block' }}>
+                <img
+                  className="make-modal-search-img me-4"
+                  src="https://clova-phinf.pstatic.net/MjAxODAzMjlfOTIg/MDAxNTIyMjg3MzM3OTAy.WkiZikYhauL1hnpLWmCUBJvKjr6xnkmzP99rZPFXVwgg.mNH66A47eL0Mf8G34mPlwBFKP0nZBf2ZJn5D4Rvs8Vwg.PNG/image.png"
+                  onClick={handleNaverClick}
+                />
+              </div>
+              <div style={{ display: 'inline-block' }}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+                  className="make-modal-search-img me-4"
+                  onClick={handleGoogleClick}
+                />
+              </div>
             </Col>
           </Row>
           <Row className="mt-2  make-modal-addr">

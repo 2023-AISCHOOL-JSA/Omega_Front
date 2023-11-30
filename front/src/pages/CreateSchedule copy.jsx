@@ -5,17 +5,9 @@ import { v4 as uuidv4 } from 'uuid'
 import Draggable from 'react-draggable'
 import { Col, Container, Row } from 'react-bootstrap'
 const CreateSchedule = () => {
-  // 데이터 꺼내기
   const location = useLocation()
   const myList2 = location.state && location.state.myList1
-  const dateRange212 = location.state && location.state.dateRange21
-  const dateRange312 = location.state && location.state.dateRange31
-  const days2 = location.state && location.state.days1
-  const reg_name1 = location.state && location.state.reg_name
-  const newText2 = location.state && location.state.newText1
-
   console.log(myList2, 'myList1 myList1')
-
   const [center, setCenter] = useState({ lat: 0, lng: 0 })
   const [level, setLevel] = useState(8) // 초기 레벨 설정
 
@@ -79,88 +71,37 @@ const CreateSchedule = () => {
     return zoomLevel
   }
 
+  // 휠 이벤트
+
+  const handleWheel = (e) => {
+    // 마우스 휠 이벤트 처리
+    setDeltaPosition((prevDelta) => ({
+      ...prevDelta,
+      y: prevDelta.y - e.deltaY,
+    }))
+  }
+
   return (
     <div className="create-map-wrap" style={{ padding: '0px 10%' }}>
       <Draggable
         onDrag={handleDrag}
         axis="y"
-        bounds={{ top: -550, bottom: 4 }}
+        bounds={{ top: -500, bottom: 10 }}
         allowAnyClick={true}
+        handle=".handle" // 이 부분을 추가합니다
       >
-        <div className="scrollable-content">
-          <Container style={{ height: '60vh' }}>
-            <Row className="mt-5 align-items-center" style={{ height: '10%' }}>
-              <Col
-                sm={3}
-                className="create-page-my d-flex justify-content-center"
-              >
-                {newText2}
-              </Col>
-              <Col
-                sm={2}
-                className="create-page-my1 d-flex justify-content-center"
-              >
-                {reg_name1}여행
-              </Col>
-              <Col
-                sm={3}
-                className="create-page-my2 d-flex justify-content-center"
-              >
-                {dateRange212}
-              </Col>
-              <Col
-                sm={2}
-                className="create-page-my3 d-flex justify-content-center"
-              >
-                {dateRange312}
-              </Col>
-              <Col sm={2} className="d-flex justify-content-center">
-                <button className="create-page-btn">일정 가져오기</button>
-              </Col>
+        <div className="scrollable-content " onWheel={handleWheel}>
+          <Container className="create-page-content ps-5 pe-5">
+            <Row className="mt-5">
+              <Col>ㅇㅇㅇ님의 여행일정</Col>
+              <Col>경주여행</Col>
+              <Col>2023~10.11~ 2023.10.12</Col>
+              <Col>1박 2일</Col>
+              <Col>일정 가져오기</Col>
             </Row>
-
-            <Row
-              className="create-page-content"
-              style={{ overflowY: 'scroll', padding: '0px 10%' }}
-            >
-              {days2.map((item, index1) => (
-                <div key={index1}>
-                  <Row className="mt-5">
-                    {/* 최종데이터 map */}
-                    <Col className="create-day-text">day {index1 + 1}</Col>
-                  </Row>
-
-                  {myList2
-                    .filter((filteredItem) => filteredItem.myDay == index1 + 1)
-                    .map((filteredItem, index2) => (
-                      <Row
-                        key={index2}
-                        className="mt-3 create-page-content-list"
-                      >
-                        <Col
-                          className="create-page-markerIndex"
-                          sm={1}
-                          style={{
-                            backgroundColor:
-                              filteredItem.bgColor.backgroundColor,
-                          }}
-                        >
-                          {filteredItem.markerIndex}
-                        </Col>
-                        <Col
-                          sm={5}
-                          className=" ms-2 text-center2 d-flex justify-content-center align-items-center"
-                        >
-                          {filteredItem.pla_name}
-                        </Col>
-                        <Col>{filteredItem.pla_code_main}</Col>
-                        <Col className="create-page-addr-text">
-                          {filteredItem.region_sub} {filteredItem.pla_addr}
-                        </Col>
-                      </Row>
-                    ))}
-                </div>
-              ))}
+            <Row className="mt-5">
+              {/* 최종데이터 map */}
+              <Col style={{ borderBottom: `2px solid black` }}>day1</Col>
             </Row>
           </Container>
         </div>
@@ -170,7 +111,7 @@ const CreateSchedule = () => {
         center={center}
         style={{
           width: '100%',
-          height: '63vh',
+          height: '60vh',
           borderRadius: '10px',
         }}
         level={level}

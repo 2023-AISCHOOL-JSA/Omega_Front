@@ -58,7 +58,15 @@ const MakePlan = () => {
     setLastMakePlan(myListObj)
     // navigate('/create')
     navigate('/create', {
-      state: { lastMakePlan1: myListObj, myList1: myList },
+      state: {
+        lastMakePlan1: myListObj,
+        myList1: myList,
+        days1: days,
+        dateRange21: dateRange2,
+        dateRange31: dateRange3,
+        reg_name1: reg_name,
+        newText1: newText,
+      },
     })
   }
 
@@ -179,7 +187,7 @@ const MakePlan = () => {
     // console.log(result, 'result')
     // console.log(result.draggableId, 'draggableId')
     // console.log(result.source, 'source')
-    // console.log(mydata2);
+    // console.log(mydata2)
 
     if (!result.destination) {
       return
@@ -191,10 +199,10 @@ const MakePlan = () => {
     ) {
       return
     }
-    // console.log(
-    //   ~~result.destination.droppableId[10] + ~~result.destination.index,
-    //   'zz'
-    // )
+    console.log(
+      ~~result.destination.droppableId[10] + ~~result.destination.index,
+      'zz'
+    )
     // console.log(~~result.source.index + ~~result.source.droppableId[10], 'xx')
     // Shallow copy of the array
 
