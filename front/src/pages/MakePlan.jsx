@@ -18,6 +18,7 @@ import Calendar from 'react-calendar'
 import '../css//CalendarCustom.css'
 import moment from 'moment'
 import MakeModal from '../components/MakeModal'
+import { useNavigate } from 'react-router-dom'
 
 export const data = createContext()
 export const checkNumber = createContext()
@@ -26,7 +27,7 @@ const MakePlan = () => {
   // 메이크페이지 모달 state
   const [makePageModal, setMakePageModal] = useState(false)
   const [modalDataTemp, setModalDataTemp] = useState({})
-
+  const navigate = useNavigate()
   // 마커 이미지 관리,토글 state
   const [listCheckCount, setListCheckCount] = useState(0)
   const [listCheckList, setListCheckList] = useState([])
@@ -51,8 +52,12 @@ const MakePlan = () => {
           myListObj[`day${i + 1}`].push(item.pla_no)
         })
     }
-
+    console.log(myListObj, 'myListObjmyListObj')
     setLastMakePlan(myListObj)
+    // navigate('/create')
+    navigate('/create', {
+      state: { lastMakePlan1: myListObj, myList1: myList },
+    })
   }
 
   // 마지막일정
@@ -1049,6 +1054,7 @@ const MakePlan = () => {
             setMakePageModal={setMakePageModal}
             makePageModal={makePageModal}
             modalDataTemp={modalDataTemp}
+            show1={makePageModal}
           />
         ) : (
           ''

@@ -1,20 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
-import Modal from 'react-bootstrap/Modal'
-import Row from 'react-bootstrap/Row'
-const MakeModal = ({
-  makePageModal,
-  modalDataTemp,
-  setMakePageModal,
-  show1,
-}) => {
-  console.log('모달 들어옴')
+import { Overlay, Tooltip } from 'react-bootstrap'
+import Col from 'react-bootstrap/esm/Col'
+import Container from 'react-bootstrap/esm/Container'
+import Row from 'react-bootstrap/esm/Row'
+
+const MakeModal = ({ makePageModal, modalDataTemp, setMakePageModal }) => {
   const modalRef = useRef(null)
   const PlaceName = useRef(null)
   const target = useRef(null)
-  const [show, setShow] = useState()
+  const [show, setShow] = useState(false)
+
   useEffect(() => {
     console.log(modalRef)
     // document에 이벤트 리스너 추가
@@ -48,13 +43,8 @@ const MakeModal = ({
     }
   }
   return (
-    <Modal
-      size="lg"
-      show={show1}
-      onHide={() => setMakePageModal(false)}
-      centered
-    >
-      <Container ref={modalRef}>
+    <div className="make-page-modal">
+      <Container className="make-page-modal-1" ref={modalRef}>
         <Row>
           <Col className="p-0">
             <div
@@ -146,24 +136,24 @@ const MakeModal = ({
               style={{
                 backgroundColor: '#eeeeee',
                 borderRadius: '15px',
-                padding: '20px',
+                padding: '0px',
                 fontWeight: '400',
                 lineHeight: '1.6rem',
                 fontSize: '15px',
                 color: '6D6D6D',
                 opacity: '1',
                 textAlign: 'left',
-                maxHeight: '150px',
-                overflow: 'hidden',
-                overflowY: 'auto',
+                maxHeight: '100px',
               }}
             >
-              {modalDataTemp.pla_info}
+              <span className="make-modal-info-area">
+                {modalDataTemp.pla_info}
+              </span>
             </Col>
           </Row>
         </Container>
       </Container>
-    </Modal>
+    </div>
   )
 }
 

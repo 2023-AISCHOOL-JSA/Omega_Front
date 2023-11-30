@@ -528,40 +528,7 @@ button[type="button"]:hover {
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 }
 /* 메이크페이지 모달CSS 영역 */
-.make-page-modal {
-  display: flex;
-  width: 100%;
-  height: calc(100vh - 76px);
 
-  position: absolute;
-  /* background-color: red; */
-  align-items: center;
-  justify-content: center;
-  /* text-align: center; */
-  backdrop-filter: blur(1px);
-  /* background-color: black; */
-  z-index: 9999;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: black; /* 검은색 배경 설정 */
-    opacity: 0.5; /* 투명도 조절 (0이 완전 투명, 1이 완전 불투명) */
-    /* backdrop-filter: blur(1px); 흐림 효과 적용 */
-    z-index: -1; /* 모달보다 뒤에 위치하도록 설정 */
-  }
-}
-.make-page-modal-1 {
-  position: absolute;
-  width: 45%;
-  /* height: 70%; */
-  background-color: white;
-  border-radius: 5px;
-  height:calc(100vh - 76px);
-}
 .make-modal-close-btn {
   position: absolute;
   /* top: 16%; */
@@ -621,9 +588,23 @@ button[type="button"]:hover {
   /* transform: rotate(110deg);
   transform-origin: center; 회전 중심점을 조절할 수 있습니다. */
 }
-.make-modal-img{
- width: 100%;
- border-radius: 5px;
- height:330px;
-
+.make-modal-img {
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 330px;
+}
+.make-modal-search-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  cursor: pointer;
+}
+/* .make-modal-info-area {
+} */
+.create-map-wrap {
+  height: 100vh;
 }
