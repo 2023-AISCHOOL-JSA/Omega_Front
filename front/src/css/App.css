@@ -424,7 +424,7 @@ button[type="button"]:hover {
   font-size: 16px;
 }
 .travel-period-text {
-  font-size: 13px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -479,19 +479,22 @@ button[type="button"]:hover {
   font-weight: 400;
 }
 .start-end-text {
-  font-size: 14px;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 .list-btn2 {
   border-radius: 5px;
   background-color: #ff9a00;
   border: none;
-  width: 30px;
-  font-size: 15px;
-  height: 30px;
+  /* width: 30%; */
+  font-size: 1.5rem;
+  height: 50px;
   align-items: center;
   color: white;
   text-align: center !important;
+}
+.list-btn2:hover {
+  background-color: #ff8400;
 }
 .temppppppppp {
   display: flex;
@@ -717,4 +720,9 @@ button[type="button"]:hover {
 
 .card-body {
   cursor: pointer;
+}
+.plan-page-modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #363636;
 }

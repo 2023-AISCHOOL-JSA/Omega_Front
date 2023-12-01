@@ -20,12 +20,11 @@ import moment from 'moment'
 import MakeModal from '../components/MakeModal'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowForward } from 'react-icons/io'
-import { Modal } from 'react-bootstrap'
 
 export const data = createContext()
 export const checkNumber = createContext()
 
-const MakePlan = (props) => {
+const MakePlan = () => {
   // 메이크페이지 모달 state
   const [makePageModal, setMakePageModal] = useState(false)
   const [modalDataTemp, setModalDataTemp] = useState({})
@@ -139,7 +138,7 @@ const MakePlan = (props) => {
   }
 
   // 캘린더 테스트
-  const [showCalendar, setShowCalendar] = useState(true)
+  const [showCalendar, setShowCalendar] = useState(false)
   const [dateRange, setDateRange] = useState([new Date(), new Date()]) // 시작일과 마감일을 저장하는 state
   const [dateRange2, setDateRange2] = useState('여행 기간 설정하기') // 시작일과 마감일을 저장하는 state
   const [dateRange3, setDateRange3] = useState('') // 시작일과 마감일을 저장하는 state
@@ -1203,77 +1202,56 @@ const MakePlan = (props) => {
                 <Col className="travel-days-text" sm={3}>
                   {dateRange3}
                 </Col>
-                {showCalendar && (
-                  <Modal
-                    // size="lg"
-                    show={showCalendar}
-                    onHide={() => setMakePageModal(false)}
-                    centered
-                    animation={false}
-                    aria-labelledby="contained-modal-title-vcenter"
-                  >
-                    <Modal.Body>
-                      <Row className="text-center mt-2 mb-2">
-                        <Col className="plan-page-modal-title">
-                          <p>여행기간을 설정해주세요!</p>
-                        </Col>
-                      </Row>
-                      <Row className="text-center">
-                        <Col className="me-3 start-end-text" sm={5}>
-                          시작 일자
-                        </Col>
-                        <Col className="ms-3 start-end-text" sm={5}>
-                          종료 일자
-                        </Col>
-                      </Row>
-                      <Row className="text-center mt-1 mb-2">
-                        <Col className="start-end me-3" sm={5}>
-                          <div>
-                            {moment(dateRange[0]).format('YY년 MM월 DD일')}
-                          </div>
-                        </Col>
-                        <Col className="start-end ms-3" sm={5}>
-                          <div>
-                            {moment(dateRange[1]).format('YY년 MM월 DD일')}
-                          </div>
-                        </Col>
-                      </Row>
-                      {/* 캘린더@@ */}
-                      <Row>
-                        <Col className="d-flex justify-content-center align-items-center">
-                          <Calendar
-                            minDetail="month"
-                            // maxDetail="month"
-                            onChange={handleCalendarChange}
-                            value={dateRange}
-                            selectRange={true}
-                            formatDay={(locale, date) =>
-                              date.toLocaleString('en', { day: 'numeric' })
-                            }
-                            // nextLabel={<NextIcon />}
-                            // prevLabel={<PrevIcon />}
-                            next2Label={null}
-                            prev2Label={null}
-                            showNeighboringMonth={false}
-                          />
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col
-                          className="mt-5 d-flex justify-content-center align-items-center"
+                {!showCalendar && (
+                  <>
+                    <Row className="text-center  mt-4">
+                      <Col className="me-3 start-end-text" sm={5}>
+                        시작 일자
+                      </Col>
+                      <Col className="ms-3 start-end-text" sm={5}>
+                        종료 일자
+                      </Col>
+                    </Row>
+                    <Row className="text-center mt-1 mb-2">
+                      <Col className="start-end me-3" sm={5}>
+                        <div>
+                          {moment(dateRange[0]).format('YY년 MM월 DD일')}
+                        </div>
+                      </Col>
+                      <Col className="start-end ms-3" sm={5}>
+                        <div>
+                          {moment(dateRange[1]).format('YY년 MM월 DD일')}
+                        </div>
+                      </Col>
+                    </Row>
+                    {/* 캘린더@@ */}
+                    <Calendar
+                      minDetail="month"
+                      // maxDetail="month"
+                      onChange={handleCalendarChange}
+                      value={dateRange}
+                      selectRange={true}
+                      formatDay={(locale, date) =>
+                        date.toLocaleString('en', { day: 'numeric' })
+                      }
+                      // nextLabel={<NextIcon />}
+                      // prevLabel={<PrevIcon />}
+                      next2Label={null}
+                      prev2Label={null}
+                      showNeighboringMonth={false}
+                    />
+                    <Row>
+                      <Col className="mt-3">
+                        <button
+                          className="list-btn2"
                           style={{ width: '100%' }}
+                          onClick={(e) => handleColClick(e)}
                         >
-                          <button
-                            className="list-btn2"
-                            style={{ width: '90%' }}
-                            onClick={(e) => handleColClick(e)}
-                          >
-                            설정하기
-                          </button>
-                        </Col>
-                      </Row>
-                    </Modal.Body>
-                  </Modal>
+                          설정하기
+                        </button>
+                      </Col>
+                    </Row>
+                  </>
                 )}
               </Row>
               <Row className="mt-4">
