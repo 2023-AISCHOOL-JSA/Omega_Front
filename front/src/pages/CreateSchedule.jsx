@@ -18,7 +18,7 @@ const CreateSchedule = () => {
   const dateRange212 = location.state && location.state.dateRange21
   const dateRange312 = location.state && location.state.dateRange31
   const days2 = location.state && location.state.days1
-  const reg_name1 = location.state && location.state.reg_name
+  const region_name2 = location.state && location.state.region_name1
   const newText2 = location.state && location.state.newText1
 
   console.log(myList2, 'myList1 myList1')
@@ -119,7 +119,7 @@ const CreateSchedule = () => {
                 sm={2}
                 className="create-page-my1 d-flex justify-content-center"
               >
-                {reg_name1}여행
+                {region_name2}여행
               </Col>
               <Col
                 sm={3}

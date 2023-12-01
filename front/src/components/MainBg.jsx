@@ -3,6 +3,7 @@ import SearchIcon from '../img/search.png'
 import styled from 'styled-components'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
+import api from '../axios'
 
 const IconImg = styled.img`
   width: 30px;
@@ -16,36 +17,46 @@ const MainBg = () => {
   var inputRef = useRef(null)
   const navigate = useNavigate()
 
-  const recommendations = {
-    서울: '서울특별시',
-    인천: '인천광역시',
-    부산: '경상남도 부산',
-    제주: '제주특별시',
-    대구: '대구광역시',
-    대전: '대전광역시',
-    울산: '울산광역시',
-    세종: '세종특별자치시',
-  }
+  // 연관 지역 검색어 리스트
+  const [recommendations, setRecommendations] = useState([])
+
+  // 넘어갈 지역 코드
+  const [region_cd, setRegion_cd] = useState()
 
   const handleBlur = () => {
     setTimeout(() => setActive(false), 100)
   }
 
-  const handleClick = (key) => {
-    console.log(key)
-    inputRef.current.value = key
+  const handleClick = (obj) => {
+    console.log(obj)
+    inputRef.current.value = obj.sd_nm
+    setRegion_cd(obj.sgg_cd)
+    setSearchTerm(obj.sd_nm)
     setActive(false)
+  }
+
+  const handlePage = () => {
+    if (!region_cd) {
+      alert('여행 하고 싶은 지역을 입력하세요')
+    } else {
+      navigate(`/info/${region_cd}`)
+    }
   }
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value
-    setSearchTerm(inputValue)
-    if (inputValue && inputValue.length > 0) {
-      setActive(true)
-    } else {
-      setActive(false)
+    if (inputValue.length >= 2 || inputValue.length == 0) {
+      setSearchTerm(inputValue)
     }
+    setActive(true)
   }
+
+  useEffect(() => {
+    api.get(`/region?keyword=${searchTerm}`).then((res) => {
+      console.log(res.data.data)
+      setRecommendations(res.data.data)
+    })
+  }, [searchTerm])
 
   return (
     <>
@@ -77,31 +88,22 @@ const MainBg = () => {
                       onMouseDown={(e) => {
                         e.preventDefault()
                       }}
-                      onClick={() => handleClick(key)}
+                      onClick={() => handleClick(recommendations[key])}
                     >
                       <div className="region-icon">
                         <EnvironmentOutlined style={{ fontSize: '15px' }} />
                       </div>
 
                       <div className="recommend1">
-                        {key.split('').map((char, idx) => {
-                          let color =
-                            key.substring(0, searchTerm.length) ===
-                              searchTerm && idx < searchTerm.length
-                              ? 'orange'
-                              : 'black'
-                          return (
-                            <span style={{ color: color }} key={idx}>
-                              {char}
-                            </span>
-                          )
-                        })}
+                        {recommendations[key].sd_nm}
                       </div>
-                      <div className="recommend2">{recommendations[key]}</div>
+                      <div className="recommend2">
+                        {recommendations[key].full_nm}
+                      </div>
                     </div>
                   ))}
                 {Object.keys(recommendations).filter((key) =>
-                  key.includes(searchTerm)
+                  key.includes(searchTerm),
                 ).length === 0 && (
                   <div
                     className="recommend"
@@ -119,11 +121,7 @@ const MainBg = () => {
             )}
             <div>
               {/* 지역소개 페이지로 넘길 값 sd_nm */}
-              <button
-                type="submit"
-                className="searchbtn"
-                onClick={() => navigate('/info')}
-              >
+              <button type="submit" className="searchbtn" onClick={handlePage}>
                 <IconImg src={SearchIcon} alt="" />
               </button>
             </div>

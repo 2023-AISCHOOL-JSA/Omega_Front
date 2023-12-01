@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Avatar } from 'antd'
 
-const MyProfile = () => {
+const MyProfile = ({ myInfo }) => {
   const [Image, setImage] = useState(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
     // mb_profile
@@ -39,7 +39,7 @@ const MyProfile = () => {
             style={{
               marginRight: '30px',
             }}
-            src={Image}
+            src={myInfo?.mb_profile || Image}
             onClick={() => {
               fileInput.current.click()
             }}
@@ -55,7 +55,7 @@ const MyProfile = () => {
 
         <div className="myinfo-txt">
           <div className="txt-group">
-            <p className="name">mb_name님의 프로필</p>
+            <p className="name">{myInfo?.mb_name}님의 프로필</p>
             <span className="name2">정보저장</span>
 
             <span className="name3">
@@ -66,12 +66,12 @@ const MyProfile = () => {
 
           <div className="info-txt">
             <span className="dlfma">이름</span>
-            <span className="myname">mb_name</span>
+            <span className="myname">{myInfo?.mb_name}</span>
           </div>
 
           <div className="info-txt">
             <span className="dlfma">이메일</span>
-            <span className="email">mb_email</span>
+            <span className="email">{myInfo?.mb_email}</span>
           </div>
         </div>
       </div>

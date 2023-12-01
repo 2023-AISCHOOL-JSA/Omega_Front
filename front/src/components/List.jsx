@@ -57,11 +57,11 @@ const List = ({
     }
   
   // 지워두됩니다 (확인용)
-  useEffect(()=>{
-    console.log(listCheckList[0],"    console.log(listCheckList[0])")
-    console.log(listCheckList,"    console.log(listCheckList)")
-    // console.log(resData.pla_no,"    console.log(listCheckList)")
-  },[listCheckList])
+  // useEffect(()=>{
+  //   console.log(listCheckList[0],"    console.log(listCheckList[0])")
+  //   console.log(listCheckList,"    console.log(listCheckList)")
+  //   // console.log(resData.pla_no,"    console.log(listCheckList)")
+  // },[listCheckList])
 
 
   const plaNoList = bgList.map((item) => item.pla_no)
@@ -113,7 +113,7 @@ const List = ({
         <div style={{ width: '100px', height: '100px' }}>
           <Card.Img
             style={{ width: '100%', height: '100%' }}
-            src={resData.img}
+            src={resData?.img}
           />
         </div>
         {/* 텍스트 */}

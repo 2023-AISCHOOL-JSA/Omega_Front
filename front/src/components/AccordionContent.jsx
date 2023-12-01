@@ -27,7 +27,7 @@ const AccordionContent = ({ myvalue, selectedKey, myList, setList, dayss }) => {
 
     // 배열에서 삭제할 아이템을 제외한 배열을 생성
     const updatedList = myData2.filter((item) => item !== deleteItem)
-    for (let i = 1; i < 4; i++) {
+    for (let i = 0; i < dayss; i++) {
       // console.log('들어오긴하지?')
       // console.log(
       //   updatedList

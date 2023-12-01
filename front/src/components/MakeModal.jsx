@@ -67,7 +67,7 @@ const MakeModal = ({
             <img
               className="make-modal-img"
               // style={{ width: '100%', borderRadius: '0px', height: '100%' }}
-              src={modalDataTemp.img}
+              src={modalDataTemp?.img}
             ></img>
           </Col>
         </Row>
