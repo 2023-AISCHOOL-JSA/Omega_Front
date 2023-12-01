@@ -213,8 +213,9 @@ button[type="button"]:hover {
   align-items: center;
   cursor: pointer;
 }
-.temp33 > img {
-  width: 25px;
+.temp33 > svg {
+  width: 35px;
+  height: 35px;
 }
 .hidden {
   transform: translateX(-100%);
@@ -632,7 +633,7 @@ button[type="button"]:hover {
   border-top-right-radius: 40px; */
   border-radius: 30px;
   background-color: white;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .create-page-content {

@@ -19,6 +19,7 @@ import '../css//CalendarCustom.css'
 import moment from 'moment'
 import MakeModal from '../components/MakeModal'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { IoIosArrowForward } from 'react-icons/io'
 
 export const data = createContext()
 export const checkNumber = createContext()
@@ -1076,8 +1077,9 @@ const MakePlan = () => {
       <Row style={{ overflow: 'hidden' }}>
         {/*///////////////////////////////// 검색 INPUT  ////////////////////////////////////*/}
         <Col
-          sm={3}
+          // sm={3}
           style={{
+            // width: '400px!important',
             backgroundColor: '#f6f6f6',
             zIndex: '20',
             height: 'calc(100vh-76px)',
@@ -1183,8 +1185,8 @@ const MakePlan = () => {
         </Col>
 
         <Col className="p-0" sm={9} style={{ position: 'relative' }}>
-          <Col className={`temp-css${isTempCssVisible ? '' : 'hidden'}`}>
-            {/* // <div className={`temp33 ${isTempCssVisible ? '' : 'hidden'}`} onClick={handleButtonClick}> */}
+          <Col className={`temp-css ${isTempCssVisible ? '' : 'hidden'}`}>
+            {/* <div className={`temp33 ${isTempCssVisible ? '' : 'hidden'}`} onClick={handleButtonClick}> */}
             <Container>
               <Row className="mt-3 text-center" style={{ fontSize: '14px' }}>
                 <Col sm={3} className="travel-region-text pe-0">
@@ -1336,12 +1338,19 @@ const MakePlan = () => {
                 scheduleToggle()
               }}
             >
-              <img
+              <IoIosArrowForward
                 style={{
                   transform: `rotate(${rotation}deg)`,
                   transition: 'transform 0.3s ease',
                 }}
               />
+              {/* <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK0eHiAMMfCelxrvHk8KAnOyakw8WPFaG5iXaoLHlc&s"
+                style={{
+                  transform: `rotate(${rotation}deg)`,
+                  transition: 'transform 0.3s ease',
+                }}
+              /> */}
             </div>
           </Col>
 
@@ -1355,9 +1364,12 @@ const MakePlan = () => {
               width: '100%',
               height: '100%',
               marginLeft: isTempCssVisible ? '220px' : '',
+              transition: 'margin-left 0.3s ease', // 여기서 오류 수정: margin-left 대신 'margin-left'를 사용
             }}
             level={10}
           >
+            {/* Map 내용 */}
+
             {/* 리스트 클릭 마커 */}
             {markerImgToggle ? (
               <React.Fragment key={uuidv4()}>
