@@ -19,7 +19,7 @@ import '../css//CalendarCustom.css'
 import moment from 'moment'
 import MakeModal from '../components/MakeModal'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { IoIosArrowForward } from 'react-icons/io'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { Modal } from 'react-bootstrap'
 
 export const data = createContext()
@@ -1078,7 +1078,7 @@ const MakePlan = (props) => {
       <Row style={{ overflow: 'hidden' }}>
         {/*///////////////////////////////// 검색 INPUT  ////////////////////////////////////*/}
         <Col
-          // sm={3}
+          sm={3}
           style={{
             // width: '400px!important',
             backgroundColor: '#f6f6f6',
@@ -1360,7 +1360,7 @@ const MakePlan = (props) => {
                 scheduleToggle()
               }}
             >
-              <IoIosArrowForward
+              <IoIosArrowBack
                 style={{
                   transform: `rotate(${rotation}deg)`,
                   transition: 'transform 0.3s ease',
