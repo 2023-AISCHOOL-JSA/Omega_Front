@@ -7,6 +7,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 const CreateSchedule = () => {
   // 데이터 꺼내기
   const location = useLocation()
+  const lastMakePlan2 = location.state && location.state.lastMakePlan1
   const myList2 = location.state && location.state.myList1
   const dateRange212 = location.state && location.state.dateRange21
   const dateRange312 = location.state && location.state.dateRange31
@@ -15,6 +16,7 @@ const CreateSchedule = () => {
   const newText2 = location.state && location.state.newText1
 
   console.log(myList2, 'myList1 myList1')
+  console.log(lastMakePlan2, 'lastMakePlan2 lastMakePlan2')
 
   const [center, setCenter] = useState({ lat: 0, lng: 0 })
   const [level, setLevel] = useState(8) // 초기 레벨 설정
