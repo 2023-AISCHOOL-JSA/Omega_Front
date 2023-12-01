@@ -53,6 +53,7 @@ const MakeModal = ({
       show={show1}
       onHide={() => setMakePageModal(false)}
       centered
+      animation={false}
     >
       <Container ref={modalRef}>
         <Row>
