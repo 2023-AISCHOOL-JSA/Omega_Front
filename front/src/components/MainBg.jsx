@@ -49,12 +49,12 @@ const MainBg = () => {
     setActive(true)
   }
 
-  // useEffect(() => {
-  //   api.get(`/region?keyword=${searchTerm}`).then((res) => {
-  //     console.log(res.data.data)
-  //     setRecommendations(res.data.data)
-  //   })
-  // }, [searchTerm])
+  useEffect(() => {
+    api.get(`/region?keyword=${searchTerm}`).then((res) => {
+      console.log(res.data.data)
+      setRecommendations(res.data.data)
+    })
+  }, [searchTerm])
 
   return (
     <>
