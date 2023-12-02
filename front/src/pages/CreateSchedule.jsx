@@ -5,24 +5,78 @@ import {
   MapMarker,
   Polyline,
 } from 'react-kakao-maps-sdk'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import Draggable from 'react-draggable'
 import { Col, Container, Row } from 'react-bootstrap'
+import api from '../axios'
 const CreateSchedule = () => {
+  const navigate = useNavigate()
   const { kakao } = window
   // 데이터 꺼내기
   const location = useLocation()
-  const lastMakePlan2 = location.state && location.state.lastMakePlan1
-  const myList2 = location.state && location.state.myList1
+  const [myList2, setMyList2] = useState(
+    (location.state && location.state.myList1) || [],
+  )
   const dateRange212 = location.state && location.state.dateRange21
   const dateRange312 = location.state && location.state.dateRange31
   const days2 = location.state && location.state.days1
   const region_name2 = location.state && location.state.region_name1
   const newText2 = location.state && location.state.newText1
 
+  const [myPlan, setMyPlan] = useState({})
+  const [myPlanDetail, setMyPlanDetail] = useState()
+
+  const { plan_no } = useParams()
+
+  useEffect(() => {
+    const getPlan = () => {
+      api
+        .get(`/plan/${plan_no}`, {
+          headers: { authorization: localStorage.getItem('jwtToken') },
+        })
+        .then((res) => {
+          console.log('불러온 일정...', res.data.data)
+          const { started_date, ended_date, ...result } = res.data.data
+          // setCenter({ lat:parseFloat(location?.state?.latlng.lat), lng: parseFloat(location?.state?.latlng.lng) })
+          setMyPlan({
+            started_date: new Date(started_date)
+              .toLocaleDateString()
+              .replace(/ /gi, '-')
+              .replace(/\./gi, ''),
+            ended_date: new Date(ended_date)
+              .toLocaleDateString()
+              .replace(/ /gi, '-')
+              .replace(/\./gi, ''),
+            days:
+              (new Date(ended_date) - new Date(started_date)) /
+              (1000 * 60 * 60 * 24),
+            ...result,
+          })
+        })
+        .catch((err) => console.log(err))
+    }
+
+    // 상세 플랜 가져오기
+    const getPlanDetail = () => {
+      api
+        .get(`/plan/${plan_no}/plan_detail`, {
+          headers: { authorization: localStorage.getItem('jwtToken') },
+        })
+        .then((res) => {
+          console.log('불러온 일정 상세...', res.data.data)
+          setMyList2(res.data.data)
+          setMyPlanDetail(res.data.data)
+        })
+        .catch((err) => console.log(err))
+    }
+
+    // url이 new가 아니면 저장된 플랜을 가져옴
+    getPlan()
+    getPlanDetail()
+  }, [])
+
   console.log(myList2, 'myList1 myList1')
-  console.log(lastMakePlan2, 'lastMakePlan2 lastMakePlan2')
 
   const [center, setCenter] = useState({ lat: 0, lng: 0 })
   const [level, setLevel] = useState(8) // 초기 레벨 설정 (크게 의미X)
@@ -90,7 +144,7 @@ const CreateSchedule = () => {
               strokeWeight: 3, // 선 두께
               strokeOpacity: 0.7, // 선 투명도
             }}
-          />
+          />,
         )
       }
     })
@@ -113,28 +167,32 @@ const CreateSchedule = () => {
                 sm={3}
                 className="create-page-my d-flex justify-content-center"
               >
-                {newText2}
+                {myPlan.plan_name}
               </Col>
               <Col
                 sm={2}
                 className="create-page-my1 d-flex justify-content-center"
               >
-                {region_name2}여행
+                {myPlan.plan_region}여행
               </Col>
               <Col
                 sm={3}
                 className="create-page-my2 d-flex justify-content-center"
               >
-                {dateRange212}
+                {myPlan.started_date} - {myPlan.ended_date}
               </Col>
               <Col
                 sm={2}
                 className="create-page-my3 d-flex justify-content-center"
               >
-                {dateRange312}
+                {myPlan.days}박{myPlan.days + 1}일
               </Col>
-              <Col sm={2} className="d-flex justify-content-center">
-                <button className="create-page-btn">일정 가져오기</button>
+              <Col
+                sm={2}
+                className="d-flex justify-content-center"
+                onClick={() => navigate(`/reservation/${plan_no}`)}
+              >
+                <button className="create-page-btn">숙소 결제하기</button>
               </Col>
             </Row>
 
@@ -200,7 +258,7 @@ const CreateSchedule = () => {
             key={`${markerList.lat}-${markerList.lng}`}
             position={markerList}
             image={{
-              src: './img/invimage.png',
+              src: '../img/invimage.png',
               size: {
                 width: 24,
                 height: 24,
@@ -221,7 +279,7 @@ const CreateSchedule = () => {
               position={position.latlng}
               title={position?.pla_name}
               image={{
-                src: './img/invimage.png',
+                src: '../img/invimage.png',
                 size: {
                   width: 24,
                   height: 24,

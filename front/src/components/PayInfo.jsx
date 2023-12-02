@@ -4,25 +4,28 @@ import {
   loadPaymentWidget,
   ANONYMOUS,
 } from '@tosspayments/payment-widget-sdk'
-import axios from 'axios'
+import api from '../axios'
 
 const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm'
 const customerKey = Math.random().toString(36).substring(2, 23)
 console.log('커스텀키', customerKey)
 
-const PayInfo = ({ RoomPrice }) => {
+const PayInfo = ({ totalPrice, userInfo, plan_no }) => {
   const paymentWidgetRef = useRef(null)
   const paymentMethodsWidgetRef = useRef(null)
   const [price, setPrice] = useState(100)
 
   useEffect(() => {
     ;(async () => {
-      const paymentWidget = await loadPaymentWidget(clientKey, customerKey)
+      const paymentWidget = await loadPaymentWidget(
+        clientKey,
+        `${customerKey}_${plan_no}`,
+      )
 
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         '#payment-widget',
         { value: price },
-        { variantKey: 'DEFAULT' }
+        { variantKey: 'DEFAULT' },
       )
 
       paymentWidget.renderAgreement('#agreement', { variantKey: 'AGREEMENT' })
@@ -40,26 +43,27 @@ const PayInfo = ({ RoomPrice }) => {
 
     paymentMethodsWidget.updateAmount(
       price,
-      paymentMethodsWidget.UPDATE_REASON.COUPON
+      paymentMethodsWidget.UPDATE_REASON.COUPON,
     )
   }, [price])
 
   const handlePaymentClick = async () => {
     const paymentWidget = paymentWidgetRef.current
-    console.log(paymentWidget)
 
-    try {
-      const paymentResponse = await paymentWidget?.requestPayment({
-        orderId: customerKey,
-        orderName: '토스 티셔츠 외 2건',
-        customerName: '김토스',
-        customerEmail: 'customer123@gmail.com',
-        successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`,
-      })
-    } catch (error) {
-      console.error(error)
-    }
+    api.put(`/reservation/${plan_no}`).then((res) => {
+      try {
+        const paymentResponse = paymentWidget?.requestPayment({
+          orderId: `${customerKey}_${plan_no}`,
+          orderName: '토스 티셔츠 외 2건',
+          customerName: `${userInfo.mb_name}`,
+          customerEmail: `${userInfo.mb_email}`,
+          successUrl: `${window.location.origin}/success`,
+          failUrl: `${window.location.origin}/fail`,
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    })
   }
 
   return (
@@ -80,11 +84,16 @@ const PayInfo = ({ RoomPrice }) => {
               style={{ marginBottom: '12px' }}
               className="pay-input"
               placeholder="이름을 입력하세요"
+              defaultValue={userInfo?.mb_name || ''}
             />
             <span className="man">남</span>
             <span className="woman">여</span>
             <br />
-            <input className="pay-input" placeholder="이메일을 입력하세요" />
+            <input
+              className="pay-input"
+              placeholder="이메일을 입력하세요"
+              defaultValue={userInfo?.mb_email || ''}
+            />
             <br />
             <input className="pay-input" placeholder="연락처를 입력하세요" />
             <p style={{ marginTop: '8px' }}>14:00~15:00</p>
@@ -104,7 +113,7 @@ const PayInfo = ({ RoomPrice }) => {
               <p className="total-price">총 결제 금액</p>
             </div>
             <div>
-              <p className="total-price">50,000원</p>
+              <p className="total-price">{totalPrice.toLocaleString()}원</p>
             </div>
           </div>
 

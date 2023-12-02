@@ -67,7 +67,7 @@ const MakeModal = ({
             <img
               className="make-modal-img"
               // style={{ width: '100%', borderRadius: '0px', height: '100%' }}
-              src={modalDataTemp?.img}
+              src={`http://localhost:9009/img/${modalDataTemp?.img}`}
             ></img>
           </Col>
         </Row>
@@ -98,7 +98,7 @@ const MakeModal = ({
           </Row>
           <Row className="mt-2  make-modal-addr">
             <Col>
-              {modalDataTemp.region_sub} {modalDataTemp.pla_addr}
+            {modalDataTemp.region_main} {modalDataTemp.region_sub} {modalDataTemp.pla_addr}
               <button
                 ref={target}
                 className="copy-btn ms-3"
@@ -128,7 +128,7 @@ const MakeModal = ({
               <p>{modalDataTemp.pla_price}</p>
             </Col>
             <Col>
-              <p>{modalDataTemp.pla_parking_yn}</p>
+              <p>{modalDataTemp.pla_parking_yn === 'y' ? '주차가능' : '주차불가'}</p>
             </Col>
             <Col>
               <p>{modalDataTemp.region_sub}</p>

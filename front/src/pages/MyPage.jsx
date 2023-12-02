@@ -10,6 +10,7 @@ import api from '../axios'
 const MyPage = () => {
   const [myInfo, setMyInfo] = useState()
   const [planList, setPlanList] = useState([])
+  const [planedList, setPlanedList] = useState([])
   const [reservationList, setReservationList] = useState([])
   const [wishList, setWishList] = useState([])
 
@@ -32,13 +33,28 @@ const MyPage = () => {
 
     const getPlanList = () => {
       api
-        .get('/plan/me', {
+        .get('/plan/me?order=0', {
           headers: { authorization: localStorage.getItem('jwtToken') },
         })
         .then((res) => {
           console.log('내일정...', res.data.data)
           console.log()
           setPlanList(res.data.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+    const getPlanedList = () => {
+      api
+        .get('/plan/me?order=1', {
+          headers: { authorization: localStorage.getItem('jwtToken') },
+        })
+        .then((res) => {
+          console.log('다녀온 내일정...', res.data.data)
+          console.log()
+          setPlanedList(res.data.data)
         })
         .catch((err) => {
           console.log(err)
@@ -75,6 +91,7 @@ const MyPage = () => {
 
     getMyInfo()
     getPlanList()
+    getPlanedList()
     getReservationList()
     getWishList()
   }, [])
@@ -90,34 +107,42 @@ const MyPage = () => {
           {/* 나의 여행 일정(MyTrip) */}
           <p className="mytitle">나의 여행 일정</p>
           <div className="mydiv-container">
-            {planList?.map((item) =>
-              today > new Date(item.ended_date) ? null : <MyTrip plan={item} />,
+            {planList.length > 0 ? (
+              planList?.map((item, idx) => <MyTrip plan={item} key={idx} />)
+            ) : (
+              <MyTrip />
             )}
           </div>
           {/* 다녀온 여행 일정(MyVisitedTrip)  */}
           <p className="mytitle">다녀온 여행 일정</p>
           <div className="mydiv-container">
-            {planList?.map((item) =>
-              today > new Date(item.ended_date) ? (
-                <MyVisitedTrip plan={item} />
-              ) : null,
+            {planedList.length > 0 ? (
+              planedList?.map((item, idx) => (
+                <MyVisitedTrip plan={item} key={idx} />
+              ))
+            ) : (
+              <MyVisitedTrip />
             )}
           </div>
 
           {/* 예약된 숙소(Reservationinfo) */}
           <p className="mytitle">예약된 숙소</p>
           <div className="mydiv-container">
-            {reservationList?.map((item, idx) =>
-              idx < 3 ? <MyReservation reservation={item} /> : null,
+            {reservationList.length > 0 ? (
+              reservationList?.map((item, idx) =>
+                idx < 3 ? <MyReservation reservation={item} /> : null,
+              )
+            ) : (
+              <MyReservation />
             )}
           </div>
         </div>
 
         <p className="mytitle">나의 저장 목록</p>
         <div className="my-wish-list">
-          {wishList?.map((item, idx) =>
+          {wishList.length > 0 ? wishList?.map((item, idx) =>
             idx < 10 ? <MyWish wish={item} /> : null,
-          )}
+          ) : <MyWish />}
         </div>
       </div>
     </div>

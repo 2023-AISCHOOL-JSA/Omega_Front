@@ -5,6 +5,7 @@ const RegionTop = ({ region }) => {
   const navigate = useNavigate()
 
   const handelClick = () => {
+    console.log(region,'dfjowejfiew');
     navigate('/plan/new', {
       state: {
         region_name: region.region_name,

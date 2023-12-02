@@ -726,3 +726,19 @@ button[type="button"]:hover {
   font-weight: 600;
   color: #363636;
 }
+
+/* 이미지 검색 css 나중에 따로 옮기기@@@@@@@@@@@ */
+.img-search-title {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+.img-search-info {
+  font-size: 0.9rem;
+}
+.img-search-main {
+  height: 250px;
+  background-color: #f1f3f4;
+  border-radius: 5px;
+  /* backdrop-filter: blur(10px);  */
+  /* position: relative; */
+}

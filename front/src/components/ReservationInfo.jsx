@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Plus from '../img/plus.png'
 import Minus from '../img/minus.png'
@@ -20,12 +20,17 @@ const MinusImg = styled.img`
   margin-left: 10px;
 `
 
-const ReservationInfo = ({ price, setprice }) => {
+const ReservationInfo = ({ place, totalPrice, setTotalPrice }) => {
   const [datePick, setDatePick] = useState(false)
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
 
   const handleDate = () => {
     setDatePick(!datePick)
+  }
+
+  const handlePrice = (op) => {
+    setTotalPrice(totalPrice + (place.reservation_cost * op))
+    setCount(count + op)
   }
 
   return (
@@ -37,7 +42,7 @@ const ReservationInfo = ({ price, setprice }) => {
         <div className="res-info">
           <p>
             <span className="room-txt">예약 숙소</span>
-            <span className="room-txt-detail">제주대학교 기숙사</span>
+            <span className="room-txt-detail">{place?.pla_name}</span>
           </p>
           {/* <span className="room-date" onClick={handleDate}>
             Day 1{' '}
@@ -59,7 +64,8 @@ const ReservationInfo = ({ price, setprice }) => {
           <p>
             <span className="room-txt">예약 기간</span>
             <span className="room-txt-detail">
-              입실일 2023.10.11 | 퇴실일 2023.10.12
+            입실일 {place?.start_day} | 퇴실일 {place?.end_day}
+
             </span>
           </p>
 
@@ -73,14 +79,14 @@ const ReservationInfo = ({ price, setprice }) => {
           <p>
             <span className="room-txt">방 갯수</span>
             <span className="room-txt-detail">
-              <button className="miu-btn" onClick={() => setCount(count - 1)}>
+              <button className="miu-btn" onClick={() => handlePrice(-1)}>
                 <MinusImg
                   src={Minus}
                   style={{ marginLeft: '15px', marginRight: '5px' }}
                 />
               </button>
               <span>{count}</span>
-              <button className="plu-btn" onClick={() => setCount(count + 1)}>
+              <button className="plu-btn" onClick={() => handlePrice(1)}>
                 <PlusImg
                   src={Plus}
                   style={{ marginLeft: '5px', marginRight: '5px' }}
@@ -93,7 +99,7 @@ const ReservationInfo = ({ price, setprice }) => {
           <p>
             <span className="room-txt">숙박 비용</span>
             <span className="room-txt-detail">
-              {price}원 <span className="room-txt">(1박 기준)</span>
+              {(place.reservation_cost*count).toLocaleString()}원 <span className="room-txt">(1박 기준)</span>
             </span>
           </p>
         </div>

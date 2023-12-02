@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../axios'
 
 export function SuccessPage() {
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export function SuccessPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(requestData),
-        }
+        },
       )
 
       const json = await response.json()
@@ -41,11 +41,9 @@ export function SuccessPage() {
       }
 
       try {
-        const axiosResponse = await axios.post(
-          'http://localhost:3003/user//payCharge',
-          {
-            data: json,
-          }
+        const plan_no = searchParams.get('orderId')
+        const axiosResponse = await api.put(
+          `http://localhost:8002/reservation/${plan_no.split('_')[1]}`,
         )
 
         console.log(axiosResponse.data)
@@ -71,7 +69,7 @@ export function SuccessPage() {
         <p>{`paymentKey = ${searchParams.get('paymentKey')}`}</p>
         <p>{`orderId = ${searchParams.get('orderId')}`}</p>
         <p>{`amount = ${Number(
-          searchParams.get('amount')
+          searchParams.get('amount'),
         ).toLocaleString()}원`}</p>
         <div className="result wrapper">
           <a href="https://docs.tosspayments.com/guides/payment-widget/integration">

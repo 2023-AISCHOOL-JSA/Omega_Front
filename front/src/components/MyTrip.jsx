@@ -1,21 +1,46 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
-const MyTrip = () => {
+const MyTrip = ({ plan }) => {
+  const navigate = useNavigate()
+
   return (
     <>
-      <div className="mydiv">
-        <p className="travel-reg">제주 여행</p>
-        <p className="travel-date">2023.10.11~2023.10.12 | 1박2일</p>
-        <button className="more-btn">
-          <FontAwesomeIcon
-            icon={faAngleRight}
-            size="xl"
-            style={{ color: '#000000' }}
-          />
-        </button>
-      </div>
+      {plan ? (
+        <div className="mydiv">
+          <p className="travel-reg">{plan.plan_region} 여행</p>
+          <p className="travel-date">
+            {new Date(plan.started_date).toLocaleDateString()}~
+            {new Date(plan.ended_date).toLocaleDateString()} |{' '}
+            {(new Date(plan.ended_date) - new Date(plan.started_date)) /
+              (1000 * 60 * 60 * 24)}
+            박
+            {(new Date(plan.ended_date) - new Date(plan.started_date)) /
+              (1000 * 60 * 60 * 24) +
+              1}
+            일
+          </p>
+          <button
+            className="more-btn"
+            onClick={() => {
+              navigate(`/plan/${plan.plan_no}`)
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              size="xl"
+              style={{ color: '#000000' }}
+            />
+          </button>
+        </div>
+      ) : (
+        <div className="mydiv">
+          {' '}
+          <p className="travel-date">여행이 없습니다.</p>
+        </div>
+      )}
     </>
   )
 }

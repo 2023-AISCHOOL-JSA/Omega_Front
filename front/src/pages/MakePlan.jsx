@@ -19,15 +19,18 @@ import '../css//CalendarCustom.css'
 import moment from 'moment'
 import MakeModal from '../components/MakeModal'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { IoIosArrowForward } from 'react-icons/io'
+import { IoIosArrowBack } from 'react-icons/io'
 import { Modal } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import api from '../axios'
+import ImgSearchModal from '../components/ImgSearchModal'
 
 export const data = createContext()
 export const checkNumber = createContext()
 
 const MakePlan = (props) => {
+  // 이미지 검색 모달 state
+  const [imgSearchModal, setImgSearchModal] = useState(false)
   // 메이크페이지 모달 state
   const [makePageModal, setMakePageModal] = useState(false)
   const [modalDataTemp, setModalDataTemp] = useState({})
@@ -38,8 +41,6 @@ const MakePlan = (props) => {
   const [listCheckList, setListCheckList] = useState([])
   const [markerImg, setMarkerImage] = useState('')
   const [markerImgToggle, setMarkerImageToggle] = useState(false)
-  // 최종 리스트 (이거 쓰시면 됩니다)
-  const [lastMakePlan, setLastMakePlan] = useState()
 
   // 지역 이름, 위도, 경도
   const [region_name, setRegion_name] = useState(location?.state?.region_name)
@@ -51,7 +52,6 @@ const MakePlan = (props) => {
   const [myPlanNo, setMyPlanNo] = useState(useParams().plan_no)
   const [myPlan, setMyPlan] = useState()
   const [myPlanDetail, setMyPlanDetail] = useState(null)
-  const [myWishList, setMyWishList] = useState(null)
   const [isPlanUpdated, setIsPlanUpdated] = useState(false)
 
   const [cate, setCate] = useState({})
@@ -64,32 +64,42 @@ const MakePlan = (props) => {
       return await data33.data.data
     }
 
-    // 카테고리별 가져옴
-    const cate1 = ['음식점', '명소', '숙박', '카페', '체험']
-
-    cate1.map((item) => {
-      getList(`/search/place?pla_code=${item}&region_no=${11}`)
-        .then((res) => {
-          console.log(res)
-          setCate((prev) => {
-            return { ...prev, [item]: res }
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    })
-
     if (localStorage.getItem('jwtToken')) {
       console.log('로그인되어있어서 위시리스트 가져옴..')
       // 로그인 되어있다면 위시리스트 가져옴
-      getList(`/wish/me`)
+      getList(`/wish/me`).then((res) => {
+        console.log(res, '.......^^')
+        setCate((prev) => {
+          return { ...prev, ['나의저장']: res }
+        })
+      })
     }
   }, [])
 
   useEffect(() => {
-    console.log(cate, 'cate1 cate1')
-  }, [cate])
+    const getList = async (url) => {
+      const data33 = await api.get(url, {
+        headers: { authorization: localStorage.getItem('jwtToken') },
+      })
+      return await data33.data.data
+    }
+
+    const cate1 = ['음식점', '명소', '숙박', '카페', '체험']
+    if (typeof region_no === 'number' && region_no > 0) {
+      cate1.map((item) => {
+        getList(`/search/place?pla_code=${item}&region_no=${region_no}`)
+          .then((res) => {
+            console.log(res)
+            setCate((prev) => {
+              return { ...prev, [item]: res }
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      })
+    }
+  }, [region_no])
 
   useEffect(() => {
     const getPlan = () => {
@@ -100,6 +110,10 @@ const MakePlan = (props) => {
         .then((res) => {
           console.log('불러온 일정...', res.data.data)
           const { started_date, ended_date, ...result } = res.data.data
+          setCenter({
+            lat: parseFloat(res.data.data.lat),
+            lng: parseFloat(res.data.data.lng),
+          })
           setMyPlan({
             started_date: new Date(started_date),
             ended_date: new Date(ended_date),
@@ -130,7 +144,8 @@ const MakePlan = (props) => {
   }, [myPlanNo])
 
   // 플랜 저장 및 갱신
-  const savePlan = () => {
+  const savePlan = (e) => {
+    console.log('savePlan....', e.target.innerText)
     setMyPlan({
       plan_name: newText,
       plan_info: 'plan_info',
@@ -146,7 +161,10 @@ const MakePlan = (props) => {
       region_no: region_no,
     })
     setIsPlanUpdated(true)
+    setIsSaved(e.target.innerText)
   }
+
+  const [isSaved, setIsSaved] = useState('저장')
 
   useEffect(() => {
     if (myPlanNo !== 'new') {
@@ -199,14 +217,23 @@ const MakePlan = (props) => {
 
     // 상세 플랜 저장 및 갱신
     const savePlanDetail = async (plan_no) => {
+      let myListObj = {}
+
+      for (let [i, j] of myList.entries()) {
+        myList
+          .filter((item) => item.myDay == i + 1)
+          .forEach((item) => {
+            if (!myListObj[`${i + 1}`]) {
+              myListObj[`${i + 1}`] = []
+            }
+            myListObj[`${i + 1}`].push(parseInt(item.pla_no))
+          })
+      }
       await api
         .put(
           `/plan/${plan_no || myPlanNo}/plan_detail`,
           {
-            1: [1, 2, 3, 4, 31961],
-            2: [3, 4, 5, 6, 31961],
-            3: [3, 4, 5, 6, 7, 3, 31961],
-            4: [3, 4, 5, 6, 7, 31962],
+            myListObj,
           },
           {
             headers: { authorization: localStorage.getItem('jwtToken') },
@@ -214,6 +241,14 @@ const MakePlan = (props) => {
         )
         .then((res) => {
           console.log('상세 일정 저장...', res.data.data)
+          if (isSaved !== '저장') {
+            navigate(`/create/${plan_no || myPlanNo}`, {
+              state: {
+                myList1: myList,
+                days1: days,
+              },
+            })
+          }
         })
         .catch((err) => console.log(err))
     }
@@ -223,6 +258,7 @@ const MakePlan = (props) => {
       } else {
         updatePlan()
       }
+      // moveCreate()
     }
   }, [myPlan])
 
@@ -235,6 +271,7 @@ const MakePlan = (props) => {
       )
       .then((res) => {
         console.log(res.data.data)
+        setCate({ ...cate, ['추천']: res.data.data })
       })
       .catch((err) => console.log(err))
   }
@@ -243,46 +280,7 @@ const MakePlan = (props) => {
   const makePlanStrat = () => {
     console.log('일정 생성 대기')
     console.log(myList)
-
-    let myListObj = {}
-
-    for (let [i, j] of myList.entries()) {
-      myList
-        .filter((item) => item.myDay == i + 1)
-        .forEach((item) => {
-          if (!myListObj[`${i + 1}`]) {
-            myListObj[`${i + 1}`] = []
-          }
-          myListObj[`${i + 1}`].push(item.pla_no)
-        })
-    }
-
-
-    console.log(myListObj, 'myListObjmyListObj')
-    setLastMakePlan(myListObj)
-    // navigate('/create')
-    navigate('/create', {
-      state: {
-        lastMakePlan1: myListObj,
-        myList1: myList,
-        days1: days,
-        dateRange21: dateRange2,
-        dateRange31: dateRange3,
-        region_name1: region_name,
-        newText1: newText,
-      },
-    })
   }
-
-  // 마지막일정
-  useEffect(() => {
-    console.log(lastMakePlan, '마지막 일정 배열 확인')
-    console.log(JSON.stringify(lastMakePlan), '마지막 일정 배열 확인22222222')
-    console.log(
-      JSON.parse(JSON.stringify(lastMakePlan ?? '')),
-      '마지막 일정 배열 확인333333333333333',
-    )
-  }, [lastMakePlan])
 
   // 마커클릭함수
 
@@ -427,25 +425,25 @@ const MakePlan = (props) => {
     } else if (result.destination.droppableId == 'droppable-3') {
       reorderedItem.myDay = '3'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-4') {
+    } else if (result.destination.droppableId == 'droppable-4') {
       reorderedItem.myDay = '4'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-5') {
+    } else if (result.destination.droppableId == 'droppable-5') {
       reorderedItem.myDay = '5'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-6') {
+    } else if (result.destination.droppableId == 'droppable-6') {
       reorderedItem.myDay = '6'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-7') {
+    } else if (result.destination.droppableId == 'droppable-7') {
       reorderedItem.myDay = '7'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-8') {
+    } else if (result.destination.droppableId == 'droppable-8') {
       reorderedItem.myDay = '8'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-9') {
+    } else if (result.destination.droppableId == 'droppable-9') {
       reorderedItem.myDay = '9'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
-    }else if (result.destination.droppableId == 'droppable-10') {
+    } else if (result.destination.droppableId == 'droppable-10') {
       reorderedItem.myDay = '10'
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
     }
@@ -560,13 +558,17 @@ const MakePlan = (props) => {
   ////////////////////////////////////////////////////////////////////////////////////////////
   const [position, setPosition] = useState([]) // 임시 마커 좌표 state
   // const [first, setFirst] = useState([]);   // 2. 일정추가할 배열 만들기
-  const [center, setCenter] = useState({ lat: 37.5665734, lng: 126.978179 }) // 초기 마커 센터값
+  const [center, setCenter] = useState({
+    lat: parseFloat(location?.state?.latlng.lat),
+    lng: parseFloat(location?.state?.latlng.lng),
+  }) // 초기 마커 센터값
   ////////////////////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////  카테고리 클릭 함수(카테고리 별로 전부 수정해야함 11/26 미완)
   const cateClick = (e, title) => {
     // console.log(key)
     console.log(title)
+    console.log(cate[title])
     setSelectedKey(title)
     setIsActive(!isActive)
     setCateList(cate[title])
@@ -727,19 +729,31 @@ const MakePlan = (props) => {
               type="search"
               className="main-input mt-3 mb-3"
               placeholder="텍스트 혹은 이미지로 검색해보세요."
+              ref={searchRef}
             />
-            <button className="search-btn">
+            <button className="search-btn" onClick={handleSearch}>
               <img
                 className="input-img search-img"
                 src="https://cdn.icon-icons.com/icons2/2406/PNG/512/search_magnifier_icon_145939.png"
               />
             </button>
-            <button className="search-btn">
+            <button
+              className="search-btn"
+              onClick={() => {
+                setImgSearchModal(true)
+              }}
+            >
               <img
                 className="input-img img-search-img"
                 src="https://cdn.icon-icons.com/icons2/2440/PNG/512/gallery_icon_148533.png"
               />
             </button>
+            <ImgSearchModal
+              show={imgSearchModal}
+              cate={cate}
+              setCate={setCate}
+              onHide={() => setImgSearchModal(false)}
+            />
           </div>
           <Nav variant="tabs">
             {categories.map((item, index) => (
@@ -900,7 +914,7 @@ const MakePlan = (props) => {
                     />
                   )}
                 </Col>
-                <Col className="save-btn" onClick={savePlan}>
+                <Col className="save-btn" onClick={(e) => savePlan(e)}>
                   <button>저장</button>
                 </Col>
               </Row>
@@ -931,7 +945,7 @@ const MakePlan = (props) => {
 
                       {myList.length > 0 ? (
                         <div
-                          onClick={makePlanStrat}
+                          onClick={(e) => savePlan(e)}
                           className="schedule-creation-col"
                         >
                           <button className="schedule-creation">

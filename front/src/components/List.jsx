@@ -113,7 +113,7 @@ const List = ({
         <div style={{ width: '100px', height: '100px' }}>
           <Card.Img
             style={{ width: '100%', height: '100%' }}
-            src={resData?.img}
+            src={`http://localhost:9009/img/${resData?.img}`}
           />
         </div>
         {/* 텍스트 */}
@@ -137,7 +137,7 @@ const List = ({
           </div>
           <div className="mt-3" style={{ fontSize: '12px', color: 'gray' }}>
             {/* {resData?.latlng.lat}-{resData?.latlng.lng} */}
-            {resData.pla_addr}
+            {resData.region_main} {resData.region_sub} {resData.pla_addr}
           </div>
           <div
             className="mt-3"
@@ -151,7 +151,7 @@ const List = ({
             <span
               style={{ fontWeight: '600', color: '#838383', fontSize: '13px' }}
             >
-              월요일 휴무
+              {resData.pla_off}
             </span>
             <span
               style={{ fontWeight: '600', color: '#838383', fontSize: '13px' }}

@@ -30,7 +30,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/login" element={<LoginModal />} />
-          <Route path="/create" element={<CreateSchedule />} />
+          <Route path="/create/:plan_no" element={<CreateSchedule />} />
           <Route path="/auth/kakao" element={<KakaoCallback />} />
           <Route path="/auth/google" element={<GoogleCallback />} />
         </Routes>
