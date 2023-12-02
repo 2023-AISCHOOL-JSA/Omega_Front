@@ -35,7 +35,7 @@ const MyProfile = ({ myInfo }) => {
       <div className="my-info">
         <div className="my-info-profile">
           <Avatar
-            size={120}
+            size={140}
             style={{
               marginRight: '30px',
             }}

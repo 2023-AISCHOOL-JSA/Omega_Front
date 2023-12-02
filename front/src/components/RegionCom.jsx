@@ -38,7 +38,62 @@ const RegionCom = () => {
   const [showModal, setShowModal] = useState(false)
   const [hearts, setHearts] = useState({})
   const { addWish, removeWish } = useContext(WishContext)
-  const [data, setData] = useState([])
+  const [data, setData] = useState([
+  //   {
+  //     pla_no: 4211,
+  //     image: '',
+  //     pla_name: '맥퀸즈바',
+  //     pla_addr: '부산 기장군 기장읍 기장해안로 268-32',
+  //   },
+  //   {
+  //     pla_no: 4212,
+  //     image: '',
+  //     pla_name: '밀락더마켓',
+  //     pla_addr: '부산 수영구 민락수변로17번길 56',
+  //   },
+  //   {
+  //     pla_no: 4212,
+  //     image: '',
+  //     pla_name: '밀락더마켓',
+  //     pla_addr: '부산 수영구 민락수변로17번길 56',
+  //   },
+  //   {
+  //     pla_no: 4213,
+  //     image: '',
+  //     pla_name: '선유도원',
+  //     pla_addr: '부산 금정구 상현로 64',
+  //   },
+  //   {
+  //     pla_no: 4214,
+  //     image: '',
+  //     pla_name: '송도 해상 케이블카',
+  //     pla_addr: '부산 서구 송도해변로 171',
+  //   },
+  //   {
+  //     pla_no: 4215,
+  //     image: '',
+  //     pla_name: '수변최고돼지국밥',
+  //     pla_addr: '부산 서구 송도해변로 171',
+  //   },
+  //   {
+  //     pla_no: 4216,
+  //     image: '',
+  //     pla_name: '코랄라니',
+  //     pla_addr: '부산 해운대구 청사포로 116 청사포정거장',
+  //   },
+  //   {
+  //     pla_no: 4217,
+  //     image: '',
+  //     pla_name: '해운대 블루라인 파크',
+  //     pla_addr: '부산 해운대구 청사포로 116 청사포정거장',
+  //   },
+  //   {
+  //     pla_no: 4218,
+  //     image: '',
+  //     pla_name: '흰여울 해안터',
+  //     pla_addr: '부산 영도구 영선동4가 1210-38',
+  //   },
+  ])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,12 +127,16 @@ const RegionCom = () => {
     <>
       <div className="reg-div">
         {data.map((item) => (
-          <DivCard className="reg-info" key={item.id} onClick={handleShowModal}>
+          <DivCard
+            className="reg-info"
+            key={item.pla_no}
+            onClick={handleShowModal}
+          >
             <img src={item.image} alt="" />
-            <p>{item.name}</p>
-            <span>{item.address}</span>
-            <p onClick={() => handleHeart(item.id)} className="heart-card">
-              {hearts[item.id] ? (
+            <p>{item.pla_name}</p>
+            <span>{item.pla_addr}</span>
+            <p onClick={() => handleHeart(item.pla_no)} className="heart-card">
+              {hearts[item.pla_no] ? (
                 <FontAwesomeIcon
                   icon={faSolidHeart}
                   size="xl"

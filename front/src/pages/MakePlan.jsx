@@ -24,6 +24,7 @@ import { Modal } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import api from '../axios'
 import ImgSearchModal from '../components/ImgSearchModal'
+import { FaRegImage } from 'react-icons/fa6'
 
 export const data = createContext()
 export const checkNumber = createContext()
@@ -132,6 +133,14 @@ const MakePlan = (props) => {
         .then((res) => {
           console.log('불러온 일정 상세...', res.data.data)
           setMyPlanDetail(res.data.data)
+          const resultArray = [
+            ...Array(
+              Number(res.data.data[res.data.data.length - 1].myDay),
+            ).keys(),
+          ].map((x) => x + 1)
+          console.log(resultArray)
+          setList(res.data.data)
+          setDays(resultArray)
         })
         .catch((err) => console.log(err))
     }
@@ -267,7 +276,7 @@ const MakePlan = (props) => {
   const handleSearch = () => {
     api
       .get(
-        `/search/place?keyword=${searchRef.current.value}&center_lat=35.15573723324999&center_lng=126.83543483014738`,
+        `/search/place?keyword=${searchRef.current.value}&center_lat=${center.lat}&center_lng=${center.lng}`,
       )
       .then((res) => {
         console.log(res.data.data)
@@ -524,8 +533,7 @@ const MakePlan = (props) => {
     if (!myList.length == 0) {
       // console.log(mydata2, '어캐생김?')
       // console.log(markerCenterList, 'markerCenterList어캐생김?')
-
-      setCenter(markerCenterList[0].latlng)
+      // setCenter(markerCenterList[0]?.latlng)
     }
   }, [myList])
 
@@ -559,11 +567,10 @@ const MakePlan = (props) => {
   const [position, setPosition] = useState([]) // 임시 마커 좌표 state
   // const [first, setFirst] = useState([]);   // 2. 일정추가할 배열 만들기
   const [center, setCenter] = useState({
-    lat: parseFloat(location?.state?.latlng.lat),
-    lng: parseFloat(location?.state?.latlng.lng),
+    lat: parseFloat(location?.state?.latlng.lat) || 37.5665734,
+    lng: parseFloat(location?.state?.latlng.lng) || 126.978179,
   }) // 초기 마커 센터값
   ////////////////////////////////////////////////////////////////////////////////////////////
-
   //////////////////////////////////////  카테고리 클릭 함수(카테고리 별로 전부 수정해야함 11/26 미완)
   const cateClick = (e, title) => {
     // console.log(key)
@@ -581,6 +588,7 @@ const MakePlan = (props) => {
 
   //////////////////////////////////////////////////////////////////// setData2 ///////////////////////////////////////
   function setData2(e, handleClose) {
+    console.log('setData2...................', myList)
     let data = {}
     let selectList = []
 
@@ -726,7 +734,7 @@ const MakePlan = (props) => {
         >
           <div className="search-container">
             <input
-              type="search"
+              type="text"
               className="main-input mt-3 mb-3"
               placeholder="텍스트 혹은 이미지로 검색해보세요."
               ref={searchRef}
@@ -743,10 +751,7 @@ const MakePlan = (props) => {
                 setImgSearchModal(true)
               }}
             >
-              <img
-                className="input-img img-search-img"
-                src="https://cdn.icon-icons.com/icons2/2440/PNG/512/gallery_icon_148533.png"
-              />
+              <FaRegImage className="input-img img-search-img" />
             </button>
             <ImgSearchModal
               show={imgSearchModal}

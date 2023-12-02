@@ -51,20 +51,20 @@ body * {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-/* input 기본 스타일 초기화 */
-input[type='search'] {
-  /* flex: 1; */
-  height: 45px;
-  width: 100%;
-  border: 1px solid #e0e0e0;
-  padding: 15px; /* 내용물 작성했을 때 여백감 */
-  border-radius: 10px; /* 굴곡 주면 padding 값도 그에 상응하게 적용하는 것이 좋음 */
-  font-size: 13px;
-}
+
 input::placeholder {
-  font-size: 13px;
+  font-size: 0.8rem;
   color: #a8a8a8;
   font-weight: 600;
+}
+input:focus{
+
+  border-color: #ff9b00; /* 포커스 시 테두리 색상 변경 예시 */
+  box-shadow: 0 0 5px #ff9b00(0, 123, 255, 0.5); /* 포커스 시 그림자 효과 예시 */
+  /* 포커스 효과 삭제 (선택적) */
+  outline: none; 
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .selected {
@@ -87,7 +87,14 @@ input::placeholder {
 .main-input {
   width: 100%;
   margin-bottom: 0 !important;
+    /* flex: 1; */
+    height: 45px;
+    border: 1px solid #e0e0e0;
+    padding: 15px; /* 내용물 작성했을 때 여백감 */
+    border-radius: 10px; /* 굴곡 주면 padding 값도 그에 상응하게 적용하는 것이 좋음 */
+    font-size: 1rem;
 }
+
 .nav-item {
   display: flex;
   flex-direction: column;
@@ -164,10 +171,17 @@ button[type="button"]:hover {
   top: 25px;
 }
 .search-img {
+  top:26px;
   right: 45px;
 }
 .img-search-img {
+  width:25px;
+  height:29px;
   right: 12px;
+  color: #ff9b00;
+}
+.img-search-img:hover{
+  color: #DB8500
 }
 
 .search-btn {
@@ -556,6 +570,7 @@ button[type="button"]:hover {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
+  height:40px;
 }
 .make-modal-title span {
   border-radius: 10px;
@@ -603,8 +618,8 @@ button[type="button"]:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
 
   cursor: pointer;
 }
@@ -734,6 +749,7 @@ button[type="button"]:hover {
 }
 .img-search-info {
   font-size: 0.9rem;
+  line-height: 1.7;
 }
 .img-search-main {
   height: 250px;
@@ -741,4 +757,11 @@ button[type="button"]:hover {
   border-radius: 5px;
   /* backdrop-filter: blur(10px);  */
   /* position: relative; */
+}
+.heart-icon{
+  width:40px;
+  height:40PX;
+  /* color: #e85720; */
+  color: #FF9B00;
+  /* color: #e15868; */
 }

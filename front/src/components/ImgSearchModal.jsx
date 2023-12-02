@@ -5,8 +5,14 @@ import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
 import Row from 'react-bootstrap/Row'
 import api from '../axios'
+import { FaRegImage } from "react-icons/fa6";
+import { Spinner } from 'react-bootstrap'
 
 const ImgSearchModal = (props) => {
+
+// 로딩 state
+const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
+
   const [isDragging, setIsDragging] = useState(false)
   const [droppedImage, setDroppedImage] = useState(null)
   const [searchImg, setSearchImg] = useState(null)
@@ -56,6 +62,7 @@ const ImgSearchModal = (props) => {
   // 이미지 보내는 함수
 
   const searchSendImg = () => {
+    setIsLoading(true)
     console.log('click@@@@@@@@@@@@')
     console.log(searchImg, 'searchImg searchImg')
 
@@ -85,11 +92,12 @@ const ImgSearchModal = (props) => {
       .then((response) => {
         console.log('File uploaded successfully:', response.data)
         props.setCate({...props.cate, ['추천']:response.data.data})
-
+        setIsLoading(false)
         // 서버의 응답을 처리할 수 있습니다.
       })
       .catch((error) => {
         console.error('Error:', error)
+        setIsLoading(false)
         // 오류가 발생했을 때의 처리를 추가할 수 있습니다.
       })
   }
@@ -100,7 +108,7 @@ const ImgSearchModal = (props) => {
       <Modal.Body>
         <Container>
           <Row>
-            <Col className="mb-4 img-search-title text-center">
+            <Col className="mt-3 mb-4 img-search-title text-center">
               사진으로 검색하는 여행지
             </Col>
           </Row>
@@ -114,7 +122,7 @@ const ImgSearchModal = (props) => {
                 className={`img-search-main d-flex justify-content-center align-items-center ${
                   isDragging ? 'dragging' : ''
                 }`}
-                style={{ backgroundColor: isDragging ? '#7b7b7b' : '' }}
+                style={{ backgroundColor: isDragging ? '#ABABAB' : '' }}
               >
                 {droppedImage ? (
                   <img
@@ -126,12 +134,11 @@ const ImgSearchModal = (props) => {
                   <style>
                     {`
                       .img-search-main::before {
-                        content: '${
-                          isDragging ? '이미지 드래그' : '이미지 드랍'
-                        }';
-                        color: '${isDragging ? 'black' : 'white'}';
-                        font-size: 18px;
-                        font-weight: bold;
+                        content: 
+                       '${isDragging ? '이미지 업로드하기!' : '이미지를 올려주세요!'}';
+                        ${isDragging ? 'color: white': 'color: #6C6D6E'};
+                        font-size: 20px;
+                        font-weight: 500;
                       }
                     `}
                   </style>
@@ -139,7 +146,7 @@ const ImgSearchModal = (props) => {
               </div>
             </Col>
           </Row>
-          <Row className="mt-4">
+          <Row className="mt-5">
             <Col className="text-muted text-center img-search-info">
               평소 저장해두었던 여행지 이미지를 올려주시면
               <br />
@@ -157,7 +164,20 @@ const ImgSearchModal = (props) => {
                 type="submit"
                 className="list-btn2"
               >
-                검색하기!
+               {
+  isLoading 
+    ? (
+      <Row>
+      <Col sm={5} className=" d-flex justify-content-end align-items-center">
+        <Spinner animation="border" size="lg" variant="primary" />
+      </Col>
+      <Col sm={7} className="p-0 d-flex justify-content-start">
+        <span className="align-items-center">검색중...</span>
+      </Col>
+    </Row>
+    ) 
+    : '검색 하기!'
+}
               </button>
             ) : (
               ''

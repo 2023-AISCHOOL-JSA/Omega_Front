@@ -20,7 +20,9 @@ const CreateSchedule = () => {
   )
   const dateRange212 = location.state && location.state.dateRange21
   const dateRange312 = location.state && location.state.dateRange31
-  const days2 = location.state && location.state.days1
+  const [days2, setDays2] = useState(
+    (location.state && location.state.days1) || [],
+  )
   const region_name2 = location.state && location.state.region_name1
   const newText2 = location.state && location.state.newText1
 
@@ -67,6 +69,12 @@ const CreateSchedule = () => {
           console.log('불러온 일정 상세...', res.data.data)
           setMyList2(res.data.data)
           setMyPlanDetail(res.data.data)
+          const resultArray = [
+            ...Array(
+              Number(res.data.data[res.data.data.length - 1].myDay),
+            ).keys(),
+          ].map((x) => x + 1)
+          setDays2(resultArray)
         })
         .catch((err) => console.log(err))
     }
@@ -137,7 +145,7 @@ const CreateSchedule = () => {
 
         lines.push(
           <Polyline
-            key={`${startPoint.lat}-${startPoint.lng}-${endPoint.lat}-${endPoint.lng}`}
+            key={`${startPoint.lat}-${startPoint.lng}-${endPoint.lat}-${endPoint.lng}${uuidv4()}`}
             path={[startPoint, endPoint]}
             options={{
               strokeColor: '#ff0000', // 선 색상
@@ -208,7 +216,7 @@ const CreateSchedule = () => {
                   </Row>
 
                   {myList2
-                    .filter((filteredItem) => filteredItem.myDay == index1 + 1)
+                    .filter((filteredItem1) => filteredItem1.myDay === String(index1 + 1))
                     .map((filteredItem, index2) => (
                       <Row
                         key={index2}
@@ -255,7 +263,7 @@ const CreateSchedule = () => {
       >
         {markerList.map((markerList) => (
           <MapMarker
-            key={`${markerList.lat}-${markerList.lng}`}
+            key={`${markerList.lat}-${markerList.lng}${uuidv4()}`}
             position={markerList}
             image={{
               src: '../img/invimage.png',

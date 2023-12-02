@@ -7,6 +7,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 // import { data } from "../pages/MakePlan';
 
 const AccordionList = ({ item, index, selectedKey, myList, setList, days }) => {
+  console.log(myList, 'ifhj0hf093h0h1309hr');
   // const mydata2 = useContext(data);
 
   // const { day, setDay } = useContext(AccordionContext);

@@ -17,6 +17,8 @@ const MyVisitedTrip = ({ plan }) => {
             boxShadow: 'box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.05);',
           }}
         >
+          <p className="travel-reg">{plan.plan_region} 여행</p>
+
           <p className="travel-date">
             {new Date(plan.started_date).toLocaleDateString()}~
             {new Date(plan.ended_date).toLocaleDateString()} |{' '}
@@ -27,7 +29,7 @@ const MyVisitedTrip = ({ plan }) => {
           <button
             className="more-btn"
             onClick={() => {
-              navigate(`/plan/${plan.plan_no}`)
+              navigate(`/create/${plan.plan_no}`)
             }}
           >
             <FontAwesomeIcon

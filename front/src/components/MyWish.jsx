@@ -56,29 +56,38 @@ const MyWish = ({ wish }) => {
 
   return (
     <>
-  {wish ?  <div className="wishlist">
-        <p className="wishlist-name">{wish.pla_name}</p>
-        <p className="wishlist-address">
-          {wish.sd_nm} {wish.region_sub} {wish.pla_addr}
-        </p>
-        <span onClick={handleHeart} className="wish-heart">
-          {heart ? (
-            <FontAwesomeIcon
-              icon={faSolidHeart}
-              size="xl"
-              style={{ color: '#ff000d' }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={faRegularHeart}
-              size="xl"
-              style={{ color: '#ff000d' }}
-            />
-          )}
-        </span>
-      </div>: <div className="wishlist">위시리스트가 비어있습니다.</div>}
-
-     
+      {wish ? (
+        <div className="wishlist">
+          <p className="wishlist-name">{wish.pla_name}</p>
+          <p className="wishlist-address">
+            {wish.sd_nm} {wish.region_sub} {wish.pla_addr}
+          </p>
+          <span onClick={handleHeart} className="wish-heart">
+            {heart ? (
+              <FontAwesomeIcon
+                icon={faSolidHeart}
+                size="xl"
+                style={{ color: '#ff000d' }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faRegularHeart}
+                size="xl"
+                style={{ color: '#ff000d' }}
+              />
+            )}
+          </span>
+        </div>
+      ) : (
+        <div
+          className="wishlist"
+          style={{
+            backgroundImage: 'url(http://localhost:9009/img/벚꽃마을_1.jpg)',
+          }}
+        >
+          위시리스트가 비어있습니다.
+        </div>
+      )}
     </>
   )
 }
