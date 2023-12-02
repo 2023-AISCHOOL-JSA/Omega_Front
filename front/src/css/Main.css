@@ -30,17 +30,20 @@ body {
   top: 27%;
   left: 28%; */
   text-align: center;
-  margin-top: 9%;
+  margin-top: 5%;
 }
 
 .main-intro {
-  font-family: yeonaesidae, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 115px;
+  /* font-family: yeonaesidae, sans-serif; */
+  font-family: 'Yeongdo-Rg';
+  /* font-style: normal; */
+  font-weight: 600;
+  font-size: 4rem;
   color: white;
-  margin-bottom: 0;
+  margin-bottom: 10px;
   animation: fadein 1s ease-in-out;
+  font-style: italic;
+  text-shadow: -1px -1px 2px rgba(255, 255, 255, 0.5), 1px -1px 2px rgba(255, 255, 255, 0.5), -1px 1px 2px rgba(255, 255, 255, 0.5), 1px 1px 2px rgba(255, 255, 255, 0.5); /* 약간 흐린 흰색 테두리 추가 */
 }
 
 @keyframes fadein {
@@ -56,10 +59,26 @@ body {
 
 .bg {
   width: 100%;
-  height: 750px;
-  background-image: url('../img/ocean.jpg');
+  height: calc(100vh - 130px);
+  background-image: url('../img/backimg.jpg');
   background-size: 100% 100%;
   overflow: hidden;
+}
+.bg::before {
+  content: "";
+  position: absolute;
+  top: 1;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 130px);
+  background: rgba(0, 0, 0, 0.6); 
+  z-index: 0;
+  overflow: hidden;
+}
+
+.main-int {
+  position: relative;
+  z-index: 2; /* Ensure the content is above the overlay */
 }
 
 .bg-input {
@@ -70,22 +89,22 @@ body {
   justify-content: space-between;
   align-items: center;
   transform: translateX(-50%);
-  border-radius: 10px;
+  border-radius: 5px;
   right: 20%;
   top: 5%;
   padding: 0 1rem;
   background-color: rgba(255, 255, 255);
-  border: none;
+  border: 2px solid white;
 }
 
 .bg-input:focus {
-  outline: none;
+  /* outline: none; */
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   background-color: white;
-  border: 0.5px solid gray;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+  border: 2px solid orange;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .bg-input::placeholder {
@@ -247,6 +266,7 @@ body {
     top: 11%;
   }
 
+
   .recommend-container {
     top: 20%;
     left: 20.2%;
@@ -280,4 +300,22 @@ body {
     margin-right: 50px;
     margin-bottom: 10px;
   }
+}
+.search-btn-img{
+  width: 30px;
+  height:30px;
+}
+.orange-color{
+  color:#ff9b00;
+  font-family: 'Yeongdo-Rg';
+}
+.main-page-logo{
+  height:50px;
+  font-size: 60px!important;
+  color: #ff9b00;
+  font-family: 'Yeongdo-Rg';
+  font-style: normal;
+  font-weight: 700;
+  /* text-shadow: -1px -1px 2px rgba(128, 128, 128, 0.5), 1px -1px 2px rgba(128, 128, 128, 0.5), -1px 1px 2px rgba(128, 128, 128, 0.5), 1px 1px 2px rgba(128, 128, 128, 0.5); 약간 흐린 회색 테두리 추가 */
+  text-shadow: -1px -1px 2px rgba(255, 255, 255, 0.5), 1px -1px 2px rgba(255, 255, 255, 0.5), -1px 1px 2px rgba(255, 255, 255, 0.5), 1px 1px 2px rgba(255, 255, 255, 0.5); 
 }
