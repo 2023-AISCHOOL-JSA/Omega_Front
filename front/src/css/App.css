@@ -56,6 +56,8 @@ input::placeholder {
   font-size: 0.8rem;
   color: #a8a8a8;
   font-weight: 600;
+  outline: none; 
+
 }
 input:focus{
 

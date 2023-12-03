@@ -3,13 +3,11 @@ import SearchIcon from '../img/search.png'
 import styled from 'styled-components'
 import { EnvironmentOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
+import { IoSearch } from "react-icons/io5";
 import api from '../axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Col, Container, Row } from 'react-bootstrap'
 
-const IconImg = styled.img`
-  width: 30px;
-  height: 30px;
-  background: none;
-`
 const MainBg = () => {
   const [active, setActive] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -62,9 +60,13 @@ const MainBg = () => {
     <>
       <div className="main">
         <div className="bg">
-          <div className="main-int">
-            <p className="main-intro">여행 어디가?</p>
-          </div>
+          <Container className="main-int">
+            <Row>
+            <p className="main-intro"><span className='orange-color' style={{fontSize:"70px"}}>모든 순간</span>을 즐길 준비가 되었나요?</p>
+            <p className="main-intro mt-4" style={{fontSize:"100px"}}><span className='orange-color'><span></span>M</span>ake a <span className='orange-color'>P</span>lan !</p>
+            <Col className='main-page-logo text-center'>어디가 ? </Col>
+            </Row>
+          </Container>
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
             <div>
               <input
@@ -122,7 +124,7 @@ const MainBg = () => {
             <div>
               {/* 지역소개 페이지로 넘길 값 sd_nm */}
               <button type="submit" className="searchbtn" onClick={handlePage}>
-                <IconImg src={SearchIcon} alt="" />
+                <IoSearch className='search-btn-img'/>
               </button>
             </div>
           </div>
