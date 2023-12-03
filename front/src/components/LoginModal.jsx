@@ -16,6 +16,7 @@ const LoginModal = ({ show, handleClose }) => {
       if (event.data.type === 'SUCCESS') {
         localStorage.setItem('jwtToken', event.data.data.token)
         newWindow.close()
+        handleClose()
       }
     }
     window.addEventListener('message', handleMessage)
@@ -30,6 +31,7 @@ const LoginModal = ({ show, handleClose }) => {
     const handleMessage = (event) => {
       if (event.data.type === 'SUCCESS') {
         newWindow.close()
+        handleClose()
       }
     }
     window.addEventListener('message', handleMessage)

@@ -8,7 +8,7 @@ const MainCard = () => {
 
   return (
     <>
-      <Card className="card7" onClick={() => navigate('/made')}>
+      <Card className="card7" onClick={() => navigate('/made/115')}>
         <Card.Img
           variant="top"
           src="https://i.ytimg.com/vi/jMjH43DPgUQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDdZmi9BIjRCJorPQX3rp-3XRBkmg"

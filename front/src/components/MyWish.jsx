@@ -11,7 +11,7 @@ const HeartImg = styled.img`
   height: 30px;
 `
 const MyWish = ({ wish }) => {
-  const [heart, setHeart] = useState(false)
+  const [heart, setHeart] = useState(true)
 
   const setWish = () => {
     console.log('위시리스트 등록')
@@ -53,11 +53,15 @@ const MyWish = ({ wish }) => {
     }
     setHeart(!heart)
   }
-
   return (
     <>
       {wish ? (
-        <div className="wishlist">
+        <div
+          className="wishlist"
+          style={{
+            backgroundImage: `url(${process.env.REACT_APP_IMG_API_URL}${wish?.img.replaceAll(' ','%20')})`,
+          }}
+        >
           <p className="wishlist-name">{wish.pla_name}</p>
           <p className="wishlist-address">
             {wish.sd_nm} {wish.region_sub} {wish.pla_addr}
@@ -82,7 +86,8 @@ const MyWish = ({ wish }) => {
         <div
           className="wishlist"
           style={{
-            backgroundImage: 'url(http://localhost:9009/img/벚꽃마을_1.jpg)',
+            backgroundImage: `url(http://localhost:9009/img/tmp)`,
+            color: 'black',
           }}
         >
           위시리스트가 비어있습니다.

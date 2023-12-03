@@ -93,6 +93,7 @@ const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
         console.log('File uploaded successfully:', response.data)
         props.setCate({...props.cate, ['추천']:response.data.data})
         setIsLoading(false)
+        props.onHide()
         // 서버의 응답을 처리할 수 있습니다.
       })
       .catch((error) => {

@@ -141,7 +141,7 @@ const MyPage = () => {
         <p className="mytitle">나의 저장 목록</p>
         <div className="my-wish-list">
           {wishList.length > 0 ? wishList?.map((item, idx) =>
-            idx < 10 ? <MyWish wish={item} /> : null,
+            idx < 4 ? <MyWish wish={item} /> : null,
           ) : <MyWish />}
         </div>
       </div>

@@ -113,7 +113,7 @@ const List = ({
         <div style={{ width: '100px', height: '100px' }}>
           <Card.Img
             style={{ width: '100%', height: '100%' }}
-            src={`http://localhost:9009/img/${resData?.img}`}
+            src={`${process.env.REACT_APP_IMG_API_URL}${resData?.img}`}
           />
         </div>
         {/* 텍스트 */}

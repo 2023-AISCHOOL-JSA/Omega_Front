@@ -24,7 +24,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/info/:region_no" element={<RegionInfo />} />
           <Route path="/plan/:plan_no" element={<MakePlan />} />
-          <Route path="/made" element={<MadePlan />} />
+          <Route path="/made/:plan_no" element={<MadePlan />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/reservation/:plan_no" element={<Reservation />} />
           <Route path="/checkout" element={<CheckoutPage />} />

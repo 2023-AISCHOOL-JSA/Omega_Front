@@ -7,7 +7,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 // import { data } from "../pages/MakePlan';
 
 const AccordionList = ({ item, index, selectedKey, myList, setList, days }) => {
-  console.log(myList, 'ifhj0hf093h0h1309hr');
   // const mydata2 = useContext(data);
 
   // const { day, setDay } = useContext(AccordionContext);
@@ -18,13 +17,13 @@ const AccordionList = ({ item, index, selectedKey, myList, setList, days }) => {
   if (index + 1 == '1') backColor = '#34eaad'
   if (index + 1 == '2') backColor = '#e7d84a'
   if (index + 1 == '3') backColor = '#1f3871'
-  if (index + 1 == '4') backColor = 'red'
-  if (index + 1 == '5') backColor = 'red'
-  if (index + 1 == '6') backColor = 'red'
-  if (index + 1 == '7') backColor = 'red'
-  if (index + 1 == '8') backColor = 'red'
-  if (index + 1 == '9') backColor = 'red'
-  if (index + 1 == '10') backColor = 'red'
+  if (index + 1 == '4') backColor = '#ea3434'
+  if (index + 1 == '5') backColor = '#58ea34'
+  if (index + 1 == '6') backColor = '#ea3489'
+  if (index + 1 == '7') backColor = '#ea8334'
+  if (index + 1 == '8') backColor = '#34bdea'
+  if (index + 1 == '9') backColor = '#3440ea'
+  if (index + 1 == '10') backColor = '#9234ea'
 
   return (
     <Accordion.Item eventKey={`${index}`}>

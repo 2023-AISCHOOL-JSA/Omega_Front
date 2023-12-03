@@ -5,16 +5,22 @@ import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
 import Row from 'react-bootstrap/Row'
 import { IoIosHeartEmpty, IoMdHeart } from 'react-icons/io'
+import api from '../axios'
 const MakeModal = ({
   makePageModal,
   modalDataTemp,
   setMakePageModal,
   show1,
+  cate,
+  setCate,
+  myWish,
+  setMyWish,
 }) => {
   // 하트 토글 관리 state
-  const [heartToggle, setHeartToggle] = useState(false)
+  const [heartToggle, setHeartToggle] = useState(
+    myWish?.includes(Number(modalDataTemp.pla_no)) ? true : false,
+  )
 
-  console.log('모달 들어옴')
   const modalRef = useRef(null)
   const PlaceName = useRef(null)
   const target = useRef(null)
@@ -51,6 +57,64 @@ const MakeModal = ({
       window.open(url, '_blank')
     }
   }
+
+  const handleHeart = () => {
+    const setWish = () => {
+      console.log('위시리스트 등록')
+      api
+        .post(
+          '/wish',
+          { pla_no: modalDataTemp.pla_no },
+          {
+            headers: { authorization: localStorage.getItem('jwtToken') },
+          },
+        )
+        .then((res) => {
+          console.log(res.data.data)
+          setCate({
+            ...cate,
+            ['나의저장']: [...cate['나의저장'], modalDataTemp],
+          })
+          setMyWish([...myWish, Number(modalDataTemp.pla_no)])
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+    const deleteWish = () => {
+      console.log('위시리스트 제거')
+      api
+        .delete(`/wish/${modalDataTemp.pla_no}`, {
+          headers: { authorization: localStorage.getItem('jwtToken') },
+        })
+        .then((res) => {
+          console.log(res.data.data)
+          setCate({
+            ...cate,
+            ['나의저장']: [
+              ...cate['나의저장'].filter(
+                (item) => item.pla_no !== modalDataTemp.pla_no,
+              ),
+            ],
+          })
+          let myWishArr = [...myWish]
+          myWishArr.splice(myWishArr.indexOf(Number(modalDataTemp.pla_no)), 1)
+          setMyWish(myWishArr)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+    if (heartToggle) {
+      deleteWish()
+    } else {
+      setWish()
+    }
+    setHeartToggle(!heartToggle)
+  }
+
   return (
     <Modal
       size="lg"
@@ -107,15 +171,9 @@ const MakeModal = ({
             </Col>
             <Col sm={3} className="d-flex justify-content-end">
               {!heartToggle ? (
-                <IoIosHeartEmpty
-                  onClick={() => setHeartToggle(!heartToggle)}
-                  className="heart-icon"
-                />
+                <IoIosHeartEmpty onClick={handleHeart} className="heart-icon" />
               ) : (
-                <IoMdHeart
-                  onClick={() => setHeartToggle(!heartToggle)}
-                  className="heart-icon"
-                />
+                <IoMdHeart onClick={handleHeart} className="heart-icon" />
               )}
             </Col>
           </Row>
@@ -136,9 +194,12 @@ const MakeModal = ({
           <Row className="mt-3 make-modal-detail">
             <Col>연락처</Col>
             <Col>운영시간</Col>
-            <Col>입장요금</Col>
+            <Col>
+              {['음식점', '카페'].includes(modalDataTemp.pla_code_main)
+                ? '대표메뉴'
+                : '입장요금'}
+            </Col>
             <Col>주차장</Col>
-            <Col>키즈 펫존</Col>
           </Row>
 
           <Row className="make-modal-detail">
@@ -146,7 +207,18 @@ const MakeModal = ({
               <p>{modalDataTemp.pla_tel}</p>
             </Col>
             <Col>
-              <p>{modalDataTemp.pla_time}</p>
+              <p>
+                {modalDataTemp.pla_time
+                  .replaceAll('<br />', '\n')
+                  .replaceAll('<br>', '\n')
+                  .split('\n')
+                  .map((item) => (
+                    <span>
+                      {item}
+                      <br />
+                    </span>
+                  ))}
+              </p>
             </Col>
             <Col>
               <p>{modalDataTemp.pla_price}</p>
@@ -155,9 +227,6 @@ const MakeModal = ({
               <p>
                 {modalDataTemp.pla_parking_yn === 'y' ? '주차가능' : '주차불가'}
               </p>
-            </Col>
-            <Col>
-              <p>{modalDataTemp.region_sub}</p>
             </Col>
           </Row>
           <Row className="mt-3 make-modal-info">
@@ -187,7 +256,16 @@ const MakeModal = ({
                 overflowY: 'auto',
               }}
             >
-              {modalDataTemp.pla_info}
+              {modalDataTemp.pla_info
+                .replaceAll('<br />', '\n')
+                .replaceAll('<br>', '\n')
+                .split('\n')
+                .map((item) => (
+                  <span>
+                    {item}
+                    <br />
+                  </span>
+                ))}
             </Col>
           </Row>
         </Container>

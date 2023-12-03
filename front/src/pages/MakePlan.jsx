@@ -52,7 +52,7 @@ const MakePlan = (props) => {
   // 불러올 플랜 state
   const [myPlanNo, setMyPlanNo] = useState(useParams().plan_no)
   const [myPlan, setMyPlan] = useState()
-  const [myPlanDetail, setMyPlanDetail] = useState(null)
+  const [myWish, setMyWish] = useState([])
   const [isPlanUpdated, setIsPlanUpdated] = useState(false)
 
   const [cate, setCate] = useState({})
@@ -70,6 +70,7 @@ const MakePlan = (props) => {
       // 로그인 되어있다면 위시리스트 가져옴
       getList(`/wish/me`).then((res) => {
         console.log(res, '.......^^')
+        setMyWish(res.map(item => item.pla_no))
         setCate((prev) => {
           return { ...prev, ['나의저장']: res }
         })
@@ -132,7 +133,6 @@ const MakePlan = (props) => {
         })
         .then((res) => {
           console.log('불러온 일정 상세...', res.data.data)
-          setMyPlanDetail(res.data.data)
           const resultArray = [
             ...Array(
               Number(res.data.data[res.data.data.length - 1].myDay),
@@ -281,15 +281,12 @@ const MakePlan = (props) => {
       .then((res) => {
         console.log(res.data.data)
         setCate({ ...cate, ['추천']: res.data.data })
+        cateClick('추천', '추천')
       })
       .catch((err) => console.log(err))
   }
   /* back 통신 끝 */
 
-  const makePlanStrat = () => {
-    console.log('일정 생성 대기')
-    console.log(myList)
-  }
 
   // 마커클릭함수
 
@@ -436,25 +433,25 @@ const MakePlan = (props) => {
       reorderedItem.bgColor = { backgroundColor: '#1F3871' }
     } else if (result.destination.droppableId == 'droppable-4') {
       reorderedItem.myDay = '4'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#ea3434' }
     } else if (result.destination.droppableId == 'droppable-5') {
       reorderedItem.myDay = '5'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#58ea34' }
     } else if (result.destination.droppableId == 'droppable-6') {
       reorderedItem.myDay = '6'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#ea3489' }
     } else if (result.destination.droppableId == 'droppable-7') {
       reorderedItem.myDay = '7'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#ea8334' }
     } else if (result.destination.droppableId == 'droppable-8') {
       reorderedItem.myDay = '8'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#34bdea' }
     } else if (result.destination.droppableId == 'droppable-9') {
       reorderedItem.myDay = '9'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#3440ea' }
     } else if (result.destination.droppableId == 'droppable-10') {
       reorderedItem.myDay = '10'
-      reorderedItem.bgColor = { backgroundColor: '#1F3871' }
+      reorderedItem.bgColor = { backgroundColor: '#9234ea' }
     }
 
     // 리로드아이템에 드래그영역의 인덱스번호로 변경
@@ -630,25 +627,25 @@ const MakePlan = (props) => {
         data.bgColor = { backgroundColor: '#1f3871' }
       }
       if (data.myDay === '4') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#ea3434' }
       }
       if (data.myDay === '5') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#58ea34' }
       }
       if (data.myDay === '6') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#ea3489' }
       }
       if (data.myDay === '7') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#ea8334' }
       }
       if (data.myDay === '8') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#34bdea' }
       }
       if (data.myDay === '9') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#3440ea' }
       }
       if (data.myDay === '10') {
-        data.bgColor = { backgroundColor: 'red' }
+        data.bgColor = { backgroundColor: '#9234ea' }
       }
 
       data.markerIndex =
@@ -713,6 +710,10 @@ const MakePlan = (props) => {
             makePageModal={makePageModal}
             modalDataTemp={modalDataTemp}
             show1={makePageModal}
+            cate={cate}
+            setCate={setCate}
+            myWish={myWish}
+            setMyWish={setMyWish}
           />
         ) : (
           ''
