@@ -99,6 +99,7 @@ const Reservation = () => {
             totalPrice={totalPrice}
             setTotalPrice={setTotalPrice}
             key={idx}
+            dorm={idx}
           />
         ))}
 

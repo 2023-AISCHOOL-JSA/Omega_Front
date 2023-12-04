@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Plus from '../img/plus.png'
 import Minus from '../img/minus.png'
-import Domi from '../img/dormitory.jpg'
+import Domi from '../img/dormitory1.jpg'
+import Domi2 from '../img/dormitory2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck as faRegularCircleCheck } from '@fortawesome/free-regular-svg-icons'
 import { faCircleCheck as faSolidCircleCheck } from '@fortawesome/free-solid-svg-icons'
@@ -20,7 +21,7 @@ const MinusImg = styled.img`
   margin-left: 10px;
 `
 
-const ReservationInfo = ({ place, totalPrice, setTotalPrice }) => {
+const ReservationInfo = ({ place, totalPrice, setTotalPrice, dorm }) => {
   const [datePick, setDatePick] = useState(false)
   const [count, setCount] = useState(0)
 
@@ -37,7 +38,7 @@ const ReservationInfo = ({ place, totalPrice, setTotalPrice }) => {
     <>
       <div className="res-div">
         <div className="room-img">
-          <img src={Domi} alt="" className="room-img2" />
+          <img src={dorm == 1 ? Domi : Domi2} className="room-img2" />
         </div>
         <div className="res-info">
           <p>

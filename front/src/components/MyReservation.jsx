@@ -21,19 +21,28 @@ const MyReservation = ({ reservation }) => {
           <span className="pay">
             {reservation.reservation_yn == 'y' ? '결제완료' : '결제필요'}
           </span>
-          <button
-            className="more-btn-pay"
-            onClick={() => {
-              navigate(`/reservation/${reservation.plan_no}`)
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faAngleRight}
-              size="xl"
-              style={{ color: '#000000' }}
-            />
-          </button>
-
+          {reservation.reservation_yn == 'n' ? (
+            <button
+              className="more-btn-pay"
+              onClick={() => {
+                navigate(`/reservation/${reservation.plan_no}`)
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                size="xl"
+                style={{ color: '#000000' }}
+              />
+            </button>
+          ) : (
+            <button className="more-btn-pay">
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                size="xl"
+                style={{ color: '#000000' }}
+              />
+            </button>
+          )}
           <p className="travel-date">
             {reservation.start_day}({reservation.days}박)
             <span className="alreay-price">

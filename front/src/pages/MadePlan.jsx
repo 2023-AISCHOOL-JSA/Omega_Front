@@ -181,7 +181,7 @@ const MadePlan = () => {
                 sm={3}
                 className="create-page-my d-flex justify-content-center"
               >
-                {myPlan.plan_name}
+                김민경님의 강원도 여행
               </Col>
               <Col
                 sm={2}

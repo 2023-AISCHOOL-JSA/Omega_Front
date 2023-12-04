@@ -30,6 +30,16 @@ export const data = createContext()
 export const checkNumber = createContext()
 
 const MakePlan = (props) => {
+  const cateRef = useRef(null)
+  
+  const handleClick = () => {
+    // Ref를 통해 DOM 요소에 접근합니다.
+    if (cateRef.current) {
+      // DOM 요소에 클릭 이벤트를 발생시킵니다.
+      cateRef.current.click()
+    }
+  }
+  
   // 이미지 검색 모달 state
   const [imgSearchModal, setImgSearchModal] = useState(false)
   // 메이크페이지 모달 state
@@ -43,9 +53,8 @@ const MakePlan = (props) => {
   const [markerImg, setMarkerImage] = useState('')
   const [markerImgToggle, setMarkerImageToggle] = useState(false)
 
-  // 지역 이름, 위도, 경도
+  // 지역 이름, 번호
   const [region_name, setRegion_name] = useState(location?.state?.region_name)
-  const [latlng, setLatlng] = useState(location?.state?.latlng)
   const [region_no, setRegion_no] = useState(location?.state?.region_no / 1000)
 
   /* back 통신 */
@@ -70,7 +79,7 @@ const MakePlan = (props) => {
       // 로그인 되어있다면 위시리스트 가져옴
       getList(`/wish/me`).then((res) => {
         console.log(res, '.......^^')
-        setMyWish(res.map(item => item.pla_no))
+        setMyWish(res.map((item) => item.pla_no))
         setCate((prev) => {
           return { ...prev, ['나의저장']: res }
         })
@@ -287,18 +296,19 @@ const MakePlan = (props) => {
   }
   /* back 통신 끝 */
 
-
   // 마커클릭함수
 
-  const markerClick = (e) => {
-    const [markerClickEventData] = cate[selectedKey].filter(
+  const markerClick = (e, code, place) => {
+    console.log('code..........',code);
+    const [markerClickEventData] = cate[code].filter(
       (item) => item.pla_name == e.Gb,
     )
 
     console.log(markerClickEventData, 'markerClickEventData')
     console.log([markerClickEventData], '[markerClickEventData]')
     console.log(e.Gb)
-    setModalDataTemp(markerClickEventData)
+    // setModalDataTemp(markerClickEventData)
+    setModalDataTemp(place)
     setMakePageModal(!makePageModal)
   }
 
@@ -759,6 +769,9 @@ const MakePlan = (props) => {
               cate={cate}
               setCate={setCate}
               onHide={() => setImgSearchModal(false)}
+              region_no={region_no}
+              center={center}
+              handleClick={handleClick}
             />
           </div>
           <Nav variant="tabs">
@@ -767,6 +780,7 @@ const MakePlan = (props) => {
                 key={index}
                 className={selectedKey === item.sequence ? 'active' : ''}
                 onClick={(e) => cateClick(e, item.title)}
+                ref={index === 0 ? cateRef : null}
                 // eventKey={`link${index}`}
               >
                 <img className="cate-img" src={item.path1}></img>
@@ -1002,7 +1016,7 @@ const MakePlan = (props) => {
               marginLeft: isTempCssVisible ? '220px' : '',
               transition: 'margin-left 0.3s ease', // 여기서 오류 수정: margin-left 대신 'margin-left'를 사용
             }}
-            level={10}
+            level={7}
           >
             {/* Map 내용 */}
 
@@ -1029,7 +1043,7 @@ const MakePlan = (props) => {
                       // }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                     },
                   }}
-                  onClick={(e) => markerClick(e)}
+                  onClick={(e) => markerClick(e, markerImg.pla_code_main, markerImg)}
                 />
                 {/* 커스텀오버레이도 같이 찍기 */}
                 <CustomOverlayMap
@@ -1085,7 +1099,7 @@ const MakePlan = (props) => {
                       }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                     },
                   }}
-                  onClick={(e) => markerClick(e)}
+                  onClick={(e) => markerClick(e, position.pla_code_main, position)}
                 />
                 {/* 커스텀오버레이도 같이 찍기 */}
                 <CustomOverlayMap
@@ -1100,12 +1114,13 @@ const MakePlan = (props) => {
                       className="center"
                       style={{
                         fontWeight: 'bold',
-                        fontSize: '10px',
+                        fontSize: '17px',
                         color: 'white',
                         backgroundColor: `${position.bgColor.backgroundColor}`,
-                        padding: '3px',
+                        // padding: '3px',
                         borderRadius: '50px',
-                        width: '21px',
+                        width: '30px',
+                        height: '30px',
                         marginTop: '5px',
                         marginLeft: '3px',
                         textAlign: 'center',

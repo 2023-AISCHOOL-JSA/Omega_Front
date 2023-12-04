@@ -9,7 +9,6 @@ import { FaRegImage } from "react-icons/fa6";
 import { Spinner } from 'react-bootstrap'
 
 const ImgSearchModal = (props) => {
-
 // 로딩 state
 const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
@@ -81,6 +80,9 @@ const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
     const searchImgFile = blobToFile(searchImg, searchImgData.name)
     formData.append('img', searchImgFile) // 'filename.ext'는 실제 파일 이름을 나타냅니다.
+    formData.append('region_no', props.region_no*1000)
+    formData.append('lng', props.center.lng)
+    formData.append('lat', props.center.lat)
 
     // Axios를 사용하여 서버로 전송
     api
@@ -94,6 +96,7 @@ const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
         props.setCate({...props.cate, ['추천']:response.data.data})
         setIsLoading(false)
         props.onHide()
+        props.handleClick()
         // 서버의 응답을 처리할 수 있습니다.
       })
       .catch((error) => {

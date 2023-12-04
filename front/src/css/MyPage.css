@@ -104,9 +104,9 @@
 .more-btn-pay {
   background: none;
   border: none;
-  position: relative;
-  left: 58%;
-  top: 25%;
+  position: absolute  ;
+  left : 90%;
+  top: 30%;
 }
 
 .more-btn-my {
@@ -142,15 +142,15 @@
 .pay {
   font-size: 14px;
   color: red;
-  position: relative;
-  left:50%;
+  position: absolute;
+  left:70%;
 }
 
 .alreay-price {
   font-weight: 600;
   font-size: 15px;
-  position: relative;
-  left: 50%;
+  position: absolute;
+  left: 70%;
 }
 
 /* 위시리스트 */

@@ -20,10 +20,18 @@ const Header = () => {
             로그인
           </button>
         ) : (
+          <>
         <Link to="/mypage" style={{ textDecoration: 'none' }}>
           <button className="login-btn">내 정보</button>
+
           </Link>
+                  <button onClick={()=>{
+                    localStorage.removeItem('jwtToken')
+                  }} className="ms-4 login-btn2">로그아웃</button>
+                  
+                  </>
         )}
+
       </div>
 
       <LoginModal show={show} handleClose={handleClose} />

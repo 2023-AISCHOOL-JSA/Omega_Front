@@ -18,13 +18,9 @@ const CreateSchedule = () => {
   const [myList2, setMyList2] = useState(
     (location.state && location.state.myList1) || [],
   )
-  const dateRange212 = location.state && location.state.dateRange21
-  const dateRange312 = location.state && location.state.dateRange31
   const [days2, setDays2] = useState(
     (location.state && location.state.days1) || [],
   )
-  const region_name2 = location.state && location.state.region_name1
-  const newText2 = location.state && location.state.newText1
 
   const [myPlan, setMyPlan] = useState({})
   const [myPlanDetail, setMyPlanDetail] = useState()
@@ -145,7 +141,9 @@ const CreateSchedule = () => {
 
         lines.push(
           <Polyline
-            key={`${startPoint.lat}-${startPoint.lng}-${endPoint.lat}-${endPoint.lng}${uuidv4()}`}
+            key={`${startPoint.lat}-${startPoint.lng}-${endPoint.lat}-${
+              endPoint.lng
+            }${uuidv4()}`}
             path={[startPoint, endPoint]}
             options={{
               strokeColor: '#ff0000', // 선 색상
@@ -198,9 +196,9 @@ const CreateSchedule = () => {
               <Col
                 sm={2}
                 className="d-flex justify-content-center"
-                onClick={() => navigate(`/reservation/${plan_no}`)}
+                onClick={() => navigate(`/plan/${plan_no}`)}
               >
-                <button className="create-page-btn">숙소 결제하기</button>
+                <button className="create-page-btn">일정 수정하기</button>
               </Col>
             </Row>
 
@@ -216,7 +214,10 @@ const CreateSchedule = () => {
                   </Row>
 
                   {myList2
-                    .filter((filteredItem1) => filteredItem1.myDay === String(index1 + 1))
+                    .filter(
+                      (filteredItem1) =>
+                        filteredItem1.myDay === String(index1 + 1),
+                    )
                     .map((filteredItem, index2) => (
                       <Row
                         key={index2}
@@ -246,6 +247,26 @@ const CreateSchedule = () => {
                     ))}
                 </div>
               ))}
+            </Row>
+            <Row>
+              <Col className="d-flex justify-content-center align-items-center">
+                {myPlan.pay_yn === 'n' ? (
+                  <button
+                    className="list-btn2"
+                    style={{ width: '70%' }}
+                    onClick={() => navigate(`/reservation/${plan_no}`)}
+                  >
+                    예약 결제하기
+                  </button>
+                ) : (
+                  <button
+                    className="list-btn2"
+                    style={{ width: '70%' }}
+                  >
+                    예약 결제 완료
+                  </button>
+                )}
+              </Col>
             </Row>
           </Container>
         </div>

@@ -9,12 +9,12 @@ import api from '../axios'
 
 const DivCard = styled.div`
   width: 300px;
-  height: 300px;
 
   img {
     width: 100%;
     height: 250px;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     cursor: pointer;
   }
   p {
@@ -101,14 +101,13 @@ const RegionCom = ({ placeList }) => {
           <DivCard
             className="reg-info"
             key={item.pla_no}
-            onClick={handleShowModal}
           >
             <img
               src={`${process.env.REACT_APP_IMG_API_URL}${item.img_original_name}`}
               alt=""
             />
-            <p>{item.pla_name}</p>
-            <span>{item.region_main} {item.region_sub} {item.pla_addr}</span>
+            <p className='p-2 fw-bold'>{item.pla_name}</p>
+            <span className='p-2 mb-3'>{item.region_sub} {item.pla_addr}</span>
             <p onClick={() => handleHeart(item.pla_no)} className="heart-card">
               {hearts[item.pla_no] ? (
                 <FontAwesomeIcon

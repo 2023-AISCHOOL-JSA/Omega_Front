@@ -18,7 +18,7 @@ const MakeModal = ({
 }) => {
   // 하트 토글 관리 state
   const [heartToggle, setHeartToggle] = useState(
-    myWish?.includes(Number(modalDataTemp.pla_no)) ? true : false,
+    myWish?.includes(Number(modalDataTemp?.pla_no)) ? true : false,
   )
 
   const modalRef = useRef(null)
@@ -64,7 +64,7 @@ const MakeModal = ({
       api
         .post(
           '/wish',
-          { pla_no: modalDataTemp.pla_no },
+          { pla_no: modalDataTemp?.pla_no },
           {
             headers: { authorization: localStorage.getItem('jwtToken') },
           },
@@ -75,7 +75,7 @@ const MakeModal = ({
             ...cate,
             ['나의저장']: [...cate['나의저장'], modalDataTemp],
           })
-          setMyWish([...myWish, Number(modalDataTemp.pla_no)])
+          setMyWish([...myWish, Number(modalDataTemp?.pla_no)])
         })
         .catch((err) => {
           console.log(err)
@@ -85,7 +85,7 @@ const MakeModal = ({
     const deleteWish = () => {
       console.log('위시리스트 제거')
       api
-        .delete(`/wish/${modalDataTemp.pla_no}`, {
+        .delete(`/wish/${modalDataTemp?.pla_no}`, {
           headers: { authorization: localStorage.getItem('jwtToken') },
         })
         .then((res) => {
@@ -94,12 +94,12 @@ const MakeModal = ({
             ...cate,
             ['나의저장']: [
               ...cate['나의저장'].filter(
-                (item) => item.pla_no !== modalDataTemp.pla_no,
+                (item) => item.pla_no !== modalDataTemp?.pla_no,
               ),
             ],
           })
           let myWishArr = [...myWish]
-          myWishArr.splice(myWishArr.indexOf(Number(modalDataTemp.pla_no)), 1)
+          myWishArr.splice(myWishArr.indexOf(Number(modalDataTemp?.pla_no)), 1)
           setMyWish(myWishArr)
         })
         .catch((err) => {
@@ -143,8 +143,8 @@ const MakeModal = ({
         <Container className="ps-4 pe-4 mb-4">
           <Row className="mt-4">
             <Col className="make-modal-title" ref={PlaceName}>
-              {modalDataTemp.pla_name}
-              <span className="ms-2">{modalDataTemp.pla_code_main}</span>
+              {modalDataTemp?.pla_name}
+              <span className="ms-2">{modalDataTemp?.pla_code_main}</span>
             </Col>
             {/* <Col></Col> */}
             <Col className="d-flex justify-content-end" sm={3}>
@@ -179,8 +179,8 @@ const MakeModal = ({
           </Row>
           <Row className="mt-2 make-modal-addr">
             <Col>
-              {modalDataTemp.region_main} {modalDataTemp.region_sub}{' '}
-              {modalDataTemp.pla_addr}
+              {modalDataTemp?.region_main} {modalDataTemp?.region_sub}{' '}
+              {modalDataTemp?.pla_addr}
               <button
                 ref={target}
                 className="copy-btn ms-3"
@@ -195,7 +195,7 @@ const MakeModal = ({
             <Col>연락처</Col>
             <Col>운영시간</Col>
             <Col>
-              {['음식점', '카페'].includes(modalDataTemp.pla_code_main)
+              {['음식점', '카페'].includes(modalDataTemp?.pla_code_main)
                 ? '대표메뉴'
                 : '입장요금'}
             </Col>
@@ -204,11 +204,11 @@ const MakeModal = ({
 
           <Row className="make-modal-detail">
             <Col>
-              <p>{modalDataTemp.pla_tel}</p>
+              <p>{modalDataTemp?.pla_tel}</p>
             </Col>
             <Col>
               <p>
-                {modalDataTemp.pla_time
+                {modalDataTemp?.pla_time
                   .replaceAll('<br />', '\n')
                   .replaceAll('<br>', '\n')
                   .split('\n')
@@ -221,11 +221,11 @@ const MakeModal = ({
               </p>
             </Col>
             <Col>
-              <p>{modalDataTemp.pla_price}</p>
+              <p>{modalDataTemp?.pla_price}</p>
             </Col>
             <Col>
               <p>
-                {modalDataTemp.pla_parking_yn === 'y' ? '주차가능' : '주차불가'}
+                {modalDataTemp?.pla_parking_yn === 'y' ? '주차가능' : '주차불가'}
               </p>
             </Col>
           </Row>
@@ -256,7 +256,7 @@ const MakeModal = ({
                 overflowY: 'auto',
               }}
             >
-              {modalDataTemp.pla_info
+              {modalDataTemp?.pla_info
                 .replaceAll('<br />', '\n')
                 .replaceAll('<br>', '\n')
                 .split('\n')

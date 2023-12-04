@@ -25,7 +25,7 @@ const MyTrip = ({ plan }) => {
           <button
             className="more-btn"
             onClick={() => {
-              navigate(`/plan/${plan.plan_no}`)
+              navigate(`/create/${plan.plan_no}`)
             }}
           >
             <FontAwesomeIcon

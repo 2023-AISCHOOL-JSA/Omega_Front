@@ -13,7 +13,6 @@ console.log('커스텀키', customerKey)
 const PayInfo = ({ totalPrice, userInfo, plan_no }) => {
   const paymentWidgetRef = useRef(null)
   const paymentMethodsWidgetRef = useRef(null)
-  const [price, setPrice] = useState(100)
 
   useEffect(() => {
     ;(async () => {
@@ -24,7 +23,7 @@ const PayInfo = ({ totalPrice, userInfo, plan_no }) => {
 
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         '#payment-widget',
-        { value: price },
+        { value: totalPrice },
         { variantKey: 'DEFAULT' },
       )
 
@@ -42,10 +41,10 @@ const PayInfo = ({ totalPrice, userInfo, plan_no }) => {
     }
 
     paymentMethodsWidget.updateAmount(
-      price,
+      totalPrice,
       paymentMethodsWidget.UPDATE_REASON.COUPON,
     )
-  }, [price])
+  }, [totalPrice])
 
   const handlePaymentClick = async () => {
     const paymentWidget = paymentWidgetRef.current
